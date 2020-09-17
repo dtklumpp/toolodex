@@ -10,7 +10,7 @@
     "type": "git",
     "url": "https://git.generalassemb.ly/dtklumpp/toolodex.git"
   },
-  "author": "",
+  "author": "Dylan Aldrich aldrich.dylan@gmail.com, David Klumpp dtklumpp@gmail.com",
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.5",
