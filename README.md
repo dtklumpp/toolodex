@@ -1,4 +1,4 @@
-Name:
+Name: Toolodex
 
 Our app is intended to be used as a way to organize and store useful coding resources, tools, solutions in a way that makes it easier for developers to access tried and true methods for recurring problem sets.
 
@@ -38,6 +38,28 @@ User Stories:
 5. Add a Tool page - Similar nav bar at the top. Below, a heading that prompts the user to add a Tool. The page will include a form that allows user input to add information about a tool, like: name (required), description, key word(s), notes, and the link (required), checkbox/dropdown menu of which category(ies) they want to add the Tool to. The form will automatically default to adding a new tool to the Favorites category, which the user can always change if/when they add in more categories for themselves.
 
 6. Edit a Tool page -  Similar nav above as above. This page will populate form that is basically identical to the Add a Tool page, but will be pre-populated with the selected tool's information. Included on this page will be a global delete button, which will completely remove the tool from the database (and recursively remove from all categories of which it is a part). If a user clicks the delete button, a pop-up alert will ask the user to confirm that they want to delete the Tool. Upon confirmation, only then will the tool actually be deleted.
+
+
+Models and Properties:
+1. User (Stretch Goal):
+    - Name
+    - Email
+    - Auth Creds
+    - "[Categories]"
+
+2. Category:
+    - Name
+    - Description
+    - "[Tools]"
+
+3. Tool:
+    - Name
+    - Description
+    - Key words
+    - Notes
+    - Link
+    - "[Category/ies]"
+
 
 
 Technologies used:
