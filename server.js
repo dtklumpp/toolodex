@@ -21,3 +21,6 @@ app.get('/', (req,res) => {
     res.send('you have reached the home folder');
 })
 
+app.get('/swordfish', (req, res) => {
+    res.send('poke poke');
+})
