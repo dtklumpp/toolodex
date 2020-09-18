@@ -42,5 +42,5 @@ app.use('/tools', controllers.tool);
 
 /* Server Listener */
 app.listen(PORT, () => {
-    console.log('greetings your port is '+PORT);
+    console.log(`Server is live and listening on http://localhost:${PORT}`);
 });
