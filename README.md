@@ -39,6 +39,8 @@ User Stories:
 
 6. Edit a Tool page -  Similar nav above as above. This page will populate form that is basically identical to the Add a Tool page, but will be pre-populated with the selected tool's information. Included on this page will be a global delete button, which will completely remove the tool from the database (and recursively remove from all categories of which it is a part). If a user clicks the delete button, a pop-up alert will ask the user to confirm that they want to delete the Tool. Upon confirmation, only then will the tool actually be deleted.
 
+7. Tool Index (Manage Tools) Page - Similar nav bar. This age will list all Tools created by the user, regardless of Category. Tools will be listed alphabetically by name. User can click on a tool's name and it will open a new tab in the browser, navigate to that tool's link. To the side of the tool's name will be similar pencil and trash bin buttons that will allow the user to edit or delete a tool. A click on the edit button will redirect to Edit a Tool page, while a click on the delete button will throw an identical alert and ask the user to confirm that they want to delete the tool. Delete on this page will be global, therefore removing the Tool from all Categories to which it belonged.
+
 
 Models and Properties:
 1. User (Stretch Goal):
@@ -55,7 +57,7 @@ Models and Properties:
 3. Tool:
     - Name
     - Description
-    - Key words
+    - [Key words]
     - Notes
     - Link
     - "[Category/ies]"
