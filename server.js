@@ -17,17 +17,6 @@ app.get('/', (req,res) => {
     res.send('you have reached the home folder');
 });
 
-app.get('/flounder', (req, res) => {
-    res.send("Glub glub");
-});
-
 app.listen(PORT, () => {
     console.log('greetings your port is '+PORT);
 });
-
-
-
-app.get('/swordfish', (req, res) => {
-    console.log('Ouch you poked me.');
-    res.send('poke poke');
-})
