@@ -29,11 +29,16 @@ app.get('/', (req,res) => {
     res.send('You have reached the homepage.');
 });
 
+//Test Route
+app.get('/testing', (req, res) => {
+    res.render('testing/testview.ejs');
+})
+
 // Category routes
-app.use('/categories', controllers.category_control);
+app.use('/categories', controllers.category);
 
 // Tool routes
-app.use('/tools', controllers.tool_control);
+app.use('/tools', controllers.tool);
 
 /* Server Listener */
 app.listen(PORT, () => {
