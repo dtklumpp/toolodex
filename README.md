@@ -1,4 +1,4 @@
-Name: Toolodex
+# Name: Toolodex
 
 Our app is intended to be used as a way to organize and store useful coding resources, tools, solutions in a way that makes it easier for developers to access tried and true methods for recurring problem sets.
 
