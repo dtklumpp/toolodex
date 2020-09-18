@@ -2,13 +2,15 @@
 
 Our app is intended to be used as a way to organize and store useful coding resources, tools, solutions in a way that makes it easier for developers to access tried and true methods for recurring problem sets.
 
-MVP Pitch:
+## MVP Pitch:
+
 For our MVP version, we plan to include a two-model application, with a one-to-many database structure that stores a user's favorite coding Tools/Resources inside of a variety of Categories or folders that they create. For example, a user can create a Category of CSS, and include within links to their preferred Tools/Resources for solving recurring problems in that aspect of their software development. User will have full CRUD functionality for their Categories and their Tool sets. User will be able to link Tools to Categories, and vice-versa. The first model, Categories, will be fairly simple: a user will be able to essentially create and name a folder in which they want to store their favorite tools and resources. Each user will start with one Category pre-made for them: Favorites. Next, the Tools/Resources model will be more robust, allowing the user to input more information about each tool they are adding to the database, namely: Name, Description, Link, Notes, and a Thumbnail.
 
-Milestones:
+## Milestones:
+
 [toolodex milestones](https://trello.com/b/u8NlOYW3/toolodex-milestones)
 
-Stretch goals:
+## Stretch goals:
 - Add a keywords field to the the Tools model that will allow a user to search and find their tools more easily.
 - Include a many-to-many relationship between the Categories and the Tools/Resources, such that a user can include a given tool in more than one Category if they choose.
 - Incorporate a search bar that allows a user to find their resources by key words.
@@ -22,13 +24,13 @@ Stretch goals:
 - Add in a "Related Tools" feature that will suggest similar tools, based on key-word connections. For example, if a user is looking at a Math-related tool, the app will suggest any other Math-related tools that are saved in the user's database.
 - Add a feature that allows a user to share a resource to another user, who could then accept it (and store it in a category), or reject it.
 
-Super stretch goals:
+## Super stretch goals:
 - Add in custom model code generator
 - Add in an internal metrics dashboard for internal use that shows what kinds of categories/tools our users are creating/using most often.
 - Acquire LinkedIn
 
 
-User Stories:
+## User Stories:
 1. Welcome Page - serves as a category index page. A user's categories are arranged in an easy to read way, as a grid of tiles. Each category tile is clickable and leads to that category's show page. There will be a nav bar at the top of the page that allows a user to create a new Category, as well as a link to create a new Tool/Resource, and a "Manage Tools" link (which links to a tools index page). Also, in the nav bar will be a clickable "logo" image that will return the user to the homepage. Near the top of the Welcome Page there will be a one-line headline that clues the user in on what to do/how to use the app. For example: "Your favorite tool for organizing your favorite coding resources..." On the welcome page, a user will start with one pre-made category "Favorites" to which they can start adding tools, or elect to create a new category. Next to the Favorites tile, there will be a blank tile with "+" to indicate that the user can click to create a new category, this will link them to a create form for a new category.
 
 2. Add a Category page - Similar nav bar at the top. Page will populate a blank form, asking the user to input basic information to create a Category (which will house the tools they create later). For MVP, the form will have two fields: name (required) and description. At the end of the form, will be a submit button that creates the Category, and then redirects back to the Welcome Page.
@@ -45,7 +47,7 @@ User Stories:
 7. Tool Index (Manage Tools) Page - Similar nav bar. This age will list all Tools created by the user, regardless of Category. Tools will be listed alphabetically by name. User can click on a tool's name and it will open a new tab in the browser, navigate to that tool's link. To the side of the tool's name will be similar pencil and trash bin buttons that will allow the user to edit or delete a tool. A click on the edit button will redirect to Edit a Tool page, while a click on the delete button will throw an identical alert and ask the user to confirm that they want to delete the tool. Delete on this page will be global, therefore removing the Tool from all Categories to which it belonged.
 
 
-Models and Properties:
+## Models and Properties:
 1. User (Stretch Goal):
     - Name
     - Email
@@ -67,13 +69,13 @@ Models and Properties:
 
 
 
-Technologies used:
+
+## Technologies used:
+
+## Existing features:
+
+## Planned features (for future versions):
 
 
-Existing features:
-
-Planned features (for future versions):
-
-
-Concrete ideas for achieving certain features:
+### Concrete ideas for achieving certain features:
     - ** Idea for stealing other people's resources: Include an add button on a resources that redirects a user an "Edit" form, pre-populated with that resource's information, therefore allowing the user to edit/adjust the record before saving it into their own tool set.
