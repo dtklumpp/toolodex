@@ -24,7 +24,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
 
 /* Routes */
-// index view
+// TODO Homepage (Category index)
 app.get('/', (req,res) => {
     res.render('index.ejs');
 });
