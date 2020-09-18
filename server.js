@@ -28,5 +28,6 @@ app.listen(PORT, () => {
 
 
 app.get('/swordfish', (req, res) => {
+    console.log('Ouch you poked me.');
     res.send('poke poke');
 })
