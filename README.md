@@ -5,6 +5,9 @@ Our app is intended to be used as a way to organize and store useful coding reso
 MVP Pitch:
 For our MVP version, we plan to include a two-model application, with a one-to-many database structure that stores a user's favorite coding Tools/Resources inside of a variety of Categories or folders that they create. For example, a user can create a Category of CSS, and include within links to their preferred Tools/Resources for solving recurring problems in that aspect of their software development. User will have full CRUD functionality for their Categories and their Tool sets. User will be able to link Tools to Categories, and vice-versa. The first model, Categories, will be fairly simple: a user will be able to essentially create and name a folder in which they want to store their favorite tools and resources. Each user will start with one Category pre-made for them: Favorites. Next, the Tools/Resources model will be more robust, allowing the user to input more information about each tool they are adding to the database, namely: Name, Description, Link, Notes, and a Thumbnail.
 
+Milestones:
+[toolodex milestones](https://trello.com/b/u8NlOYW3/toolodex-milestones)
+
 Stretch goals:
 - Add a keywords field to the the Tools model that will allow a user to search and find their tools more easily.
 - Include a many-to-many relationship between the Categories and the Tools/Resources, such that a user can include a given tool in more than one Category if they choose.
