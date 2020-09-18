@@ -13,11 +13,17 @@ app.use(express.urlencoded({extended: false}));
 const db = require('./models');
 const controllers = require('./controllers');
 
-app.listen(PORT, () => {
-    console.log('greetings your port is '+PORT);
-})
-
 app.get('/', (req,res) => {
     res.send('you have reached the home folder');
-})
+});
+
+app.get('/flounder', (req, res) => {
+    res.send("Glub glub");
+});
+
+app.listen(PORT, () => {
+    console.log('greetings your port is '+PORT);
+});
+
+
 
