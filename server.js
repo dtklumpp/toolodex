@@ -26,7 +26,7 @@ app.use(express.urlencoded({extended: false}));
 /* Routes */
 // index view
 app.get('/', (req,res) => {
-    res.send('You have reached the homepage.');
+    res.render('index.ejs');
 });
 
 //Test Route
