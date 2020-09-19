@@ -9,15 +9,23 @@
     <title>Toolodex</title>
 </head>
 <body>
-    <%- include('partials/header-navbar.ejs') %>
-    <h2>Your Categories</h2>
-    <% categories.forEach(category => { %>
-        <div class="category tile">
-            <a href="/categories/<%= category._id %>"><%= category.name %></a>
-        </div>
-    <% }) %>
-    <div class="add-category tile">
-        <a href="/categories/new">+</a>
+    <div class='display-area'>
+        <section class='header'>
+            <%- include('partials/header-navbar.ejs') %>
+        </section>
+        <section class='corkboard'>
+            <h2>Your Categories</h2>
+            <div class='post-its'>
+                <% categories.forEach(category => { %>
+                    <div class="category tile">
+                        <a href="/categories/<%= category._id %>" class='category-name'><%= category.name %></a>
+                    </div>
+                <% }) %>
+                <div class="add-category tile">
+                    <a href="/categories/new">+</a>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>

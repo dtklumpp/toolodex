@@ -1,7 +1,46 @@
 body {
+    display: flex;
+    flex-direction: column;
+}
+
+.display-area {
+    margin: 0 auto;
+    width: 960px;
+}
+
+.header {
+    background-color: yellow;
+    text-align: center;
+}
+
+.corkboard {
     background-image: url('../images/corkboard.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     color: blue;
+    min-height: 960px;
 }
+
+.post-its {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.tile {
+    background-color: lightyellow;
+    margin: 10px;
+    width: 150px;
+    height: 150px;
+    box-shadow: 1px 1px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-word;
+}
+
+/* .category-name {
+    word-wrap: break-word;
+} */
