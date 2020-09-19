@@ -12,7 +12,8 @@
     Link: <%= oneTool.link %> <br>
     Description: <%= oneTool.description %> <br>
     Notes: <%= oneTool.notes %> <br>
-    Category: <%= oneTool.category %> <br>
+    <!-- Full Category: <%= oneTool.category %> <br> -->
+    Category: <%= oneTool.category.name %> <br>
     <br>
     <form action="/tools/<%=oneTool._id%>?_method=DELETE" method="POST">
         <input type="submit" value="DESTROY">
