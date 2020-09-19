@@ -6,14 +6,7 @@
     <title>Add a Category</title>
 </head>
 <body>
-    <nav>
-        <h1>Toolodex</h1>
-        <a href='/'>Home</a> |
-        <a href='/categories/new'>Add a Category</a> |
-        <a href='/tools/new'>Add a Tool</a> |
-        <a href='/tools'>Tools Index</a> |
-        <a href='/users/login'>Login</a>
-    </nav>
+    <%- include('../partials/header-navbar.ejs') %>
     <h2>Add a Category</h2>
     <form action='/categories' method='POST'>
         <p>Name: <input type='text' name='name' placeholder='Category Name' required /></p>
