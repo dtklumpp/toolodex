@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Index</title>
+</head>
+<body>
+    <h1>Tools Index page</h1>
+    <ul>
+        <% allTools.forEach(tool => { %> 
+            <li>
+                <%= tool.name %> 
+            </li>
+        <% }) %> 
+    </ul>
+    <%- include('../partials/testfooter.ejs'); %>
+</body>
+</html>

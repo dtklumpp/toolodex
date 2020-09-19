@@ -18,6 +18,6 @@ mongoose.connection.on('disconnected', (event) => {
 });
 
 module.exports = {
-    Tool: require('./Tool.js'),
+    Tool: require('./Tool.js').Tool,
     Category: require('./Category.js'),
 }
