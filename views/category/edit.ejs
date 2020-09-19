@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css' rel='stylesheet'>
+    <link href='//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' rel='stylesheet'>
+    <title>Edit a Category</title>
+</head>
+<body>
+    <%- include('../partials/header-navbar.ejs') %>
+    <h2>Edit Category: <%= category.name %></h2>
+    <form action='/categories/<%= category._id %>?_method=PUT' method='POST'>
+        <p>Name: <input type='text' name='name' value='<%= category.name %>' /></p>
+        <p>Description: <textarea type= 'text' name='description' value='<%= category.description %>' ></textarea></p>
+        <input type='submit' value='Submit Changes' />
+    </form>
+    <h2>Available Tools:</h2>
+    <ul class="edit-tools">
+        
+    </ul>
+</body>
+</html>

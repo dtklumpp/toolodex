@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <title>Explore Your Category</title>
+</head>
+<body>
+    <%- include('../partials/header-navbar.ejs') %>
+    <h2>Category <%= category.name %></h2>
+    <div>
+        <a href="/category/edit"><i class="fas fa-edit"></i></a>
+    </div>
+    <% category.tools.forEach(tool => { %>
+        <div class="tool">
+            <a href="/tools/<%= tool._id %>"><%= tool.name %></a>
+        </div>
+    <% }); %>
+    <% if(category.tools.length === 0) { %>
+        <p>There are no tools available yet!</p>
+    <% } %>
+    <div class="add-tool">
+        <a href="/tools/new">+</a>
+    </div>
+</body>
+</html>
