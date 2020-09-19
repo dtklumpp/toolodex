@@ -16,7 +16,11 @@ router.get('/', (req, res) => {
 
 //new route
 router.get('/newTool', (req, res) => {
-    res.render('tool/new.ejs');
+    db.Tool.find({}, (err1, catsArray) => {
+        if(err1) return res.send("create route authors erro: "+err1);
+        context = {allCats: catsArray};
+        res.render('tool/new.ejs', context);
+    })
 })
 
 //create route
