@@ -15,5 +15,10 @@
         <a href='/users/login'>Login</a>
     </nav>
     <h2>Your Categories</h2>
+    <% categories.forEach(category => { %>
+        <div class="category">
+            <a href="/categories/<%= category._id %>"><%= category.name %></a>
+        </div>
+    <% }) %>
 </body>
 </html>
