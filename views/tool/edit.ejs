@@ -15,8 +15,6 @@
         Notes: <input type="text" name="notes" value=<%=oneTool.notes%>><br>
         Category: <select name="category">
             <% for(eachCat of allCats) { %> 
-                <% let defaultVar = false; %> 
-                <% if(eachCat._id === oneTool.category._id) {defaultVar = true} %> 
                 <option 
                     <%if(String(eachCat._id) == String(catId)){%>
                         selected="selected"
