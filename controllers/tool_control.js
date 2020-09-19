@@ -63,6 +63,7 @@ router.get('/:toolId/edit', (req, res) => {
             context = {
                 oneTool: foundTool,
                 allCats: catsArray,
+                catId: foundTool.category._id,
             };
             res.render('tool/edit.ejs', context);
         })
