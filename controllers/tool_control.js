@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 //new route
 router.get('/newTool', (req, res) => {
-    db.Tool.find({}, (err1, catsArray) => {
+    db.Category.find({}, (err1, catsArray) => {
         if(err1) return res.send("create route authors erro: "+err1);
         context = {allCats: catsArray};
         res.render('tool/new.ejs', context);
@@ -24,11 +24,23 @@ router.get('/newTool', (req, res) => {
 })
 
 //create route
-router.post('/', (req, res) => {
-    db.Tool.create(req.body, (err, createdTool) => {
-        if(err) return res.send("update route error: "+err);
+router.post('/', async (req, res) => {
+    try {
+        const createdTool = await db.Tool.create(req.body);
+        const foundCategory = await db.Category.findById(req.body.category);
+        foundCategory.tools.push(createdTool);
+        foundCategory.save();
         res.redirect('/tools');
-    })
+    }
+    catch (err) {
+        res.send("update route error: "+err);
+    }
+
+    //old way:
+    // db.Tool.create(req.body, (err, createdTool) => {
+    //     if(err) return res.send("update route error: "+err);
+    //     res.redirect('/tools');
+    // })
 })
 
 //show route
