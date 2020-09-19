@@ -17,7 +17,17 @@
     </form>
     <h2>Available Tools:</h2>
     <ul class="edit-tools">
-        
+        <% category.tools.forEach(tool => { %>
+            <li class='tool'>
+                <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
+            </li>
+        <% }); %>
+        <% if(category.tools.length === 0) { %>
+            <p>There are no tools available yet!</p>
+        <% } %>
+        <li class="add-tool">
+            <a href="/tools/newTool">+</a>
+        </li>
     </ul>
 </body>
 </html>

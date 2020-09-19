@@ -14,15 +14,15 @@
         <a href="/category/edit"><i class="fas fa-edit"></i></a>
     </div>
     <% category.tools.forEach(tool => { %>
-        <div class="tool">
-            <a href="/tools/<%= tool._id %>"><%= tool.name %></a>
+        <div class='tool'>
+            <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
         </div>
     <% }); %>
     <% if(category.tools.length === 0) { %>
         <p>There are no tools available yet!</p>
     <% } %>
     <div class="add-tool">
-        <a href="/tools/new">+</a>
+        <a href="/tools/newTool">+</a>
     </div>
 </body>
 </html>
