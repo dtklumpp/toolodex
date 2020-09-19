@@ -3,29 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
     <title>Explore Your Category</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
-    <h2><%= category.name %> Tools:</h2>
-    <div class='edit-category'>
-        <a href="/categories/<%= category._id %>/edit">Edit Category</a>
-        <!-- <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
-    </div>
-    <section class='tools-menu'>
-        <% category.tools.forEach(tool => { %>
-            <div class='tool-tile'>
-                <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
+    <div class="display-area">
+        <section class='header'>
+            <%- include('../partials/header-navbar.ejs') %>
+        </section>
+        <section class='corkboard'>
+            <h2><%= category.name %> Tools:</h2>
+            <div class='edit-category'>
+                <a href="/categories/<%= category._id %>/edit">Edit Category</a>
+                <!-- <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
             </div>
-        <% }); %>
-        <% if(category.tools.length === 0) { %>
-            <p>There are no tools available yet!</p>
-        <% } %>
-        <div class="add-tile">
-            <a href="/tools/newTool">+</a>
-        </div>
-    </section>  
+            <div class='post-its'>
+                <% category.tools.forEach(tool => { %>
+                    <div class='tool tile'>
+                        <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
+                    </div>
+                <% }); %>
+                <% if(category.tools.length === 0) { %>
+                    <p>There are no tools available yet!</p>
+                <% } %>
+                <div class="add-tool tile">
+                    <a href="/tools/newTool">+</a>
+                </div>
+            </div>
+        </section>
+    </div>  
 </body>
 </html>
