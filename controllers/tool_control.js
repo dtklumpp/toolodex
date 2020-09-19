@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
 //new route
 router.get('/newTool', (req, res) => {
-    res.render('/tool/new.ejs');
+    res.render('tool/new.ejs');
 })
 
 
