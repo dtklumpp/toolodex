@@ -28,10 +28,10 @@ router.post('/', (req, res) => {
 })
 
 //show route
-router.get('/:toolID', (req, res) => {
-    db.Tool.findById(req.params.toolID, (err, foundTool) => {
+router.get('/:toolId', (req, res) => {
+    db.Tool.findById(req.params.toolId, (err, foundTool) => {
         if(err) return res.send("show route error: "+err);
-        //console.log('req.params.toolID:', req.params.toolID);
+        //console.log('req.params.toolId:', req.params.toolId);
         //console.log('foundTool:', foundTool);
         context = {oneTool: foundTool};
         res.render('tool/show.ejs', context);
@@ -41,4 +41,11 @@ router.get('/:toolID', (req, res) => {
 
 //edit route
 //update route
+
 //delete route
+router.delete('/:toolId', (req, res) => {
+    db.Tool.findByIdAndDelete(req.params.toolId, (err, goneTool) => {
+        if(err) return res.send("delete route error: "+err);
+        res.redirect('/tools');
+    })
+})
