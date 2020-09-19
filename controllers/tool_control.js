@@ -17,11 +17,18 @@ router.get('/', (req, res) => {
 //new route
 router.get('/newTool', (req, res) => {
     db.Category.find({}, (err1, catsArray) => {
-        if(err1) return res.send("create route authors erro: "+err1);
+        if(err1) return res.send("create route categories error: "+err1);
         context = {allCats: catsArray};
         res.render('tool/new.ejs', context);
     })
 })
+
+//old Create methods:
+// db.Tool.create(req.body, (err, createdTool) => {
+//     if(err) return res.send("update route error: "+err);
+//     res.redirect('/tools');
+// })
+
 
 //create route
 router.post('/', async (req, res) => {
@@ -36,13 +43,7 @@ router.post('/', async (req, res) => {
         res.send("update route error: "+err);
     }
 
-    //old way:
-    // db.Tool.create(req.body, (err, createdTool) => {
-    //     if(err) return res.send("update route error: "+err);
-    //     res.redirect('/tools');
-    // })
 })
-
 //show route
 router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId, (err, foundTool) => {
@@ -53,23 +54,52 @@ router.get('/:toolId', (req, res) => {
         res.render('tool/show.ejs', context);
     })
 })
-
-
 //edit route
 router.get('/:toolId/edit', (req, res) => {
-    db.Tool.findById(req.params.toolId, (err, foundTool) => {
-        if(err) return res.send("edit route error: "+err);
-        context = {oneTool: foundTool};
-        res.render('tool/edit.ejs', context);
+    db.Category.find({}, (err1, catsArray) => {
+        if(err1) return res.send("edit route categories error: "+err1)
+        db.Tool.findById(req.params.toolId, (err, foundTool) => {
+            if(err) return res.send("edit route error: "+err);
+            context = {
+                oneTool: foundTool,
+                allCats: catsArray,
+            };
+            res.render('tool/edit.ejs', context);
+        })
+
     })
+    
 })
 
+//old update methods
+// db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true}, (err, updatedTool) => {
+//     if(err) return res.send("update route error: "+err);
+//     res.redirect('/tools/'+req.params.toolId);
+// })
+
+
 //update route
-router.put('/:toolId', (req, res) => {
-    db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true}, (err, updatedTool) => {
-        if(err) return res.send("update route error: "+err);
+router.put('/:toolId', async (req, res) => {
+    try{
+        const oldTool = await db.Tool.findById(req.params.toolId);
+        const isCategoryChange = (oldTool.category != req.params.category);
+        if(isCategoryChange) {
+            const oldCategory = await db.Category.findById(oldTool.category);
+            oldCategory.tools.remove(oldTool);
+            oldCategory.save();
+        }
+        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
+        if(isCategoryChange){
+            const newCategory = await db.Category.findById(updatedTool.category);
+            newCategory.tools.push(updatedTool);
+            newCategory.save();
+        }
         res.redirect('/tools/'+req.params.toolId);
-    })
+    }
+    catch(err){
+        res.send("update route error: "+err);
+    }
+
 })
 
 
