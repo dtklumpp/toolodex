@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,8 @@
     <title>New Tool Page</title>
 </head>
 <body>
-    <h1>Make New Tool</h1>
+    <%- include('../partials/header-navbar.ejs') %>
+    <h2>Make New Tool</h2>
     <form action="/tools/" method="post">
         Name: <input type="text" name="name"><br>
         Link: <input type="text" name="link"><br>
