@@ -12,8 +12,8 @@ For our MVP version, we plan to include a two-model application, with a one-to-m
 
 ## Stretch goals:
 - Add a keywords field to the the Tools model that will allow a user to search and find their tools more easily.
-- Include a many-to-many relationship between the Categories and the Tools/Resources, such that a user can include a given tool in more than one Category if they choose.
 - Incorporate a search bar that allows a user to find their resources by key words.
+- Include a many-to-many relationship between the Categories and the Tools/Resources, such that a user can include a given tool in more than one Category if they choose.
 - Add a third model for users, so each user can save their own set of Categories and Tools/Resources.
 - Include user authentication - user creates an account with username and password.
 - Add in a map page that allows users to see other users and maybe interact with/view their saved resources. Other users would appear on a world map and be clickable to access their data.
