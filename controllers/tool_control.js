@@ -42,13 +42,22 @@ router.get('/:toolId', (req, res) => {
 //edit route
 router.get('/:toolId/edit', (req, res) => {
     db.Tool.findById(req.params.toolId, (err, foundTool) => {
-        if(err) return res.send("edit route error:"+err);
+        if(err) return res.send("edit route error: "+err);
         context = {oneTool: foundTool};
         res.render('tool/edit.ejs', context);
     })
 })
 
 //update route
+router.put('/:toolId', (req, res) => {
+    db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true}, (err, updatedTool) => {
+        if(err) return res.send("update route error: "+err);
+        res.redirect('/tools/'+req.params.toolId);
+    })
+})
+
+
+
 
 //delete route
 router.delete('/:toolId', (req, res) => {
