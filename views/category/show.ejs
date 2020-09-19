@@ -9,10 +9,12 @@
 </head>
 <body>
     <%- include('../partials/header-navbar.ejs') %>
-    <h2>Category <%= category.name %></h2>
+    <h2><%= category.name %> Tools:</h2>
     <div>
-        <a href="/category/edit"><i class="fas fa-edit"></i></a>
+        <a href="/categories/<%= category._id %>/edit">Edit Category</a>
+        <!-- <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
     </div>
+    
     <% category.tools.forEach(tool => { %>
         <div class='tool'>
             <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
