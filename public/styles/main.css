@@ -1,4 +1,7 @@
 body {
-    background-color: aquamarine;
+    background-image: url('../images/corkboard.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     color: blue;
 }
