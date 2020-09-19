@@ -17,6 +17,4 @@ const toolSchema = new Schema({
 )
 
 const toolModel = mongoose.model('Tool', toolSchema);
-module.exports = {
-    Tool: toolModel
-}
+module.exports = toolModel;

@@ -7,9 +7,9 @@ const db = require('../models');
 //index route
 router.get('/', (req, res) => {
     //res.send('tools index page');
-    db.Tool.find({}, (err, foundTools) => {
+    db.Tool.find({}, (err, toolsArray) => {
         if(err) return res.send("index route error: "+err);
-        context = {allTools: foundTools};
+        context = {allTools: toolsArray};
         res.render('tool/index.ejs', context);
     })
 })
@@ -28,6 +28,15 @@ router.post('/', (req, res) => {
 })
 
 //show route
+router.get('/:toolID', (req, res) => {
+    db.Tool.findById(req.params.toolID, (err, foundTool) => {
+        if(err) return res.send("show route error: "+err);
+        //console.log('req.params.toolID:', req.params.toolID);
+        //console.log('foundTool:', foundTool);
+        context = {oneTool: foundTool};
+        res.render('tool/show.ejs', context);
+    })
+})
 
 
 //edit route

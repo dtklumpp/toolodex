@@ -10,7 +10,9 @@
     <ul>
         <% allTools.forEach(tool => { %> 
             <li>
-                <%= tool.name %> 
+                <a href="/tools/<%=tool._id%>">
+                    <%= tool.name %>                 
+                </a>
             </li>
         <% }) %> 
     </ul>
