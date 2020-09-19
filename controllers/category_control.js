@@ -19,6 +19,17 @@ router.post('/', (req, res) => {
 });
 
 // show route (view contents of one category)
+router.get('/:id', (req, res) => {
+    db.Category.findById(req.params.id)
+    .populate('tools')
+    .exec( (error, foundCategory) => {
+        if(error) return res.send(error);
+        const context = {
+            category: foundCategory,
+        };
+        res.render('category/show', context);
+    });
+});
 
 // edit route
 
