@@ -53,5 +53,20 @@ router.put('/:id', (req, res) => {
 });
 
 // delete route
+router.delete('/:id', async (req, res) => {
+    try {
+        // find and delete the category
+        const deletedCategory = await db.Category.findByIdAndDelete(req.params.id);
+        console.log('Deleted category: ', deletedCategory);
+        // find and delete any tools that belonged to that category
+        // TODO might need to refactor and remove this part when we add many-to-many connections
+        const deletedTools = await db.Tool.deleteMany({ category: deletedCategory._id });
+        console.log('deletedTools: ', deletedTools);
+        // redirect to the homepage (aka categories index)
+        res.redirect('/');
+    } catch (error) {
+        return res.send(error);
+    }
+});
 
 module.exports = router;
