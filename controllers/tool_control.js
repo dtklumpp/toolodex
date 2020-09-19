@@ -40,6 +40,14 @@ router.get('/:toolId', (req, res) => {
 
 
 //edit route
+router.get('/:toolId/edit', (req, res) => {
+    db.Tool.findById(req.params.toolId, (err, foundTool) => {
+        if(err) return res.send("edit route error:"+err);
+        context = {oneTool: foundTool};
+        res.render('tool/edit.ejs', context);
+    })
+})
+
 //update route
 
 //delete route
