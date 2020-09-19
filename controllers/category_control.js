@@ -19,9 +19,8 @@ router.post('/', (req, res) => {
 });
 
 // show route (view contents of one category)
-//TODO I think I'll need to turn this into an async function but not sure exactly how
 router.get('/:id', (req, res) => {
-    db.Category.findById(req.params.id) // Throws an error saying cannot read prop of undefined. Is it because David doesn't have the categories linked in his Tool model?
+    db.Category.findById(req.params.id)
     .populate('tools')
     .exec( (error, foundCategory) => {
         if(error) return res.send(error);
@@ -33,9 +32,8 @@ router.get('/:id', (req, res) => {
 });
 
 // edit (form) route
-//TODO I think I'll need to turn this into an async function but not sure exactly how
 router.get('/:id/edit', (req, res) => {
-    db.Category.findById(req.params.id) // Throws an error saying cannot read prop of undefined. Is it because David doesn't have the categories linked in his Tool model?
+    db.Category.findById(req.params.id)
     .populate('tools')
     .exec( (error, foundCategory) => {
         if(error) return res.send(error);
