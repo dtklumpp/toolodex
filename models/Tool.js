@@ -8,8 +8,8 @@ const toolSchema = new Schema({
     link: {type: String, required: true},
     description: String,
     notes: String,
-    //keywords: [{type: String}],
-    //category: String,
+    //keywords: [{type: String}],  STRETCH FEATURE
+    //category: String,  STRETCH FEATURE
 }, {
     timestamps: true,
 })
