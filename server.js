@@ -25,8 +25,17 @@ app.use(express.urlencoded({extended: false}));
 
 /* Routes */
 // TODO Homepage (Category index)
-app.get('/', (req,res) => {
-    res.render('index.ejs');
+app.get('/', async (req,res) => {
+    try {
+        const allCategories = await db.Category.find({});
+        const context = {
+            categories: allCategories,
+        };
+        res.render('index.ejs', context);
+    } catch (error) {
+        console.log(error);
+        res.send('Internal Server Error');
+    }
 });
 
 //Test Route
