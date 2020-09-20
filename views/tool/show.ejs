@@ -18,6 +18,13 @@
     Keywords: <%= oneTool.keywords %> <br>
     <!-- Full Category: <%= oneTool.category %> <br> -->
     Category: <%= oneTool.category.name %> <br>
+    Categories: <ul>
+        <% for(eachCat of oneTool.categories){ %> 
+            <li>
+                <%= eachCat.name %> 
+            </li>
+        <% } %> 
+    </ul>
     <br>
     <form action="/tools/<%=oneTool._id%>?_method=DELETE" method="POST">
         <input type="submit" value="DESTROY">

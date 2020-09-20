@@ -58,6 +58,7 @@ router.post('/', async (req, res) => {
 router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
     .populate('category')
+    .populate('categories')
     .exec( (err, foundTool) => {
         if(err) return res.send("show route error: "+err);
         //console.log('req.params.toolId:', req.params.toolId);
