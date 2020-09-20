@@ -1,6 +1,16 @@
+:root {
+    /* colors */
+    --post-it: lightyellow;
+    --background: whitesmoke;
+    --navbar: burlywood;
+    /* sizes */
+    --scale-size: 1;
+}
+
 body {
     display: flex;
     flex-direction: column;
+    background-color: var(--background);
 }
 
 .display-area {
@@ -9,7 +19,8 @@ body {
 }
 
 .header {
-    background-color: yellow;
+    /* background-color: yellow; */
+    background-color: var(--navbar);
     text-align: center;
 }
 
@@ -30,7 +41,7 @@ body {
 }
 
 .tile {
-    background-color: lightyellow;
+    background-color: var(--post-it);
     margin: 10px;
     width: 150px;
     height: 150px;
@@ -41,6 +52,8 @@ body {
     word-wrap: break-word;
 }
 
+
 /* .category-name {
     word-wrap: break-word;
 } */
+
