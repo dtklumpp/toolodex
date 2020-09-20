@@ -26,6 +26,17 @@
                     value="<%=eachCat._id%>"><%=eachCat.name%></option>
             <% } %> 
         </select> <br>
+        Categories: <ul>
+            <% for(eachCat of allCats){ %> 
+                <li>
+                    <input type="checkbox" name="category_<%= eachCat._id %>"
+                        <% if(oneTool.categories.includes(String(eachCat._id))){ %>
+                            checked
+                        <% } %> 
+                    /><%= eachCat.name %> 
+                </li>
+            <% } %> 
+        </ul>
         <input type="submit" value="Apply Changes">
     </form>
     <%- include('../partials/testfooter.ejs'); %>
