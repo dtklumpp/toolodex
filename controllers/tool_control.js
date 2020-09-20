@@ -34,9 +34,19 @@ router.get('/newTool', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const createdTool = await db.Tool.create(req.body);
-        const foundCategory = await db.Category.findById(req.body.category);
-        foundCategory.tools.push(createdTool);
-        foundCategory.save();
+        const allCats = await db.Category.find({});
+        for(eachCat of allCats){
+            catId = eachCat._id;
+            if(req.body["category_"+catId] === 'on'){
+                await createdTool.categories.push(eachCat);
+                eachCat.tools.push(createdTool);
+                eachCat.save();
+            }
+        }
+        createdTool.save();
+        //const foundCategory = await db.Category.findById(req.body.category);
+        //foundCategory.tools.push(createdTool);
+        //foundCategory.save();
         res.redirect('/tools');
     }
     catch (err) {
