@@ -17,13 +17,23 @@
             <h2>Your Categories</h2>
             <div class='post-its'>
                 <% categories.forEach(category => { %>
-                    <div class="category tile">
+                    <a href="/categories/<%= category._id %>" class='category-name'>
+                        <div class="category tile">
+                            <%= category.name %>
+                        </div>
+                    </a>
+                    <!-- <div class="category tile">
                         <a href="/categories/<%= category._id %>" class='category-name'><%= category.name %></a>
-                    </div>
+                    </div> -->
                 <% }) %>
-                <div class="add-category tile">
+                <a href="/categories/new">
+                    <div class="add-category tile">
+                        +
+                    </div>
+                </a>
+                <!-- <div class="add-category tile">
                     <a href="/categories/new">+</a>
-                </div>
+                </div> -->
             </div>
         </section>
     </div>
