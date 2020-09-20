@@ -13,7 +13,7 @@
     <h2>Edit Category: <%= category.name %></h2>
     <form action='/categories/<%= category._id %>?_method=PUT' method='POST'>
         <p>Name: <input type='text' name='name' value='<%= category.name %>' /></p>
-        <p>Description: <textarea type= 'text' name='description' value='<%= category.description %>' ></textarea></p>
+        <p>Description: <textarea type= 'text' name='description' ><%= category.description %></textarea></p>
         <input type='submit' value='Save Changes' />
     </form>
     <form action="/categories/<%= category._id %>?_method=DELETE" method="POST">
