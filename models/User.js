@@ -8,7 +8,10 @@ const userSchema = new Schema(
         location: {type: String, required: true},
         email: {type: String, required: true, unique: true},
         pw: {type: String, required: false},
-
+        categories: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Category",
+        }],
     },
     {timestamps: true},
 )
