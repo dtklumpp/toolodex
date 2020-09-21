@@ -27,7 +27,7 @@ router.get('/newUser', (req, res) => {
 
 //create route
 router.post('/', (req, res) => {
-    console.log('got here');
+    //console.log('got here');
     db.User.create(req.body, (err, createdUser) => {
         if(err) return res.send('create route error: '+err);
         res.redirect('/users');
@@ -40,7 +40,7 @@ router.get('/:userId', async (req, res) => {
     try{
         const foundUser = await db.User.findById(req.params.userId).populate('categories').exec();
         const context = {oneUser: foundUser};
-        res.render('users/show.ejs', context);
+        res.render('user/show.ejs', context);
     }
     catch(error){
         res.send('show route error: '+error);
@@ -66,8 +66,9 @@ router.get('/:userId/edit', async (req, res) => {
 
 //update route
 router.put('/:userId', async (req, res) => {
+    //console.log('got hereabouts');
     try{
-        const updatedUser = db.User.findByIdAndUpdate(req.params.userId, req.body, {new: true});
+        const updatedUser = await db.User.findByIdAndUpdate(req.params.userId, req.body, {new: true});
         res.redirect('/users/'+req.params.userId);
     }
     catch(error){
@@ -79,8 +80,10 @@ router.put('/:userId', async (req, res) => {
 
 //delete route
 router.delete('/:userId', async (req, res) => {
+    //console.log('got here now');
     try{
-        const deletedUser = await db.User.findByIdAndDelete(req.params.id);
+        const doneUser = await db.User.findById(req.params.userId);
+        doneUser.deleteOne();
         res.redirect('/users');
     }
     catch(error){
