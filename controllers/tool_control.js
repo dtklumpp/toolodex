@@ -57,7 +57,6 @@ router.post('/', async (req, res) => {
 //show route
 router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
-    .populate('category')
     .populate('categories')
     .exec( (err, foundTool) => {
         if(err) return res.send("show route error: "+err);
@@ -76,7 +75,6 @@ router.get('/:toolId/edit', (req, res) => {
             context = {
                 oneTool: foundTool,
                 allCats: catsArray,
-                catId: foundTool.category._id,
             };
             res.render('tool/edit.ejs', context);
         })

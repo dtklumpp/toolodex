@@ -12,7 +12,7 @@ const toolSchema = new Schema(
         keywords: String,
         //keywords: [{type: String}],  STRETCH FEATURE
         //category: String,  STRETCH FEATURE
-        category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
+        //category: {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
         categories: [{
             type: mongoose.Schema.ObjectId,
             ref: 'Category',
