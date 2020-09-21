@@ -11,7 +11,16 @@
 <body>
     <div class='display-area'>
         <section class='header'>
-            <%- include('partials/header-navbar.ejs') %>
+            <nav>
+                <%- include('partials/header-navbar.ejs') %>
+                <% if(user) { %>
+                    <form action="/logout?_method=DELETE" method="post" value=''>
+                        <input type="submit" value="Logout" id='logout'>
+                    </form>
+                <%} else { %>
+                    <a href='/login'>Login</a>
+                <% } %> 
+            </nav>
         </section>
         <section class='corkboard'>
             <h2>Your Categories</h2>

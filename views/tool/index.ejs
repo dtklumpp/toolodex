@@ -9,7 +9,12 @@
     <title>Tool Index</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
+    <nav>
+        <%- include('../partials/header-navbar.ejs') %>
+        <form action="/logout?_method=DELETE" method="post" value=''>
+            <input type="submit" value="Logout" id='logout'>
+        </form>
+    </nav>
     <h2>Tools Index page</h2>
     <ul>
         <% allTools.forEach(tool => { %> 

@@ -9,7 +9,10 @@
     <title>Register</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
+    <nav>
+        <%- include('../partials/header-navbar.ejs') %>
+        <a href='/login'>Login</a>
+    </nav>
     <h2>New User</h2>
     <form action="/register" method="POST">
         Email: <input type="text" name="email"  required /><br>

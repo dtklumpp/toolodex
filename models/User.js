@@ -7,7 +7,7 @@ const userSchema = new Schema(
         location: {type: String, required: true},
         politicalAffiliation: {type: String},
         email: {type: String, required: true, unique: true},
-        pw: {type: String, required: true},
+        password: {type: String, required: true},
         categories: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Category",

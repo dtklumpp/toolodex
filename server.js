@@ -36,6 +36,14 @@ app.use(session({
     },
 }));
 
+// Gatekeeper Authorization
+const authRequired = function (req, res, next) {
+    if(!req.session.currentUser) {
+        return res.redirect('/login');
+    };
+    next();
+};
+
 /* Routes */
 
 // Auth routes
@@ -47,6 +55,7 @@ app.get('/', async (req,res) => {
         const allCategories = await db.Category.find({});
         const context = {
             categories: allCategories,
+            user: req.session.currentUser,
         };
         res.render('index.ejs', context);
     } catch (error) {
@@ -61,13 +70,13 @@ app.get('/testing', (req, res) => {
 })
 
 // Category routes
-app.use('/categories', controllers.category);
+app.use('/categories', authRequired, controllers.category);
 
 // Tool routes
-app.use('/tools', controllers.tool);
+app.use('/tools', authRequired, controllers.tool);
 
 // User routes
-app.use('/users', controllers.user);
+app.use('/users', authRequired, controllers.user);
 
 /* Server Listener */
 app.listen(PORT, () => {

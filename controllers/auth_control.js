@@ -13,7 +13,7 @@ router.get('/register', (req, res) => {
 });
 
 // register post => creates user
-router.get('/register', async (req, res) => {
+router.post('/register', async (req, res) => {
     try {
         const foundUser = await db.User.findOne({ email: req.body.email });
         if(foundUser) {
@@ -41,7 +41,7 @@ router.get('/login', (req, res) => {
 });
 
 // login post (authentication)
-router.get('/login', async (req,res) => {
+router.post('/login', async (req,res) => {
     try {
         const foundUser = await db.User.findOne({ username: req.body.username});
         

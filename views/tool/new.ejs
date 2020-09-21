@@ -9,7 +9,12 @@
     <title>New Tool Page</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
+    <nav>
+        <%- include('../partials/header-navbar.ejs') %>
+        <form action="/logout?_method=DELETE" method="post" value=''>
+            <input type="submit" value="Logout" id='logout'>
+        </form>
+    </nav>
     <h2>Make New Tool</h2>
     <form action="/tools/" method="post">
         Name: <input type="text" name="name"><br>
