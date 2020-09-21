@@ -37,6 +37,10 @@ app.use(session({
 }));
 
 /* Routes */
+
+// Auth routes
+app.use('/', controllers.auth);
+
 // TODO Homepage (Category index)
 app.get('/', async (req,res) => {
     try {
