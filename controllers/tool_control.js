@@ -163,7 +163,7 @@ router.delete('/:toolId', async (req, res) => {
         doomedTool.deleteOne();
     }
     catch (error) {
-        res.send('deletion category error: '+error);
+        res.send('tool deletion route error: '+error);
     }
     res.redirect('/tools');
 })

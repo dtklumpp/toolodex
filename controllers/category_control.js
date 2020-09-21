@@ -57,16 +57,31 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         // find and delete the category
-        const deletedCategory = await db.Category.findByIdAndDelete(req.params.id);
-        console.log('Deleted category: ', deletedCategory);
+        //DK note: this was the old method pre-MTM
+        //const deletedCategory = await db.Category.findByIdAndDelete(req.params.id);
+
+        //new method:
+        const doomedCategory= await db.Category.findById(req.params.id).populate('tools').exec();
+        const childTools = doomedCategory.tools;
+        //console.log('childTools:', childTools);
+        for(eachTool of childTools){
+            eachTool.categories.remove(doomedCategory);
+            eachTool.save();
+        }
+        doomedCategory.deleteOne();
+        console.log('Deleted category: ', doomedCategory);
+
+
         // find and delete any tools that belonged to that category
         // TODO might need to refactor and remove this part when we add many-to-many connections
-        const deletedTools = await db.Tool.deleteMany({ category: deletedCategory._id });
-        console.log('deletedTools: ', deletedTools);
+        //DK-note: just commented out this now that MTM is running
+        //const deletedTools = await db.Tool.deleteMany({ category: deletedCategory._id });
+        //console.log('deletedTools: ', deletedTools);
+
         // redirect to the homepage (aka categories index)
         res.redirect('/');
     } catch (error) {
-        return res.send(error);
+        return res.send("category deletion route error: "+error);
     }
 });
 
