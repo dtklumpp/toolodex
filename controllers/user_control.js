@@ -81,9 +81,33 @@ router.put('/:userId', async (req, res) => {
 //delete route
 router.delete('/:userId', async (req, res) => {
     //console.log('got here now');
+    console.log('got to delete route')
     try{
-        const doneUser = await db.User.findById(req.params.userId);
-        doneUser.deleteOne();
+        const doomedUser = await db.User.findById(req.params.userId).populate('categories').exec();
+
+        //deletes each category owned by the doomed User
+        const childCats = doomedUser.categories;
+        console.log('childCats:', childCats);
+        for(eachCat of childCats){
+            //eachCat.user.remove(doomedUser);
+            //eachCat.save();
+
+            //eachCat.deleteOne(); // doesn't delete the tools!
+            //const childTools = eachCat.populate('tools').exec();
+
+            //const fullCat = await eachCat.populate('tools').exec();
+            const fullCat2 = await eachCat.populate('tools');
+
+
+
+
+            //console.log('fullCat:', fullCat);
+            console.log('fullCat2:', fullCat2);
+
+
+        }
+        
+        //doomedUser.deleteOne();
         res.redirect('/users');
     }
     catch(error){

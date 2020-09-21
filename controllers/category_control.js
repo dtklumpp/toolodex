@@ -53,12 +53,34 @@ router.get('/:id/edit', async (req, res) => {
 });
 
 // update route
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
     //console.log('req.body:', req.body);
-    db.Category.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedCategory) => {
-        if(error) return res.send(error);
-        res.redirect(`/categories/${updatedCategory._id}`);
-    });
+    // db.Category.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedCategory) => {
+    //     if(error) return res.send(error);
+    //     res.redirect(`/categories/${updatedCategory._id}`);
+    // });
+
+    try {
+        const oldCategory = await db.Category.findById(req.params.id);
+        const isUserChange = (oldCategory.user != req.params.user);
+        if(isUserChange) {
+            const oldUser = await db.User.findById(oldCategory.user);
+            oldUser.categories.remove(oldCategory);
+            oldUser.save();
+        }
+        const updatedCategory = await db.Category.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        if(isUserChange){
+            const newUser = await db.User.findById(updatedCategory.user);
+            newUser.categories.push(updatedCategory);
+            newUser.save();
+        }
+        res.redirect('/categories/'+req.params.id);
+
+    }
+
+    catch(err){
+        res.send("update route error: "+err);
+    }
 });
 
 // delete route
@@ -70,12 +92,22 @@ router.delete('/:id', async (req, res) => {
 
         //new method:
         const doomedCategory= await db.Category.findById(req.params.id).populate('tools').exec();
-        const childTools = doomedCategory.tools;
         //console.log('childTools:', childTools);
+        
+        //removes the reference to the category from each associated tool
+        const childTools = doomedCategory.tools;
         for(eachTool of childTools){
             eachTool.categories.remove(doomedCategory);
             eachTool.save();
         }
+
+        //removes the reference to the category from its associated User
+        const parentUser = doomedCategory.user;
+        parentUser.categories.remove(doomedCategory);
+        parentUser.save();
+
+
+
         doomedCategory.deleteOne();
         console.log('Deleted category: ', doomedCategory);
 
