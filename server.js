@@ -49,6 +49,9 @@ app.use('/categories', controllers.category);
 // Tool routes
 app.use('/tools', controllers.tool);
 
+// User routes
+app.use('/users', controllers.user);
+
 /* Server Listener */
 app.listen(PORT, () => {
     console.log(`Server is live and listening on http://localhost:${PORT}`);

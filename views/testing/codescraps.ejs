@@ -1,0 +1,12 @@
+
+<!-- from edit.ejs, way to make checkbox auto-checked -->
+Category: <select name="category">
+    <% for(eachCat of allCats) { %> 
+        <option 
+            <%if(String(eachCat._id) == String(catId)){%>
+                selected="selected"
+            <%}%>
+            value="<%=eachCat._id%>"><%=eachCat.name%></option>
+    <% } %> 
+</select> <br>
+

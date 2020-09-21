@@ -20,4 +20,5 @@ mongoose.connection.on('disconnected', (event) => {
 module.exports = {
     Tool: require('./Tool.js'),
     Category: require('./Category.js'),
+    User: require('./User.js'),
 }
