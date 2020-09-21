@@ -60,8 +60,6 @@ body {
 }
 
 i {
-    height: 20px;
-    width: 20px;
-    z-index: 2;
+    font-size: 30px;
 }
 
