@@ -23,6 +23,19 @@ app.use(express.static('public'));
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}));
 
+// user auth
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'Open sesame',
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/toolodex-sessions'
+    }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 // one day
+    },
+}));
+
 /* Routes */
 // TODO Homepage (Category index)
 app.get('/', async (req,res) => {

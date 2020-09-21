@@ -1,6 +1,4 @@
-
 const mongoose = require('mongoose');
-//const { tool } = require('../controllers');
 const Schema = mongoose.Schema;
 
 const toolSchema = new Schema(
