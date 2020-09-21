@@ -21,16 +21,20 @@
             </div>
             <div class='post-its'>
                 <% category.tools.forEach(tool => { %>
-                    <div class='tool tile'>
-                        <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
-                    </div>
+                    <a href='<%= tool.link %>' target='_blank'>
+                        <div class='tool tile'>
+                            <%= tool.name %>
+                        </div>
+                    </a>
                 <% }); %>
                 <% if(category.tools.length === 0) { %>
                     <p>There are no tools available yet!</p>
                 <% } %>
-                <div class="add-tool tile">
-                    <a href="/tools/newTool">+</a>
-                </div>
+                <a href="/tools/newTool">
+                    <div class="add-tool tile">
+                        +
+                    </div>
+                </a>
             </div>
         </section>
     </div>  

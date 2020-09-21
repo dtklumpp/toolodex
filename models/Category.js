@@ -9,6 +9,7 @@ const categorySchema = new mongoose.Schema(
                 ref: 'Tool',
             },
         ],
+        user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     },
     {timestamps: true},
 );

@@ -1,25 +1,43 @@
+* {
+    box-sizing: border-box;
+    /* this is useful so borders & padding don't change the size of elements */
+}
+
+:root {
+    /* colors */
+    --post-it: lightyellow;
+    --background: whitesmoke;
+    --navbar: burlywood;
+    /* sizes */
+    --scale-size: 1;
+}
+
 body {
     display: flex;
     flex-direction: column;
+    background-color: var(--background);
 }
 
 .display-area {
     margin: 0 auto;
-    width: 960px;
+    width: calc( var(--scale-size) * 960px);
+    /* width: 960px; */
 }
 
 .header {
-    background-color: yellow;
+    /* background-color: yellow; */
+    background-color: var(--navbar);
     text-align: center;
 }
 
 .corkboard {
     background-image: url('../images/corkboard.jpg');
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
+    /* i commented out "fixed" so the corkboard doesn't move behind the post-its when you resize the screen */
     background-size: cover;
     color: blue;
-    min-height: 960px;
+    min-height: calc( var(--scale-size) * 960px);
 }
 
 .post-its {
@@ -30,10 +48,10 @@ body {
 }
 
 .tile {
-    background-color: lightyellow;
-    margin: 10px;
-    width: 150px;
-    height: 150px;
+    background-color: var(--post-it);
+    margin: calc( var(--scale-size) * 10px);
+    width: calc( var(--scale-size) * 150px);
+    height: calc( var(--scale-size) * 150px);
     box-shadow: 1px 1px black;
     display: flex;
     align-items: center;
@@ -41,6 +59,8 @@ body {
     word-wrap: break-word;
 }
 
+
 /* .category-name {
     word-wrap: break-word;
 } */
+

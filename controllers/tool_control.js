@@ -34,9 +34,19 @@ router.get('/newTool', (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const createdTool = await db.Tool.create(req.body);
-        const foundCategory = await db.Category.findById(req.body.category);
-        foundCategory.tools.push(createdTool);
-        foundCategory.save();
+        const allCats = await db.Category.find({});
+        for(eachCat of allCats){
+            catId = eachCat._id;
+            if(req.body["category_"+catId] === 'on'){
+                await createdTool.categories.push(eachCat);
+                eachCat.tools.push(createdTool);
+                eachCat.save();
+            }
+        }
+        createdTool.save();
+        //const foundCategory = await db.Category.findById(req.body.category);
+        //foundCategory.tools.push(createdTool);
+        //foundCategory.save();
         res.redirect('/tools');
     }
     catch (err) {
@@ -47,7 +57,7 @@ router.post('/', async (req, res) => {
 //show route
 router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
-    .populate('category')
+    .populate('categories')
     .exec( (err, foundTool) => {
         if(err) return res.send("show route error: "+err);
         //console.log('req.params.toolId:', req.params.toolId);
@@ -65,7 +75,6 @@ router.get('/:toolId/edit', (req, res) => {
             context = {
                 oneTool: foundTool,
                 allCats: catsArray,
-                catId: foundTool.category._id,
             };
             res.render('tool/edit.ejs', context);
         })
@@ -84,6 +93,37 @@ router.get('/:toolId/edit', (req, res) => {
 //update route
 router.put('/:toolId', async (req, res) => {
     try{
+
+        const allCats = await db.Category.find({});
+        const oldTool = await db.Tool.findById(req.params.toolId);
+        
+        for(eachCat of allCats){
+            catId = eachCat._id;
+            const checkedCategory = req.body["category_"+catId] === 'on';
+            const alreadyInCategory = oldTool.categories.includes(String(catId));
+
+            const isCategoryAdded = checkedCategory && !(alreadyInCategory);
+            const isCategoryRemoved = alreadyInCategory && !(checkedCategory);
+
+            if(isCategoryAdded){
+                await oldTool.categories.push(eachCat);
+                eachCat.tools.push(oldTool);
+                eachCat.save();
+            } else
+            if(isCategoryRemoved){
+                await oldTool.categories.remove(eachCat);
+                eachCat.tools.remove(oldTool);
+                eachCat.save();
+            }
+        }
+        await oldTool.save();
+        
+        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
+
+        res.redirect('/tools/'+req.params.toolId);
+
+
+/* 
         const oldTool = await db.Tool.findById(req.params.toolId);
         const isCategoryChange = (oldTool.category != req.params.category);
         if(isCategoryChange) {
@@ -98,6 +138,8 @@ router.put('/:toolId', async (req, res) => {
             newCategory.save();
         }
         res.redirect('/tools/'+req.params.toolId);
+ */
+
     }
     catch(err){
         res.send("update route error: "+err);
@@ -109,9 +151,19 @@ router.put('/:toolId', async (req, res) => {
 
 
 //delete route
-router.delete('/:toolId', (req, res) => {
-    db.Tool.findByIdAndDelete(req.params.toolId, (err, goneTool) => {
-        if(err) return res.send("delete route error: "+err);
-        res.redirect('/tools');
-    })
+router.delete('/:toolId', async (req, res) => {
+    try {
+        const doomedTool = await db.Tool.findById(req.params.toolId).populate('categories').exec();
+        const parentCats = doomedTool.categories;
+        //console.log('parentCats:', parentCats);
+        for(eachCat of parentCats){
+            eachCat.tools.remove(doomedTool);
+            eachCat.save();
+        }
+        doomedTool.deleteOne();
+    }
+    catch (error) {
+        res.send('tool deletion route error: '+error);
+    }
+    res.redirect('/tools');
 })

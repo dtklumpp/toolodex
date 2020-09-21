@@ -16,15 +16,18 @@
         Link: <input type="text" name="link" value=<%=oneTool.link%>><br>
         Description: <input type="text" name="description" value=<%=oneTool.description%>><br>
         Notes: <input type="text" name="notes" value=<%=oneTool.notes%>><br>
-        Category: <select name="category">
-            <% for(eachCat of allCats) { %> 
-                <option 
-                    <%if(String(eachCat._id) == String(catId)){%>
-                        selected="selected"
-                    <%}%>
-                    value="<%=eachCat._id%>"><%=eachCat.name%></option>
+        Keywords: <input type="text" name="keywords" value=<%=oneTool.keywords%>><br>
+        Categories: <ul>
+            <% for(eachCat of allCats){ %> 
+                <li>
+                    <input type="checkbox" name="category_<%= eachCat._id %>"
+                        <% if(oneTool.categories.includes(String(eachCat._id))){ %>
+                            checked
+                        <% } %> 
+                    /><%= eachCat.name %> 
+                </li>
             <% } %> 
-        </select> <br>
+        </ul>
         <input type="submit" value="Apply Changes">
     </form>
     <%- include('../partials/testfooter.ejs'); %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Show User</title>
+</head>
+<body>
+    <%- include('../partials/header-navbar.ejs') %>
+    <h2>Show User</h2>
+    Name: <%= oneUser.name %> <br>
+    Location: <%= oneUser.location %> <br>
+    Political Affiliation: <%= oneUser.politicalAffiliation %> <br>
+    <br>
+    <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
+        <input type="submit" value="DESTROY">
+    </form>
+    <br>
+    <a href="/users/<%=oneUser._id%>/edit">Edit</a>
+    <br>
+    <%- include('../partials/testfooter.ejs'); %>
+</body>
+</html>
