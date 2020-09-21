@@ -9,13 +9,18 @@
     <title>User Index</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
+    <nav>
+        <%- include('../partials/header-navbar.ejs') %>
+        <form action="/logout?_method=DELETE" method="post" value=''>
+            <input type="submit" value="Logout" id='logout'>
+        </form>
+    </nav>
     <h2>Users Index page</h2>
     <ul>
         <% allUsers.forEach(user => { %> 
             <li>
                 <a href="/users/<%=user._id%>">
-                    <%= user.name %>                 
+                    <%= user.username %>                 
                 </a>
             </li>
         <% }) %> 

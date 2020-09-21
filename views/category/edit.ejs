@@ -19,6 +19,15 @@
     <form action='/categories/<%= category._id %>?_method=PUT' method='POST'>
         <p>Name: <input type='text' name='name' value='<%= category.name %>' /></p>
         <p>Description: <textarea type= 'text' name='description' ><%= category.description %></textarea></p>
+        User: <select name="user">
+            <% for(eachUser of allUsers) { %> 
+                <option 
+                    <%if(String(eachUser._id) == String(category.user)){%>
+                        selected="selected"
+                    <%}%>
+                    value="<%=eachUser._id%>"><%=eachUser.username%></option>
+            <% } %> 
+        </select> <br>
         <input type='submit' value='Save Changes' />
     </form>
     <form action="/categories/<%= category._id %>?_method=DELETE" method="POST">
@@ -38,5 +47,6 @@
             <a href="/tools/newTool">+</a>
         </li>
     </ul>
+    <br>
 </body>
 </html>
