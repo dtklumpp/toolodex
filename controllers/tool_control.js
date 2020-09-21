@@ -95,6 +95,37 @@ router.get('/:toolId/edit', (req, res) => {
 //update route
 router.put('/:toolId', async (req, res) => {
     try{
+
+        const allCats = await db.Category.find({});
+        const oldTool = await db.Tool.findById(req.params.toolId);
+        
+        for(eachCat of allCats){
+            catId = eachCat._id;
+            const checkedCategory = req.body["category_"+catId] === 'on';
+            const alreadyInCategory = oldTool.categories.includes(String(catId));
+
+            const isCategoryAdded = checkedCategory && !(alreadyInCategory);
+            const isCategoryRemoved = alreadyInCategory && !(checkedCategory);
+
+            if(isCategoryAdded){
+                await oldTool.categories.push(eachCat);
+                eachCat.tools.push(oldTool);
+                eachCat.save();
+            } else
+            if(isCategoryRemoved){
+                await oldTool.categories.remove(eachCat);
+                eachCat.tools.remove(oldTool);
+                eachCat.save();
+            }
+        }
+        await oldTool.save();
+        
+        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
+
+        res.redirect('/tools/'+req.params.toolId);
+
+
+/* 
         const oldTool = await db.Tool.findById(req.params.toolId);
         const isCategoryChange = (oldTool.category != req.params.category);
         if(isCategoryChange) {
@@ -109,6 +140,8 @@ router.put('/:toolId', async (req, res) => {
             newCategory.save();
         }
         res.redirect('/tools/'+req.params.toolId);
+ */
+
     }
     catch(err){
         res.send("update route error: "+err);
