@@ -27,9 +27,10 @@ router.get('/newUser', (req, res) => {
 
 //create route
 router.post('/', (req, res) => {
+    console.log('got here');
     db.User.create(req.body, (err, createdUser) => {
-        if(err) return res.send(err);
-        res.redirected('/users');
+        if(err) return res.send('create route error: '+err);
+        res.redirect('/users');
     })
 })
 
