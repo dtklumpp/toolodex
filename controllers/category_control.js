@@ -32,16 +32,24 @@ router.get('/:id', (req, res) => {
 });
 
 // edit (form) route
-router.get('/:id/edit', (req, res) => {
-    db.Category.findById(req.params.id)
-    .populate('tools')
-    .exec( (error, foundCategory) => {
-        if(error) return res.send(error);
-        const context = {
-            category: foundCategory,
-        };
-        res.render('category/edit', context);
-    });
+router.get('/:id/edit', async (req, res) => {
+    try{
+        const userArray = await db.User.find({});
+        db.Category.findById(req.params.id)
+        .populate('tools')
+        .exec( (error, foundCategory) => {
+            if(error) return res.send(error);
+            const context = {
+                category: foundCategory,
+                allUsers: userArray,
+            };
+            res.render('category/edit', context);
+        });
+
+    }
+    catch(error){
+        res.send("category edit route error: "+error);
+    }
 });
 
 // update route

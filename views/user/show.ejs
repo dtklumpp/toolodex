@@ -9,9 +9,14 @@
     <title>Show User</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
+    <nav>
+        <%- include('../partials/header-navbar.ejs') %>
+        <form action="/logout?_method=DELETE" method="post" value=''>
+            <input type="submit" value="Logout" id='logout'>
+        </form>
+    </nav>
     <h2>Show User</h2>
-    Name: <%= oneUser.name %> <br>
+    Userame: <%= oneUser.username %> <br>
     Location: <%= oneUser.location %> <br>
     Political Affiliation: <%= oneUser.politicalAffiliation %> <br>
     <br>
