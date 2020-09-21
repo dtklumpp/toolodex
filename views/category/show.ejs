@@ -11,13 +11,18 @@
 <body>
     <div class="display-area">
         <section class='header'>
-            <%- include('../partials/header-navbar.ejs') %>
+            <nav>
+                <%- include('../partials/header-navbar.ejs') %>
+                <form action="/logout?_method=DELETE" method="post" value=''>
+                    <input type="submit" value="Logout" id='logout'>
+                </form>
+            </nav>
         </section>
         <section class='corkboard'>
             <h2><%= category.name %> Tools:</h2>
             <div class='edit-category'>
                 <a href="/categories/<%= category._id %>/edit">Edit Category</a>
-                <!-- <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
+                <!-- TODO <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
             </div>
             <div class='post-its'>
                 <% category.tools.forEach(tool => { %>

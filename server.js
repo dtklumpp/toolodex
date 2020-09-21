@@ -23,13 +23,39 @@ app.use(express.static('public'));
 //app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: false}));
 
+// user auth
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: 'Open sesame',
+    store: new MongoStore({
+        url: 'mongodb://localhost:27017/toolodex-sessions'
+    }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 // one day
+    },
+}));
+
+// Gatekeeper Authorization
+const authRequired = function (req, res, next) {
+    if(!req.session.currentUser) {
+        return res.redirect('/login');
+    };
+    next();
+};
+
 /* Routes */
+
+// Auth routes
+app.use('/', controllers.auth);
+
 // TODO Homepage (Category index)
 app.get('/', async (req,res) => {
     try {
         const allCategories = await db.Category.find({});
         const context = {
             categories: allCategories,
+            user: req.session.currentUser,
         };
         res.render('index.ejs', context);
     } catch (error) {
@@ -44,13 +70,13 @@ app.get('/testing', (req, res) => {
 })
 
 // Category routes
-app.use('/categories', controllers.category);
+app.use('/categories', authRequired, controllers.category);
 
 // Tool routes
-app.use('/tools', controllers.tool);
+app.use('/tools', authRequired, controllers.tool);
 
 // User routes
-app.use('/users', controllers.user);
+app.use('/users', authRequired, controllers.user);
 
 /* Server Listener */
 app.listen(PORT, () => {

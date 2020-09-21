@@ -4,14 +4,23 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script src="/scripts/app.js" defer></script>
-    <%- include('partials/external-imports.ejs') %>
     <link rel="stylesheet" href="/styles/main.css" />
+    <%- include('partials/external-imports.ejs') %>
     <title>Toolodex</title>
 </head>
 <body>
     <div class='display-area'>
         <section class='header'>
-            <%- include('partials/header-navbar.ejs') %>
+            <nav>
+                <%- include('partials/header-navbar.ejs') %>
+                <% if(user) { %>
+                    <form action="/logout?_method=DELETE" method="post" value=''>
+                        <input type="submit" value="Logout" id='logout'>
+                    </form>
+                <%} else { %>
+                    <a href='/login'>Login</a>
+                <% } %> 
+            </nav>
         </section>
         <section class='corkboard'>
             <h2>Your Categories</h2>
@@ -22,20 +31,15 @@
                             <%= category.name %>
                         </div>
                     </a>
-                    <!-- <div class="category tile">
-                        <a href="/categories/<%= category._id %>" class='category-name'><%= category.name %></a>
-                    </div> -->
-                <% }) %>
+                <% }); %>
                 <a href="/categories/new">
                     <div class="add-category tile">
-                        +
+                        <i class="fas fa-plus"></i>
                     </div>
                 </a>
-                <!-- <div class="add-category tile">
-                    <a href="/categories/new">+</a>
-                </div> -->
             </div>
         </section>
     </div>
+
 </body>
 </html>
