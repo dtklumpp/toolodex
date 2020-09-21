@@ -151,9 +151,19 @@ router.put('/:toolId', async (req, res) => {
 
 
 //delete route
-router.delete('/:toolId', (req, res) => {
-    db.Tool.findByIdAndDelete(req.params.toolId, (err, goneTool) => {
-        if(err) return res.send("delete route error: "+err);
-        res.redirect('/tools');
-    })
+router.delete('/:toolId', async (req, res) => {
+    try {
+        const doomedTool = await db.Tool.findById(req.params.toolId).populate('categories').exec();
+        const parentCats = doomedTool.categories;
+        //console.log('parentCats:', parentCats);
+        for(eachCat of parentCats){
+            eachCat.tools.remove(doomedTool);
+            eachCat.save();
+        }
+        doomedTool.deleteOne();
+    }
+    catch (error) {
+        res.send('deletion category error: '+error);
+    }
+    res.redirect('/tools');
 })
