@@ -59,8 +59,9 @@ body {
     word-wrap: break-word;
 }
 
-
-/* .category-name {
-    word-wrap: break-word;
-} */
+i {
+    height: 20px;
+    width: 20px;
+    z-index: 2;
+}
 
