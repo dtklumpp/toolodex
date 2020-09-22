@@ -4,6 +4,8 @@ module.exports = router;
 
 const db = require('../models');
 
+const statesUSA = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY', 'United Arab Emirates' ];
+
 
 //index route
 router.get('/', async (req, res) => {
@@ -21,7 +23,7 @@ router.get('/', async (req, res) => {
 
 //new route
 router.get('/newUser', (req, res) => {
-    res.render('user/new.ejs');
+    res.render('user/new.ejs', {statesArray: statesUSA});
 })
 
 
@@ -52,7 +54,10 @@ router.get('/:userId', async (req, res) => {
 router.get('/:userId/edit', async (req, res) => {
     try{
         const foundUser = await db.User.findById(req.params.userId);
-        const context = {oneUser: foundUser};
+        const context = {
+                oneUser: foundUser,
+                statesArray: statesUSA,
+            };
         res.render('user/edit.ejs', context);
     }
     catch(error){

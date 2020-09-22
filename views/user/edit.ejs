@@ -18,7 +18,16 @@
     <h2>Edit a User</h2>
     <form action="/users/<%=oneUser._id%>?_method=PUT"  method="post">
         Username: <input type="text" name="username" value=<%=oneUser.username%>><br>
-        Location: <input type="text" name="location" value=<%=oneUser.location%>><br>
+        <!-- Location: <input type="text" name="location" value=<%=oneUser.location%>><br> -->
+        Location: <select name="location">
+            <% for(eachState of statesArray) { %> 
+                <option 
+                    <%if(eachState == oneUser.location){%>
+                        selected="selected"
+                    <%}%>
+                    value="<%=eachState%>"><%=eachState%></option>
+            <% } %> 
+        </select> <br>
         Political Affiliation: <input type="text" name="politicalAffiliation" value=<%=oneUser.politicalAffiliation%>><br>
         <!-- Email: <input type="text" name="email"> -->
         <input type="submit" value="Apply Changes">
