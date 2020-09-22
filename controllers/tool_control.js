@@ -60,8 +60,36 @@ router.post('/', async (req, res) => {
     catch (err) {
         res.send("update route error: "+err);
     }
-
 })
+
+
+//create route pre-populated
+router.post('/:catId', async (req, res) => {
+    try {
+        const createdTool = await db.Tool.create(req.body);
+        const allCats = await db.Category.find({});
+        for(eachCat of allCats){
+            catId = eachCat._id;
+            if(req.body["category_"+catId] === 'on'){
+                console.log('got here too');
+                await createdTool.categories.push(eachCat);
+                eachCat.tools.push(createdTool);
+                eachCat.save();
+            }
+        }
+        createdTool.save();
+        res.redirect('/categories/'+req.params.catId);
+    }
+    catch (err) {
+        res.send("update route error: ");
+    }
+})
+
+
+
+
+
+
 
 
 //show route
