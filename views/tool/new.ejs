@@ -27,7 +27,11 @@
         Categories: <ul>
             <% for(eachCat of allCats){ %> 
                 <li>
-                    <input type="checkbox" name="category_<%= eachCat._id %>"/> <%= eachCat.name %>
+                    <input type="checkbox" name="category_<%= eachCat._id %>"
+                        <% if(String(eachCat._id) === catId){ %>
+                            checked
+                        <% } %> 
+                    /> <%= eachCat.name %>
                 </li>
             <% } %> 
         </ul>

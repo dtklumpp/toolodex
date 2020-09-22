@@ -18,3 +18,23 @@ Category: <select name="category">
         <%} else { %>
             <a href='/login'>Login</a>
         <% } %>
+
+
+
+<!-- old way to update a tool -->
+<!-- 
+        const oldTool = await db.Tool.findById(req.params.toolId);
+        const isCategoryChange = (oldTool.category != req.params.category);
+        if(isCategoryChange) {
+            const oldCategory = await db.Category.findById(oldTool.category);
+            oldCategory.tools.remove(oldTool);
+            oldCategory.save();
+        }
+        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
+        if(isCategoryChange){
+            const newCategory = await db.Category.findById(updatedTool.category);
+            newCategory.tools.push(updatedTool);
+            newCategory.save();
+        }
+        res.redirect('/tools/'+req.params.toolId);
+ -->
