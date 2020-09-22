@@ -9,12 +9,7 @@
     <title>Show Tool</title>
 </head>
 <body>
-    <nav>
-        <%- include('../partials/header-navbar.ejs') %>
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-    </nav>
+    <%- include('../partials/header-navbar.ejs') %>
     <h2>Show Tool</h2>
     Name: <%= oneTool.name %> <br>
     Link: <%= oneTool.link %> <br>

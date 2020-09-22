@@ -6,20 +6,36 @@
     <script src="/scripts/app.js" defer></script>
     <%- include('../partials/external-imports.ejs') %>
     <link rel="stylesheet" href="/styles/main.css" />
-    <title>Login</title>
+    <title>Toolodex</title>
 </head>
 <body>
-    <nav>
-        <%- include('../partials/header-navbar.ejs') %>
-        <a href='/register'>Register</a>
-    </nav>
-    <h2>Login to Access your Toolodex!</h2>
-    <form action="/login" method="POST">
-        Username: <input type="text" name="username" required /><br>
-        Password: <input type="password" name="password" required />
-        <input type="submit" value="Login">
-    </form>
-    <p>New to Toolodex? <a href='/register'>Register now!</a></p>
+    <h2>Welcome to Toolodex!</h2>
+        <section class='register-form'>
+            <h3>Register</h3>
+            <form action="/register" method="POST">
+                Username: <input type="text" name="username" required /><br>
+                <!-- Location: <input type="text" name="location" required /><br> -->
+                Location: <select name="location">
+                    <% for(eachState of statesArray) { %> 
+                        <option value="<%=eachState%>"><%=eachState%></option>
+                        <% } %> 
+                    </select> <br>
+                    
+                    Political Affiliation: <input type="text" name="politicalAffiliation" /><br>
+                    Email: <input type="text" name="email"  required /><br>
+                Password: <input type="password" name="password" required />
+                <input type="submit" value="Create User">
+            </form>
+        </section>
+            
+        <section class="login-form">
+            <h3>Login</h3>
+            <form action="/login" method="POST">
+                Username: <input type="text" name="username" required /><br>
+                Password: <input type="password" name="password" required />
+                <input type="submit" value="Login">
+            </form>
+        </section>
     <%- include('../partials/testfooter.ejs') %>
 </body>
 </html>

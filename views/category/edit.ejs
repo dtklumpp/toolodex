@@ -9,12 +9,7 @@
     <title>Edit a Category</title>
 </head>
 <body>
-    <nav>
-        <%- include('../partials/header-navbar.ejs') %>
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-    </nav>
+    <%- include('../partials/header-navbar.ejs') %>
     <h2>Edit Category: <%= category.name %></h2>
     <form action='/categories/<%= category._id %>?_method=PUT' method='POST'>
         <p>Name: <input type='text' name='name' value='<%= category.name %>' /></p>

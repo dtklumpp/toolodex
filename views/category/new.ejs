@@ -9,12 +9,7 @@
     <title>Add a Category</title>
 </head>
 <body>
-    <nav>
-        <%- include('../partials/header-navbar.ejs') %>
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-    </nav>
+    <%- include('../partials/header-navbar.ejs') %>
     <h2>Add a Category</h2>
     <form action='/categories' method='POST'>
         <p>Name: <input type='text' name='name' placeholder='Category Name' required /></p>
