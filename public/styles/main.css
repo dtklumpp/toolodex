@@ -52,7 +52,7 @@ body {
     margin: calc( var(--scale-size) * 10px);
     width: calc( var(--scale-size) * 150px);
     height: calc( var(--scale-size) * 150px);
-    box-shadow: 1px 1px black;
+    box-shadow: 2px 2px black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,6 +60,7 @@ body {
 }
 
 i {
+    /* font-size: 36px; */
     height: 20px;
     width: 20px;
     z-index: 2;
