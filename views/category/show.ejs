@@ -6,16 +6,12 @@
     <script src="/scripts/app.js" defer></script>
     <%- include('../partials/external-imports.ejs') %>
     <link rel="stylesheet" href="/styles/main.css" />
-    <!-- <script src="jquery-ui.min.js"></script> -->
-    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script> -->
     <script src="/scripts/tool-reorder.js" defer></script>
     <title>Explore Your Category</title>
 </head>
 <body>
     <div class="display-area">
-        <section class='header'>
-            <%- include('../partials/header-navbar.ejs') %>
-        </section>
+        <%- include('../partials/header-navbar.ejs') %>
         <section class='corkboard'>
             <h2><%= category.name %> Tools:</h2>
             <div class='edit-category'>
@@ -25,16 +21,16 @@
             <div class='post-its'>
                 <% category.tools.forEach((tool, index) => { %>
                     <a href='<%= tool.link %>' target='_blank' class="tool-link tile<%=index%> ">
-                        <div class='tool tile'>
+                        <div class='tool tile' title='<%= tool.description %>'>
                             <%= tool.name %>
                         </div>
                     </a>
                 <% }); %>
                 <% if(category.tools.length === 0) { %>
-                    <p>There are no tools available yet!</p>
+                    <p>This category has no tools available yet.</p>
                 <% } %>
                 <a href="/tools/newTool/<%=category._id%>">
-                    <div class="add-tool tile">
+                    <div class="add-tool tile" title='Add a new tool!'>
                         <i class="fas fa-plus"></i>
                     </div>
                 </a>

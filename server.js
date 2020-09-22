@@ -49,15 +49,15 @@ const authRequired = function (req, res, next) {
 // Auth routes
 app.use('/', controllers.auth);
 
-// Landing page (register/login)
-/* app.get('/', (req, res) => {
-    res.render('auth/register.ejs');
-}); */
-
 //Test Route
 app.get('/testing', (req, res) => {
     res.render('testing/testview.ejs');
-})
+});
+
+// Search route
+app.get('/search', (req, res) => {
+    res.render('search.ejs');
+});
 
 // Category routes
 app.use('/categories', authRequired, controllers.category);
