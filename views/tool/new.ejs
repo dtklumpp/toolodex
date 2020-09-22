@@ -11,7 +11,7 @@
 <body>
     <%- include('../partials/header-navbar.ejs') %>
     <h2>Make New Tool</h2>
-    <form action="/tools/" method="post">
+    <form action="/tools/<%if(catId){%><%=catId%><%}%>"  method="post">
         Name: <input type="text" name="name"><br>
         Link: <input type="text" name="link"><br>
         <!-- Link: <input type="URL" name="link"><br> -->
