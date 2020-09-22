@@ -20,26 +20,11 @@
                 <%} else { %>
                     <a href='/login'>Login</a>
                 <% } %> 
-                <% console.log("User", user) %>
             </nav>
         </section>
         <section class='corkboard'>
             <% if(user) { %>
-            <h2><%= user.username %>'s Categories</h2>
-            <div class='post-its'>
-                <% console.log("Categories", categories) %>
-                <% categories.forEach(category => { %>
-                    <a href="/categories/<%= category._id %>" class='category-name'>
-                        <div class="category tile">
-                            <%= category.name %>
-                        </div>
-                    </a>
-                <% }); %>
-                <a href="/categories/new">
-                    <div class="add-category tile">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                </a>
+                <h2><%= user.username %>'s Categories</h2>
             <% } else { %>
                 No one is signed in.
             <% } %> 

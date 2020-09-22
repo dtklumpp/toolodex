@@ -52,18 +52,17 @@ app.use('/', controllers.auth);
 // TODO Homepage (Category index)
 app.get('/', (req,res) => {
         //finds current user
-        const currentUser = db.User.findById(req.session.currentUser);
-        console.log('currentUser.schema.obj', currentUser.schema.obj);
+        const userId = req.session.currentUser.id;
         // populate the current user's categories
-        currentUser.populate('categories').exec(function (error, foundCategories) {
+        db.User.findById(userId).populate('categories').exec(function (error, foundUser) {
             if(error) {
                 console.log("Error", error);
+                return res.send(error);
             } 
             
-            /* return res.send(error); */
             const context = {
-                categories: foundCategories, 
-                user: req.session.currentUser,
+                // categories: foundCategories, 
+                user: foundUser,
 
             };
             res.render('index.ejs', context);
