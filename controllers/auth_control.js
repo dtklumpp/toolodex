@@ -33,7 +33,7 @@ router.post('/register', async (req, res) => {
             id: newUser._id,
         };
 
-        const favoritesCategory = await db.Category.create({name: 'Favorites', user: newUser});
+        const favoritesCategory = await db.Category.create({name: 'Favorites', user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
         await newUser.save();
 

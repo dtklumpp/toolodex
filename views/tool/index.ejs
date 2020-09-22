@@ -13,7 +13,7 @@
     <h2>Tools Index page</h2>
     <ul>
         <% allTools.forEach(tool => { %> 
-            <li>
+            <li title='<%= tool.description %>'>
                 <a href="/tools/<%=tool._id%>">
                     <%= tool.name %>                 
                 </a>

@@ -49,15 +49,40 @@ const authRequired = function (req, res, next) {
 // Auth routes
 app.use('/', controllers.auth);
 
-// Landing page (register/login)
-/* app.get('/', (req, res) => {
-    res.render('auth/register.ejs');
-}); */
-
 //Test Route
 app.get('/testing', (req, res) => {
     res.render('testing/testview.ejs');
-})
+});
+
+// Search route
+app.get('/search', async (req, res) => {
+    try {
+        // store search query
+        const searchQuery = req.body;
+
+        // finds current user
+        const userId = req.session.currentUser.id;
+
+        // populate user's categories and tools in an array
+        const allUserCategories = await db.User.findById(userId).populate('categories');
+        console.log("All user categories: ", allUserCategories.categories);
+
+        
+        
+        const allUserTools = allUserCategories.categories.tools;
+        console.log("All user tools: ", allUserTools);
+
+        const context = {};
+
+        res.send("searching...");
+        /* res.render('search.ejs'); */
+
+    } catch (error) {
+        console.log("Error: ", error);
+        return res.send("Internal server error.");
+    }
+
+});
 
 // Category routes
 app.use('/categories', authRequired, controllers.category);

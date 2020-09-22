@@ -20,12 +20,12 @@
             <h2><%= category.name %> Tools:</h2>
             <div class='edit-category'>
                 <a href="/categories/<%= category._id %>/edit">Edit Category</a>
-                <!-- TODO <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
+                <!-- TODO <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->
             </div>
             <div class='post-its'>
                 <% category.tools.forEach((tool, index) => { %>
                     <a href='<%= tool.link %>' target='_blank' class="tool-link dragit tile<%=index%> arrange<%=index%>" style="order: <%=index%>">
-                        <div class='tool tile'>
+                        <div class='tool tile' title='<%= tool.description %>'>
                             <%= tool.name %>
                         </div>
                     </a>
@@ -34,12 +34,14 @@
                     <p>There are no tools available yet!</p>
                 <% } %>
                 <a href="/tools/newTool/<%=category._id%>" style="order: 1000">
-                    <div class="add-tool tile">
+                    <div class="add-tool tile" title='Add a tool!'>
                         <i class="fas fa-plus"></i>
                     </div>
                 </a>
             </div>
         </section>
-    </div>  
+    </div>
 </body>
 </html>
+
+
