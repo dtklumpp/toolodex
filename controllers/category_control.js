@@ -87,13 +87,13 @@ router.put('/:id', async (req, res) => {
 // delete route
 router.delete('/:id', async (req, res) => {
     try {
-        const doomedCategory= await db.Category.findById(req.params.id).populate('tools').exec();
+        const doomedCategory= await db.Category.findById(req.params.id).populate('tools').populate('user').exec();
         
         //removes the reference to the category from each associated tool
         const childTools = doomedCategory.tools;
         for(eachTool of childTools){
             eachTool.categories.remove(doomedCategory);
-            eachTool.save();
+            await eachTool.save();
         }
 
         //removes the reference to the category from its associated User

@@ -48,6 +48,7 @@ router.post('/', async (req, res) => {
         for(eachCat of allCats){
             catId = eachCat._id;
             if(req.body["category_"+catId] === 'on'){
+                console.log('got here');
                 await createdTool.categories.push(eachCat);
                 eachCat.tools.push(createdTool);
                 eachCat.save();
@@ -61,6 +62,8 @@ router.post('/', async (req, res) => {
     }
 
 })
+
+
 //show route
 router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
