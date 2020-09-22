@@ -49,10 +49,11 @@ const authRequired = function (req, res, next) {
 // Auth routes
 app.use('/', controllers.auth);
 
-// TODO Homepage (Category index)
+// Homepage (Category index)
 app.get('/', (req,res) => {
         //finds current user
         const userId = req.session.currentUser.id;
+
         // populate the current user's categories
         db.User.findById(userId).populate('categories').exec(function (error, foundUser) {
             if(error) {
@@ -61,10 +62,9 @@ app.get('/', (req,res) => {
             } 
             
             const context = {
-                // categories: foundCategories, 
                 user: foundUser,
-
             };
+
             res.render('index.ejs', context);
         });
 });
