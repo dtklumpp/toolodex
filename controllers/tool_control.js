@@ -18,7 +18,22 @@ router.get('/', (req, res) => {
 router.get('/newTool', (req, res) => {
     db.Category.find({}, (err1, catsArray) => {
         if(err1) return res.send("create route categories error: "+err1);
-        context = {allCats: catsArray};
+        context = {
+            allCats: catsArray,
+            catId: null,
+        };
+        res.render('tool/new.ejs', context);
+    })
+})
+
+//new route prepopulated
+router.get('/newTool/:catId', (req, res) => {
+    db.Category.find({}, (err1, catsArray) => {
+        if(err1) return res.send("create route categories error: "+err1);
+        context = {
+            allCats: catsArray,
+            catId: req.params.catId,
+        };
         res.render('tool/new.ejs', context);
     })
 })
@@ -58,6 +73,8 @@ router.get('/:toolId', (req, res) => {
         res.render('tool/show.ejs', context);
     })
 })
+
+
 //edit route
 router.get('/:toolId/edit', (req, res) => {
     db.Category.find({}, (err1, catsArray) => {
