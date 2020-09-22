@@ -22,8 +22,17 @@ router.post('/register', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(req.body.password, salt);
         req.body.password = hash;
-        db.User.create(req.body);
-        res.redirect('/login');
+
+        //adding this stuff to auto-login when make user
+        //db.User.create(req.body);
+        const newUser = await db.User.create(req.body);
+        req.session.currentUser = {
+            username: newUser.username,
+            id: newUser._id,
+        };
+        res.redirect('/');
+        //res.redirect('/login');
+
     } catch (error) {
         console.log(error);
         res.send({message: 'Internal server error.'});
@@ -60,6 +69,6 @@ router.post('/login', async (req,res) => {
 // logout (delete the session)
 router.delete('/logout', async (req, res) => {
     await req.session.destroy();
-    res.redirect('/');
+    res.redirect('/login');
 });
 
