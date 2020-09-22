@@ -9,12 +9,12 @@ const statesUSA = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 
 
 // base path: /
 
-//register form
-router.get('/register', (req, res) => {
-    res.render('auth/register', {statesArray: statesUSA});
+// Login/Register form
+router.get('/login', (req, res) => {
+    res.render('auth/login', {statesArray: statesUSA});
 });
 
-// register post => creates user
+// Register post => creates user
 router.post('/register', async (req, res) => {
     try {
         const foundUser = await db.User.findOne({ email: req.body.email });
@@ -32,8 +32,12 @@ router.post('/register', async (req, res) => {
             username: newUser.username,
             id: newUser._id,
         };
+
+        const favoritesCategory = await db.Category.create({name: 'Favorites', user: newUser});
+        newUser.categories.push(favoritesCategory);
+        await newUser.save();
+
         res.redirect('/');
-        //res.redirect('/login');
 
     } catch (error) {
         console.log(error);
@@ -41,12 +45,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// login form
-router.get('/login', (req, res) => {
-    res.render('auth/login');
-});
-
-// login post (authentication)
+// Login post (authentication)
 router.post('/login', async (req,res) => {
     try {
         const foundUser = await db.User.findOne({ username: req.body.username});
@@ -74,6 +73,7 @@ router.delete('/logout', async (req, res) => {
     res.redirect('/login');
 });
 
+// Redirects to categories index if user is signed in
 router.get('/', (req,res) => {
     res.redirect('/categories');
 });

@@ -14,12 +14,7 @@
 <body>
     <div class="display-area">
         <section class='header'>
-            <nav>
-                <%- include('../partials/header-navbar.ejs') %>
-                <form action="/logout?_method=DELETE" method="POST">
-                    <input type="submit" value="Logout" id='logout'>
-                </form>
-            </nav>
+            <%- include('../partials/header-navbar.ejs') %>
         </section>
         <section class='corkboard'>
             <h2><%= category.name %> Tools:</h2>

@@ -9,12 +9,7 @@
     <title>Edit Tool</title>
 </head>
 <body>
-    <nav>
-        <%- include('../partials/header-navbar.ejs') %>
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-    </nav>
+    <%- include('../partials/header-navbar.ejs') %>
     <h2>Edit a Tool</h2>
     <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post">
         Name: <input type="text" name="name" value=<%=oneTool.name%>><br>
