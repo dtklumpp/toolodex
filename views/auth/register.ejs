@@ -15,10 +15,16 @@
     </nav>
     <h2>New User</h2>
     <form action="/register" method="POST">
-        Email: <input type="text" name="email"  required /><br>
         Username: <input type="text" name="username" required /><br>
-        Location: <input type="text" name="location" required /><br>
-        Political Affiliation: <input type="text" name="politicalAffiliation" /><br>
+        <!-- Location: <input type="text" name="location" required /><br> -->
+        Location: <select name="location">
+            <% for(eachState of statesArray) { %> 
+                <option value="<%=eachState%>"><%=eachState%></option>
+                <% } %> 
+            </select> <br>
+            
+            Political Affiliation: <input type="text" name="politicalAffiliation" /><br>
+            Email: <input type="text" name="email"  required /><br>
         Password: <input type="password" name="password" required />
         <input type="submit" value="Create User">
     </form>

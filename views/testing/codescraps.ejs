@@ -9,3 +9,32 @@ Category: <select name="category">
             value="<%=eachCat._id%>"><%=eachCat.name%></option>
     <% } %> 
 </select> <br>
+
+<!-- Renders login/logout link depending if user is logged in/out -->
+<% if(user) { %>
+        <form action="/logout?_method=DELETE" method="post" value=''>
+            <input type="submit" value="Logout" id='logout'>
+        </form>
+        <%} else { %>
+            <a href='/login'>Login</a>
+        <% } %>
+
+
+
+<!-- old way to update a tool -->
+<!-- 
+        const oldTool = await db.Tool.findById(req.params.toolId);
+        const isCategoryChange = (oldTool.category != req.params.category);
+        if(isCategoryChange) {
+            const oldCategory = await db.Category.findById(oldTool.category);
+            oldCategory.tools.remove(oldTool);
+            oldCategory.save();
+        }
+        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
+        if(isCategoryChange){
+            const newCategory = await db.Category.findById(updatedTool.category);
+            newCategory.tools.push(updatedTool);
+            newCategory.save();
+        }
+        res.redirect('/tools/'+req.params.toolId);
+ -->

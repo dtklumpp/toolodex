@@ -18,16 +18,26 @@ router.get('/', (req, res) => {
 router.get('/newTool', (req, res) => {
     db.Category.find({}, (err1, catsArray) => {
         if(err1) return res.send("create route categories error: "+err1);
-        context = {allCats: catsArray};
+        context = {
+            allCats: catsArray,
+            catId: null,
+        };
         res.render('tool/new.ejs', context);
     })
 })
 
-//old Create methods:
-// db.Tool.create(req.body, (err, createdTool) => {
-//     if(err) return res.send("update route error: "+err);
-//     res.redirect('/tools');
-// })
+//new route prepopulated
+router.get('/newTool/:catId', (req, res) => {
+    db.Category.find({}, (err1, catsArray) => {
+        if(err1) return res.send("create route categories error: "+err1);
+        context = {
+            allCats: catsArray,
+            catId: req.params.catId,
+        };
+        res.render('tool/new.ejs', context);
+    })
+})
+
 
 
 //create route
@@ -44,9 +54,6 @@ router.post('/', async (req, res) => {
             }
         }
         createdTool.save();
-        //const foundCategory = await db.Category.findById(req.body.category);
-        //foundCategory.tools.push(createdTool);
-        //foundCategory.save();
         res.redirect('/tools');
     }
     catch (err) {
@@ -66,6 +73,8 @@ router.get('/:toolId', (req, res) => {
         res.render('tool/show.ejs', context);
     })
 })
+
+
 //edit route
 router.get('/:toolId/edit', (req, res) => {
     db.Category.find({}, (err1, catsArray) => {
@@ -83,11 +92,6 @@ router.get('/:toolId/edit', (req, res) => {
     
 })
 
-//old update methods
-// db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true}, (err, updatedTool) => {
-//     if(err) return res.send("update route error: "+err);
-//     res.redirect('/tools/'+req.params.toolId);
-// })
 
 
 //update route
@@ -121,24 +125,6 @@ router.put('/:toolId', async (req, res) => {
         const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
 
         res.redirect('/tools/'+req.params.toolId);
-
-
-/* 
-        const oldTool = await db.Tool.findById(req.params.toolId);
-        const isCategoryChange = (oldTool.category != req.params.category);
-        if(isCategoryChange) {
-            const oldCategory = await db.Category.findById(oldTool.category);
-            oldCategory.tools.remove(oldTool);
-            oldCategory.save();
-        }
-        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
-        if(isCategoryChange){
-            const newCategory = await db.Category.findById(updatedTool.category);
-            newCategory.tools.push(updatedTool);
-            newCategory.save();
-        }
-        res.redirect('/tools/'+req.params.toolId);
- */
 
     }
     catch(err){

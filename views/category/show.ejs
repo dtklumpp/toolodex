@@ -6,6 +6,9 @@
     <script src="/scripts/app.js" defer></script>
     <%- include('../partials/external-imports.ejs') %>
     <link rel="stylesheet" href="/styles/main.css" />
+    <!-- <script src="jquery-ui.min.js"></script> -->
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script> -->
+    <script src="/scripts/tool-reorder.js" defer></script>
     <title>Explore Your Category</title>
 </head>
 <body>
@@ -25,8 +28,8 @@
                 <!-- TODO <i class="fas fa-edit"></i> USE THIS TO REPLACE EDIT CATEGORY TEXT ABOVE -->    
             </div>
             <div class='post-its'>
-                <% category.tools.forEach(tool => { %>
-                    <a href='<%= tool.link %>' target='_blank'>
+                <% category.tools.forEach((tool, index) => { %>
+                    <a href='<%= tool.link %>' target='_blank' class="tool-link tile<%=index%> ">
                         <div class='tool tile'>
                             <%= tool.name %>
                         </div>
@@ -35,7 +38,7 @@
                 <% if(category.tools.length === 0) { %>
                     <p>There are no tools available yet!</p>
                 <% } %>
-                <a href="/tools/newTool">
+                <a href="/tools/newTool/<%=category._id%>">
                     <div class="add-tool tile">
                         <i class="fas fa-plus"></i>
                     </div>
