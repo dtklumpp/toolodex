@@ -60,11 +60,6 @@ router.get('/:id/edit', async (req, res) => {
 
 // update route
 router.put('/:id', async (req, res) => {
-    //console.log('req.body:', req.body);
-    // db.Category.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, updatedCategory) => {
-    //     if(error) return res.send(error);
-    //     res.redirect(`/categories/${updatedCategory._id}`);
-    // });
 
     try {
         const oldCategory = await db.Category.findById(req.params.id);

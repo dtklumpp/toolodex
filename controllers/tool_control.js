@@ -23,11 +23,6 @@ router.get('/newTool', (req, res) => {
     })
 })
 
-//old Create methods:
-// db.Tool.create(req.body, (err, createdTool) => {
-//     if(err) return res.send("update route error: "+err);
-//     res.redirect('/tools');
-// })
 
 
 //create route
@@ -44,9 +39,6 @@ router.post('/', async (req, res) => {
             }
         }
         createdTool.save();
-        //const foundCategory = await db.Category.findById(req.body.category);
-        //foundCategory.tools.push(createdTool);
-        //foundCategory.save();
         res.redirect('/tools');
     }
     catch (err) {
@@ -83,11 +75,6 @@ router.get('/:toolId/edit', (req, res) => {
     
 })
 
-//old update methods
-// db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true}, (err, updatedTool) => {
-//     if(err) return res.send("update route error: "+err);
-//     res.redirect('/tools/'+req.params.toolId);
-// })
 
 
 //update route
@@ -121,24 +108,6 @@ router.put('/:toolId', async (req, res) => {
         const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
 
         res.redirect('/tools/'+req.params.toolId);
-
-
-/* 
-        const oldTool = await db.Tool.findById(req.params.toolId);
-        const isCategoryChange = (oldTool.category != req.params.category);
-        if(isCategoryChange) {
-            const oldCategory = await db.Category.findById(oldTool.category);
-            oldCategory.tools.remove(oldTool);
-            oldCategory.save();
-        }
-        const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
-        if(isCategoryChange){
-            const newCategory = await db.Category.findById(updatedTool.category);
-            newCategory.tools.push(updatedTool);
-            newCategory.save();
-        }
-        res.redirect('/tools/'+req.params.toolId);
- */
 
     }
     catch(err){
