@@ -74,3 +74,6 @@ router.delete('/logout', async (req, res) => {
     res.redirect('/login');
 });
 
+router.get('/', (req,res) => {
+    res.redirect('/categories');
+});

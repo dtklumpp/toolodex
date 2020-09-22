@@ -37,6 +37,26 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Category index
+router.get('/', (req, res) => {
+    //finds current user
+    const userId = req.session.currentUser.id;
+
+    // populate the current user's categories
+    db.User.findById(userId).populate('categories').exec(function (error, foundUser) {
+        if(error) {
+            console.log("Error", error);
+            return res.send(error);
+        } 
+        
+        const context = {
+            user: foundUser,
+        };
+
+        res.render('category/index.ejs', context);
+    });
+});
+
 // show route (view contents of one category)
 router.get('/:id', (req, res) => {
     db.Category.findById(req.params.id)
