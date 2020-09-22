@@ -11,9 +11,23 @@ router.get('/new', (req, res) => {
 
 // create route
 router.post('/', (req, res) => {
+
+
+    // try{
+    // }
+    // catch(error){
+    //     res.send("cat-create route error: "+error);
+    // }
+
+
+
     db.Category.create(req.body, (error, createdCategory) => {
         if(error) return res.send(error);
-        console.log('Created category: ', createdCategory);
+        const activeUser = req.session.currentUser;
+        console.log('activeUser:', activeUser);
+        createdCategory.user = activeUser.id;
+        //console.log('Created category: ', createdCategory);
+        createdCategory.save();
         res.redirect('/');
     });
 });
