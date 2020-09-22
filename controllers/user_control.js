@@ -21,20 +21,23 @@ router.get('/', async (req, res) => {
 })
 
 
+
+//REPLACED BY REGISTER FORM
 //new route
-router.get('/newUser', (req, res) => {
-    res.render('user/new.ejs', {statesArray: statesUSA});
-})
+// router.get('/newUser', (req, res) => {
+//     res.render('user/new.ejs', {statesArray: statesUSA});
+// })
 
-
+//REPLACED BY REGISTER POST
 //create route
-router.post('/', (req, res) => {
-    //console.log('got here');
-    db.User.create(req.body, (err, createdUser) => {
-        if(err) return res.send('create route error: '+err);
-        res.redirect('/users');
-    })
-})
+// router.post('/', (req, res) => {
+//     //console.log('got here');
+//     db.User.create(req.body, (err, createdUser) => {
+//         if(err) return res.send('create route error: '+err);
+//         res.redirect('/users');
+//     })
+// })
+
 
 
 //show route
