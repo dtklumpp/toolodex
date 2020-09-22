@@ -49,19 +49,24 @@ const authRequired = function (req, res, next) {
 // Auth routes
 app.use('/', controllers.auth);
 
-// TODO Homepage (Category index)
-app.get('/', async (req,res) => {
-    try {
-        const allCategories = await db.Category.find({});
-        const context = {
-            categories: allCategories,
-            user: req.session.currentUser,
-        };
-        res.render('index.ejs', context);
-    } catch (error) {
-        console.log(error);
-        res.send('Internal Server Error');
-    }
+// Homepage (Category index)
+app.get('/', (req,res) => {
+        //finds current user
+        const userId = req.session.currentUser.id;
+
+        // populate the current user's categories
+        db.User.findById(userId).populate('categories').exec(function (error, foundUser) {
+            if(error) {
+                console.log("Error", error);
+                return res.send(error);
+            } 
+            
+            const context = {
+                user: foundUser,
+            };
+
+            res.render('index.ejs', context);
+        });
 });
 
 //Test Route

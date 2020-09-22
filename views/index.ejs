@@ -23,21 +23,24 @@
             </nav>
         </section>
         <section class='corkboard'>
-            <h2>Your Categories</h2>
-            <div class='post-its'>
-                <% categories.forEach(category => { %>
-                    <a href="/categories/<%= category._id %>" class='category-name'>
-                        <div class="category tile">
-                            <%= category.name %>
+            <% if(user) { %>
+                <h2><%= user.username %>'s Categories</h2>
+                <div class='post-its'>
+                    <% user.categories.forEach(category => { %>
+                        <a href="/categories/<%= category._id %>" class='category-name'>
+                            <div class="category tile">
+                                <%= category.name %>
+                            </div>
+                        </a>
+                    <% }); %>
+                    <a href="/categories/new">
+                        <div class="add-category tile">
+                            <i class="fas fa-plus"></i>
                         </div>
                     </a>
-                <% }); %>
-                <a href="/categories/new">
-                    <div class="add-category tile">
-                        <i class="fas fa-plus"></i>
-                    </div>
-                </a>
-            </div>
+            <% } else { %>
+                No one is signed in.
+            <% } %> 
         </section>
     </div>
 
