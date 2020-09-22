@@ -49,25 +49,10 @@ const authRequired = function (req, res, next) {
 // Auth routes
 app.use('/', controllers.auth);
 
-// Homepage (Category index)
-app.get('/', (req,res) => {
-        //finds current user
-        const userId = req.session.currentUser.id;
-
-        // populate the current user's categories
-        db.User.findById(userId).populate('categories').exec(function (error, foundUser) {
-            if(error) {
-                console.log("Error", error);
-                return res.send(error);
-            } 
-            
-            const context = {
-                user: foundUser,
-            };
-
-            res.render('index.ejs', context);
-        });
-});
+// Landing page (register/login)
+/* app.get('/', (req, res) => {
+    res.render('auth/register.ejs');
+}); */
 
 //Test Route
 app.get('/testing', (req, res) => {
