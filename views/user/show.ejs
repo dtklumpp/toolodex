@@ -19,6 +19,13 @@
     Userame: <%= oneUser.username %> <br>
     Location: <%= oneUser.location %> <br>
     Political Affiliation: <%= oneUser.politicalAffiliation %> <br>
+    Categories: <ul>
+        <% for(eachCat of oneUser.categories){ %> 
+            <li>
+                <%= eachCat.name %> 
+            </li>
+        <% } %> 
+    </ul>
     <br>
     <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
         <input type="submit" value="DESTROY">
