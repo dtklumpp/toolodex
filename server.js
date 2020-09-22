@@ -55,8 +55,33 @@ app.get('/testing', (req, res) => {
 });
 
 // Search route
-app.get('/search', (req, res) => {
-    res.render('search.ejs');
+app.get('/search', async (req, res) => {
+    try {
+        // store search query
+        const searchQuery = req.body;
+
+        // finds current user
+        const userId = req.session.currentUser.id;
+
+        // populate user's categories and tools in an array
+        const allUserCategories = await db.User.findById(userId).populate('categories');
+        console.log("All user categories: ", allUserCategories.categories);
+
+        
+        
+        const allUserTools = allUserCategories.categories.tools;
+        console.log("All user tools: ", allUserTools);
+
+        const context = {};
+
+        res.send("searching...");
+        /* res.render('search.ejs'); */
+
+    } catch (error) {
+        console.log("Error: ", error);
+        return res.send("Internal server error.");
+    }
+
 });
 
 // Category routes
