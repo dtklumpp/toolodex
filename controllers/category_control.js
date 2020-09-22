@@ -12,16 +12,29 @@ router.get('/new', (req, res) => {
 });
 
 // create route
-router.post('/', (req, res) => {
-    db.Category.create(req.body, (error, createdCategory) => {
-        if(error) return res.send(error);
-        const activeUser = req.session.currentUser;
-        //console.log('activeUser:', activeUser);
-        createdCategory.user = activeUser.id;
-        //console.log('Created category: ', createdCategory);
+router.post('/', async (req, res) => {
+    try {
+        // find the current user (to whom the new category will be associated)
+        const currentUser = await db.User.findById(req.session.currentUser.id);
+
+        // use the req.body to create a category
+        const createdCategory = await db.Category.create(req.body);
+
+        // save the current user into the category's 'user' prop
+        createdCategory.user = currentUser;
         createdCategory.save();
-        res.redirect('/');
-    });
+
+        // push the new category into the user's 'categories' array, save the user
+        currentUser.categories.push(createdCategory);
+        currentUser.save();
+
+        // redirect to the new category's show page
+        res.redirect(`/categories/${createdCategory._id}`)
+        
+    } catch (error) {
+        console.log('Error: ', error);
+        return res.send('Internal server error.');
+    }
 });
 
 // show route (view contents of one category)
