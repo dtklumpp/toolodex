@@ -9,12 +9,3 @@ Category: <select name="category">
             value="<%=eachCat._id%>"><%=eachCat.name%></option>
     <% } %> 
 </select> <br>
-
-<!-- Renders login/logout link depending if user is logged in/out -->
-<% if(user) { %>
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-        <%} else { %>
-            <a href='/login'>Login</a>
-        <% } %>

@@ -50,18 +50,24 @@ const authRequired = function (req, res, next) {
 app.use('/', controllers.auth);
 
 // TODO Homepage (Category index)
-app.get('/', async (req,res) => {
-    try {
-        const allCategories = await db.Category.find({});
-        const context = {
-            categories: allCategories,
-            user: req.session.currentUser,
-        };
-        res.render('index.ejs', context);
-    } catch (error) {
-        console.log(error);
-        res.send('Internal Server Error');
-    }
+app.get('/', (req,res) => {
+        //finds current user
+        const currentUser = db.User.findById(req.session.currentUser);
+        console.log('currentUser.schema.obj', currentUser.schema.obj);
+        // populate the current user's categories
+        currentUser.populate('categories').exec(function (error, foundCategories) {
+            if(error) {
+                console.log("Error", error);
+            } 
+            
+            /* return res.send(error); */
+            const context = {
+                categories: foundCategories, 
+                user: req.session.currentUser,
+
+            };
+            res.render('index.ejs', context);
+        });
 });
 
 //Test Route

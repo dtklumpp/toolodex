@@ -11,6 +11,7 @@ router.get('/new', (req, res) => {
 
 // create route
 router.post('/', (req, res) => {
+    // TODO need to add code to push new category into user's categories array
     db.Category.create(req.body, (error, createdCategory) => {
         if(error) return res.send(error);
         console.log('Created category: ', createdCategory);
