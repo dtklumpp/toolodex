@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
+module.exports = router;
+
 
 /* Base route is /categories */
 
@@ -11,20 +13,10 @@ router.get('/new', (req, res) => {
 
 // create route
 router.post('/', (req, res) => {
-
-
-    // try{
-    // }
-    // catch(error){
-    //     res.send("cat-create route error: "+error);
-    // }
-
-
-
     db.Category.create(req.body, (error, createdCategory) => {
         if(error) return res.send(error);
         const activeUser = req.session.currentUser;
-        console.log('activeUser:', activeUser);
+        //console.log('activeUser:', activeUser);
         createdCategory.user = activeUser.id;
         //console.log('Created category: ', createdCategory);
         createdCategory.save();
@@ -100,13 +92,7 @@ router.put('/:id', async (req, res) => {
 // delete route
 router.delete('/:id', async (req, res) => {
     try {
-        // find and delete the category
-        //DK note: this was the old method pre-MTM
-        //const deletedCategory = await db.Category.findByIdAndDelete(req.params.id);
-
-        //new method:
         const doomedCategory= await db.Category.findById(req.params.id).populate('tools').exec();
-        //console.log('childTools:', childTools);
         
         //removes the reference to the category from each associated tool
         const childTools = doomedCategory.tools;
@@ -120,17 +106,11 @@ router.delete('/:id', async (req, res) => {
         parentUser.categories.remove(doomedCategory);
         parentUser.save();
 
-
-
         doomedCategory.deleteOne();
         console.log('Deleted category: ', doomedCategory);
 
-
-        // find and delete any tools that belonged to that category
-        // TODO might need to refactor and remove this part when we add many-to-many connections
         //DK-note: just commented out this now that MTM is running
         //const deletedTools = await db.Tool.deleteMany({ category: deletedCategory._id });
-        //console.log('deletedTools: ', deletedTools);
 
         // redirect to the homepage (aka categories index)
         res.redirect('/');
@@ -139,4 +119,3 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
