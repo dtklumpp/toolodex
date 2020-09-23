@@ -55,12 +55,13 @@ app.get('/testing', (req, res) => {
 });
 
 // Search route
-app.get('/search', async (req, res) => {
+app.post('/search', async (req, res) => {
     try {
+        console.log("req.body: ", req.body);
         // store search query
         // TODO store the value of search input to use for getting search results
-        // let searchQuery = ;
-        // console.log("searchQuery", searchQuery);
+        /* let searchQuery = ;
+        console.log("searchQuery", searchQuery); */
 
         // finds current user
         const userId = req.session.currentUser.id;
