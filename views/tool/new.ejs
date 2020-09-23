@@ -9,31 +9,46 @@
     <title>New Tool Page</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
-    <h2>Make New Tool</h2>
-    <form action="/tools/<%if(catId){%><%=catId%><%}%>"  method="post">
-        Name: <input type="text" name="name"><br>
-        Link: <input type="text" name="link"><br>
-        <!-- Link: <input type="URL" name="link"><br> -->
-        <!-- use this Link line in production -->
-        Description: <input type="text" name="description"><br>
-        Notes: <input type="text" name="notes"><br>
-        Keywords: <input type="text" name="keywords"><br>
-        Categories: <ul>
-            <% for(eachCat of allCats){ %> 
-                <li>
-                    <input type="checkbox" name="category_<%= eachCat._id %>"
-                        <% if(String(eachCat._id) === catId){ %>
-                            checked
+    <div class="display-area">
+        <%- include('../partials/header-navbar.ejs') %>
+        <section class="corkboard">
+            <h2>Add a New Tool</h2>
+            <form action="/tools/<%if(catId){%><%=catId%><%}%>"  method="post">
+                <p>
+                    Name: <input type="text" name="name" placeholder='Tool name' required /> 
+                </p>
+                <p>
+                    Link: <input type="text" name="link" placeholder='Paste URL here' required />
+                    <!-- Link: <input type="URL" name="link"><br> -->
+                    <!-- use this Link line in production -->
+                </p>
+                <p>
+                    Description: <textarea type= 'text' name='description' placeholder='Add a description...'></textarea>
+                </p>
+                <p>
+                    Notes: <textarea type= 'text' name='notes' placeholder='How/when to use this tool...'></textarea><br>
+                </p>
+                <p>
+                    Keywords: <input type="text" name="keywords" placeholder='Make your tool easier to find...'>
+                </p>
+                <p>
+                    Categories: <ul>
+                        <% for(eachCat of allCats){ %> 
+                            <li>
+                                <input type="checkbox" name="category_<%= eachCat._id %>"
+                                    <% if(String(eachCat._id) === catId){ %>
+                                        checked
+                                    <% } %> 
+                                /> <%= eachCat.name %>
+                            </li>
                         <% } %> 
-                    /> <%= eachCat.name %>
-                </li>
-            <% } %> 
-        </ul>
-
-
-        <input type="submit" value="Create">
-    </form>
-    <%- include('../partials/testfooter.ejs') %>
+                    </ul>
+                </p>
+                <p>
+                    <input type="submit" value="Add">
+                </p>
+            </form>
+        </section>
+    </div>
 </body>
 </html>

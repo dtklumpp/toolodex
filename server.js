@@ -59,7 +59,6 @@ app.post('/search', async (req, res) => {
     try {
         // store search query
         let searchInput = req.body.search;
-        console.log("searchInput:", searchInput);
 
         // finds current user
         const userId = req.session.currentUser.id;
@@ -79,19 +78,16 @@ app.post('/search', async (req, res) => {
         // find user's categories, populate their tools
         const categoryMatches = await db.Category.find(query).populate('tools').exec();
 
-
         const context = {
             categoryMatches: categoryMatches,
         };
 
-        // res.send("searching...");
         res.render('search.ejs', context);
 
     } catch (error) {
         console.log("Error: ", error);
-        return res.send({message: error});
+        return res.send("Internal server error.");
     }
-
 });
 
 // Category routes
