@@ -9,17 +9,26 @@
     <title>Tool Index</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
-    <h2>Tools Index page</h2>
-    <ul>
-        <% allTools.forEach(tool => { %> 
-            <li title='<%= tool.description %>'>
-                <a href="/tools/<%=tool._id%>">
-                    <%= tool.name %>                 
-                </a>
-            </li>
-        <% }) %> 
-    </ul>
-    <%- include('../partials/testfooter.ejs'); %>
+    <div class="display-area">
+        <%- include('../partials/header-navbar.ejs') %>
+        <section class="corkboard">
+            <h2>Tools Index page</h2>
+            <ul>
+                <% allTools.forEach(tool => { %> 
+                    <li title='<%= tool.description %>'>
+                        <a href="/tools/<%=tool._id%>">
+                            <%= tool.name %>                 
+                        </a>
+                        <div class='pencil edit-tool'>
+                            <a href="/tools/<%=tool._id%>/edit"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
+                            <input type="submit" value="Delete Tool">
+                        </form>
+                    </li>
+                <% }) %> 
+            </ul>
+        </section>
+    </div>
 </body>
 </html>
