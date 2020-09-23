@@ -33,9 +33,6 @@ $('.dragit').draggable({
     stop: function () {
         $(this).addClass('tool-link');
     }
-
-
-
 });
 
 $('.dragit').droppable({
@@ -85,7 +82,7 @@ $('.dragit').droppable({
     }
 })
 
-const allTiles = $('.tool-link');
-console.log('length: '+allTiles.length);
-console.log(Math.min(7,5));
+//const allTiles = $('.tool-link');
+//console.log('length: '+allTiles.length);
+//console.log(Math.min(7,5));
 
