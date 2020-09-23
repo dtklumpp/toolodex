@@ -8,8 +8,14 @@
         <form action="/logout?_method=DELETE" method="post" value=''>
             <input type="submit" value="Logout" id='logout'>
         </form>
-        <form action="/search" method="get">
-            <input type="text" name="search" placeholder="Search...">
+
+        <!-- <div>
+            <input type="text" method="put" id="search" placeholder="Search..." value="">
+            <input type='submit' value="Submit" onclick="/search" />
+        </div> -->
+
+        <form action="/search" method="GET">
+            <input type="text" id='search' value='' placeholder="Search...">
             <input type="submit" value="Submit">
         </form>
     </nav>
