@@ -1,23 +1,20 @@
 <section class='header'>
-    <h1>Toolodex</h1>
-    <p class='tagline'>The best way to find the right tool for the job.</p>
-    <nav>
-        <a href='/'>Home</a> |
-        <a href='/categories/new'>Add a Category</a> |
-        <a href='/tools/newTool'>Add a Tool</a> |
-        <a href='/tools'>Tools Index</a> | 
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-
-        <!-- <div>
-            <input type="text" method="put" id="search" placeholder="Search..." value="">
-            <input type='submit' value="Submit" onclick="/search" />
-        </div> -->
-
-        <form action="/search" method="POST">
-            <input type="text" name='search' placeholder="Search...">
-            <input type="submit" value="Submit">
-        </form>
-    </nav>
+    <div class="header-container">
+        <h1>Toolodex</h1>
+        <p class='tagline'>The best way to find the right tool for the job.</p>
+        <nav>
+            <a href='/'>Home</a> |
+            <a href='/categories/new'>Add a Category</a> |
+            <a href='/tools/newTool'>Add a Tool</a> |
+            <a href='/tools'>Tools Index</a> | 
+            <form action="/logout?_method=DELETE" method="post" value='' class='logout'>
+                <input type="submit" value="Logout" id='logout' class='btn-link'>
+            </form>
+    
+            <form action="/search" method="POST" id='search'>
+                <input type="text" name='search' placeholder="Search...">
+                <input type="submit" value="Submit">
+            </form>
+        </nav>
+    </div>
 </section>

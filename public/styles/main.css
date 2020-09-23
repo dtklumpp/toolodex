@@ -9,7 +9,7 @@
     --background: whitesmoke;
     --navbar: burlywood;
     /* sizes */
-    --scale-size: 0.75;
+    --scale-size: 1;
 }
 
 body {
@@ -25,9 +25,42 @@ body {
 }
 
 .header {
-    /* background-color: yellow; */
-    background-color: var(--navbar);
+    background-image: url('../images/files-header-background1.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     text-align: center;
+    font-family: 'Courier Prime', monospace;
+    position: relative;
+}
+
+.header-container {
+    left: 50%;
+    background-color:rgba(255, 255, 255, 0.7);
+    color: black;
+    width: 70%;
+}
+
+h1 {
+    padding-top: 10px;
+}
+
+nav {
+    color: white;
+}
+
+.logout {
+    display: inline;
+}
+
+#search {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.btn-link {
+    font-family: 'Courier Prime', monospace;
 }
 
 .corkboard {
@@ -38,6 +71,7 @@ body {
     background-size: cover;
     color: blue;
     min-height: calc( var(--scale-size) * 960px);
+    font-family: 'Courier Prime', monospace;
 }
 
 .post-its {
