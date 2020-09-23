@@ -88,9 +88,9 @@ app.post('/search', async (req, res) => {
 
         // https://stackoverflow.com/questions/35948669/how-to-check-if-a-value-exists-in-an-object-using-javascript/35948779#35948779
         // loop through the categories and check for matches
-/*         allUserCategories.forEach(category => {
+        /* allUserCategories.forEach(category => {
             if(Object.values(category).indexOf(searchQuery))
-        }) */
+        }); */
         
         /* allUserTools.forEach(tool => {
             console.log("Tool names:", tool.name);
