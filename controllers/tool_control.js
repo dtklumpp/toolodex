@@ -7,40 +7,40 @@ const db = require('../models');
 //index route
 router.get('/', (req, res) => {
     //res.send('tools index page');
-    db.Tool.find({}, (err, toolsArray) => {
-        if(err) return res.send("index route error: "+err);
+    db.Tool.find({}, (error, toolsArray) => {
+        if(error) return res.send("index route error: "+error);
         context = {allTools: toolsArray};
         res.render('tool/index.ejs', context);
-    })
-})
+    });
+});
 
-//new route
+// new route
 router.get('/newTool', (req, res) => {
-    db.Category.find({}, (err1, catsArray) => {
-        if(err1) return res.send("create route categories error: "+err1);
+    db.Category.find({}, (error, catsArray) => {
+        if(error) return res.send("create route categories error: "+error);
         context = {
             allCats: catsArray,
             catId: null,
         };
         res.render('tool/new.ejs', context);
-    })
-})
+    });
+});
 
-//new route prepopulated
+
+// new route (Category pre-populated)
 router.get('/newTool/:catId', (req, res) => {
-    db.Category.find({}, (err1, catsArray) => {
-        if(err1) return res.send("create route categories error: "+err1);
+    db.Category.find({}, (error, catsArray) => {
+        if(error) return res.send("create route categories error: "+error);
         context = {
             allCats: catsArray,
             catId: req.params.catId,
         };
         res.render('tool/new.ejs', context);
-    })
-})
+    });
+});
 
 
-
-//create route
+// create route
 router.post('/', async (req, res) => {
     try {
         const createdTool = await db.Tool.create(req.body);
@@ -57,13 +57,13 @@ router.post('/', async (req, res) => {
         createdTool.save();
         res.redirect('/tools');
     }
-    catch (err) {
-        res.send("update route error: "+err);
+    catch (error) {
+        return res.send("update route error: "+error);
     }
-})
+});
 
 
-//create route pre-populated
+// create route pre-populated
 router.post('/:catId', async (req, res) => {
     try {
         const createdTool = await db.Tool.create(req.body);
@@ -80,55 +80,45 @@ router.post('/:catId', async (req, res) => {
         createdTool.save();
         res.redirect('/categories/'+req.params.catId);
     }
-    catch (err) {
-        res.send("update route error: ");
+    catch (error) {
+        return res.send("Create route error: ", error);
     }
-})
+});
 
 
-
-
-
-
-
-
-//show route
+// show route
 router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
     .populate('categories')
-    .exec( (err, foundTool) => {
-        if(err) return res.send("show route error: "+err);
+    .exec( (error, foundTool) => {
+        if(error) return res.send("show route error: "+error);
         //console.log('req.params.toolId:', req.params.toolId);
         //console.log('foundTool:', foundTool);
         context = {oneTool: foundTool};
         res.render('tool/show.ejs', context);
-    })
-})
+    });
+});
 
 
-//edit route
+// edit route
 router.get('/:toolId/edit', (req, res) => {
-    db.Category.find({}, (err1, catsArray) => {
-        if(err1) return res.send("edit route categories error: "+err1)
-        db.Tool.findById(req.params.toolId, (err, foundTool) => {
-            if(err) return res.send("edit route error: "+err);
+    db.Category.find({}, (error, catsArray) => {
+        if(error) return res.send("edit route categories error: "+error)
+        db.Tool.findById(req.params.toolId, (error, foundTool) => {
+            if(error) return res.send("edit route error: "+err);
             context = {
                 oneTool: foundTool,
                 allCats: catsArray,
             };
             res.render('tool/edit.ejs', context);
-        })
-
-    })
-    
-})
+        });
+    }); 
+});
 
 
-
-//update route
+// update route
 router.put('/:toolId', async (req, res) => {
     try{
-
         const allCats = await db.Category.find({});
         const oldTool = await db.Tool.findById(req.params.toolId);
         
@@ -156,18 +146,14 @@ router.put('/:toolId', async (req, res) => {
         const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
 
         res.redirect('/tools/'+req.params.toolId);
-
     }
-    catch(err){
-        res.send("update route error: "+err);
+    catch(error){
+        res.send("update route error: "+error);
     }
-
-})
-
+});
 
 
-
-//delete route
+// delete route
 router.delete('/:toolId', async (req, res) => {
     try {
         const doomedTool = await db.Tool.findById(req.params.toolId).populate('categories').exec();
@@ -183,4 +169,4 @@ router.delete('/:toolId', async (req, res) => {
         res.send('tool deletion route error: '+error);
     }
     res.redirect('/tools');
-})
+});
