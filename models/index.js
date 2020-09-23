@@ -13,8 +13,8 @@ mongoose.connect(connectionString, {
     console.log('MongoDB connection error: ', error);
 });
 
-mongoose.connection.on('disconnected', (event) => {
-    console.log("MongoDB is disconnected.", event);
+mongoose.connection.on('disconnected', () => {
+    console.log("MongoDB is disconnected.");
 });
 
 module.exports = {

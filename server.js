@@ -57,52 +57,38 @@ app.get('/testing', (req, res) => {
 // Search route
 app.post('/search', async (req, res) => {
     try {
-        console.log("req.body: ", req.body);
         // store search query
-        // TODO store the value of search input to use for getting search results
-        /* let searchQuery = ;
-        console.log("searchQuery", searchQuery); */
+        let searchInput = req.body.search;
+        console.log("searchInput:", searchInput);
 
         // finds current user
         const userId = req.session.currentUser.id;
 
+        const query = {
+            $and:
+                [
+                    { user: userId },
+                    {
+                        $or: [
+                            { name: { $regex: searchInput, $options: 'i' } }, { description: { $regex: searchInput, $options: 'i' } }
+                        ]
+                    }
+                ]
+        }
+
         // find user's categories, populate their tools
-        const allUserCategories = await db.Category.find({user: userId}).populate('tools').exec();
-        //const allUserCats = allUserResources.categories;
-        
-        console.log("All user categories: ", allUserCategories);
-        
-        // create an empty tools array
-        const allUserTools = [];
+        const categoryMatches = await db.Category.find(query).populate('tools').exec();
 
-        // loop trough all categories and push tools into the above array
-        allUserCategories.forEach(category => {
-                category.tools.forEach(tool => {
-                    allUserTools.push(tool);
-                });
-        });
 
-        console.log("All user tools: ", allUserTools);
+        const context = {
+            categoryMatches: categoryMatches,
+        };
 
-        // const categoryMatches = [];
-
-        // https://stackoverflow.com/questions/35948669/how-to-check-if-a-value-exists-in-an-object-using-javascript/35948779#35948779
-        // loop through the categories and check for matches
-        /* allUserCategories.forEach(category => {
-            if(Object.values(category).indexOf(searchQuery))
-        }); */
-        
-        /* allUserTools.forEach(tool => {
-            console.log("Tool names:", tool.name);
-        });
-
-        const context = {}; */
-
-        res.send("searching...");
-        /* res.render('search.ejs'); */
+        // res.send("searching...");
+        res.render('search.ejs', context);
 
     } catch (error) {
-        /* console.log("Error: ", error); */
+        console.log("Error: ", error);
         return res.send({message: error});
     }
 
