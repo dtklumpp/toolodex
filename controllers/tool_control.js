@@ -81,7 +81,7 @@ router.post('/:catId', async (req, res) => {
         res.redirect('/categories/'+req.params.catId);
     }
     catch (error) {
-        return res.send("Create route error: ", error);
+        return res.send("Create route error: "+ error);
     }
 });
 
@@ -105,7 +105,7 @@ router.get('/:toolId/edit', (req, res) => {
     db.Category.find({}, (error, catsArray) => {
         if(error) return res.send("edit route categories error: "+error)
         db.Tool.findById(req.params.toolId, (error, foundTool) => {
-            if(error) return res.send("edit route error: "+err);
+            if(error) return res.send("edit route error: "+error);
             context = {
                 oneTool: foundTool,
                 allCats: catsArray,
