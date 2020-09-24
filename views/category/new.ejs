@@ -12,18 +12,22 @@
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-            <h2>Add a New Category</h2>
-            <form action='/categories' method='POST'>
-                <p>
-                    Name: <input type='text' name='name' placeholder='Category Name' required />
-                </p>
-                <p>
-                    Description: <textarea type= 'text' name='description' placeholder='Add a description...'></textarea>
-                </p>
-                <p>
-                    <input type='submit' value='Add' />
-                </p>
-            </form>
+            <div class="postit-image">
+                <h2>Add a New Category</h2>
+            </div>
+            <div class="form-container">
+                <form action='/categories' method='POST' class='form'>
+                    <p>
+                        Name: <input type='text' name='name' placeholder='Category Name' required />
+                    </p>
+                    <p>
+                        Description: <textarea type= 'text' name='description' placeholder='Add a description...'></textarea>
+                    </p>
+                    <p>
+                        <input type='submit' value='Add Category' class='submit-button' />
+                    </p>
+                </form>
+            </div>
         </section>
     </div>
 </body>

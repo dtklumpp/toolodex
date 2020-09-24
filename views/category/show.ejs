@@ -17,10 +17,10 @@
             <%- include('../partials/header-navbar.ejs') %>
         </section>
         <section class='corkboard'>
-            <h2>"<%= category.name %>" Tools:</h2>
-            <div class='pencil edit-category'>
-                <a href="/categories/<%= category._id %>/edit"><i class="fas fa-edit"></i></a>
+            <div class="postit-image">
+                <h2>"<%= category.name %>" Tools:</h2>
             </div>
+            <a href="/categories/<%= category._id %>/edit" title='Edit "<%= category.name %>"'><i class="fas fa-edit"></i></a>
             <div class='post-its'>
                 <% category.tools.forEach((tool, index) => { %>
                     <a href='<%= tool.link %>' target='_blank' class="tool-link tile-link dragit tile<%=index%> arrange<%=index%>" style="order: <%=index%>">
