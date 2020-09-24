@@ -10,11 +10,13 @@
             <form action="/logout?_method=DELETE" method="post" value='' class='logout'>
                 <input type="submit" value="Logout" id='logout' class='btn-link'>
             </form>
-    
-            <form action="/search" method="POST" id='search'>
-                <input type="text" name='search' placeholder="Search...">
-                <input type="submit" value="Submit">
-            </form>
+
+            <form action="/search" method="POST" class="form-inline d-flex justify-content-center md-form form-sm" id='search'>
+                <input class="form-control form-control-sm mr-3 w-75" type="text" name='search' placeholder="Search..."
+                  aria-label="Search" id='search-placeholder'>
+                <i class="fas fa-search" aria-hidden="true" id='search-icon'></i>
+              </form>
         </nav>
     </div>
 </section>
+
