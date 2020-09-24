@@ -12,7 +12,6 @@
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-
             <%- include('../partials/postit-image.ejs', {title: 'Edit a Tool'}) %>
             <div class="form-container">
                 <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post" class='form'>
