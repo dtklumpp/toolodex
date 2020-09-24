@@ -3,8 +3,8 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel="stylesheet" href="/styles/main.css" />
     <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
     <script src="/scripts/app.js" defer></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
     <title>Toolodex</title>
@@ -16,13 +16,13 @@
                 <h2><%= user.username %>'s Categories</h2>
                 <div class='post-its'>
                     <% user.categories.forEach(category => { %>
-                        <a href="/categories/<%= category._id %>" class='category-name'>
+                        <a href="/categories/<%= category._id %>" class='category-name tile-link'>
                             <div class="category tile" title='<%= category.description %>'>
                                 <%= category.name %>
                             </div>
                         </a>
                     <% }); %>
-                    <a href="/categories/new">
+                    <a href="/categories/new" class="tile-link">
                         <div class="add-category tile">
                             <i class="fas fa-plus"></i>
                         </div>
