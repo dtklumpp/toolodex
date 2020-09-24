@@ -86,3 +86,50 @@ $('.dragit').droppable({
 //console.log('length: '+allTiles.length);
 //console.log(Math.min(7,5));
 
+
+
+$('.dragit').ondragover = function (event, ui) {
+        //console.log('dropped');
+        //$(this).css("background-color", "red");
+        //console.log("this:", $(this));
+        //console.log('drop order: '+$(this).css('order'));
+        //console.log('drag order: '+ui.draggable.css('order'));
+
+        const x = $(this).css('order');
+        const y = Number(ui.draggable.css('order'));
+
+        //$(this).css('order', y);
+        //ui.draggable.css('order', x);
+
+        //console.log('y:', y);
+        //console.log('x:', x);
+
+        ui.draggable.removeClass('arrange'+y);
+        if( y > x ) {
+            for(let i = y-1; i >= x; i--){
+                $('.arrange'+i).css('order', i+1);
+                $('.arrange'+i).addClass('arrange'+(i+1));
+                $('.arrange'+i).removeClass('arrange'+i);
+            }
+            ui.draggable.css('order', x);
+            ui.draggable.addClass('arrange'+x);
+        } else {
+            for(let i = (y+1); i <= x; i++){
+                //console.log("i is "+i);
+                //console.log($('.arrange'+i).text());
+                $('.arrange'+i).css('order', i-1);    
+                $('.arrange'+i).addClass('arrange'+(i-1));
+                $('.arrange'+i).removeClass('arrange'+i);
+            }
+            ui.draggable.css('order', x);
+            ui.draggable.addClass('arrange'+x);    
+        }
+
+
+        ui.draggable.css('left', 0);
+        ui.draggable.css('top', 0);
+
+
+
+    }
+    

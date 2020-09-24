@@ -28,6 +28,7 @@ router.get('/newTool', (req, res) => {
 
 
 // new route (Category pre-populated)
+// note: COPIED FROM NEW ROUTE -- VERY WET.  COMBINE THESE LATER.
 router.get('/newTool/:catId', (req, res) => {
     db.Category.find({}, (error, catsArray) => {
         if(error) return res.send("create route categories error: "+error);
@@ -64,6 +65,7 @@ router.post('/', async (req, res) => {
 
 
 // create route pre-populated
+// note: COPIED FROM CREATE ROUTE: VERY WET.  COMBINE THESE LATER
 router.post('/:catId', async (req, res) => {
     try {
         const createdTool = await db.Tool.create(req.body);
