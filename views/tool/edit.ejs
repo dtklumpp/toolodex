@@ -10,9 +10,7 @@
 </head>
 <body>
     <%- include('../partials/header-navbar.ejs') %>
-    <div class="postit-image">
-        <h2>Edit a Tool</h2>
-    </div>
+    <%- include('../partials/postit-image.ejs', {title: 'Edit a Tool'}) %>
     <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post">
         Name: <input type="text" name="name" value=<%=oneTool.name%>><br>
         Link: <input type="text" name="link" value=<%=oneTool.link%>><br>

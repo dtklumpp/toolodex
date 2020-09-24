@@ -17,7 +17,8 @@
             <%- include('../partials/header-navbar.ejs') %>
         </section>
         <section class='corkboard'>
-            <div class="postit-image">
+            <div class="postit-container">
+                <img src="/images/row-postits.png" class='postit-image' />
                 <h2>"<%= category.name %>" Tools:</h2>
             </div>
             <a href="/categories/<%= category._id %>/edit" title='Edit "<%= category.name %>"'><i class="fas fa-edit"></i></a>

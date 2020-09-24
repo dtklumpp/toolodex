@@ -12,8 +12,10 @@
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-
-            <h2>Edit Category: <%= category.name %></h2>
+            <div class="postit-container">
+                <img src="/images/row-postits.png" class='postit-image' />
+                <h2>Edit "<%= category.name %>"</h2>
+            </div>
             <form action='/categories/<%= category._id %>?_method=PUT' method='POST'>
                 <p>Name: <input type='text' name='name' value='<%= category.name %>' /></p>
                 <p>Description: <textarea type= 'text' name='description' ><%= category.description %></textarea></p>

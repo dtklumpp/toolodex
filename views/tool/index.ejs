@@ -6,28 +6,34 @@
     <script src="/scripts/app.js" defer></script>
     <%- include('../partials/external-imports.ejs') %>
     <link rel="stylesheet" href="/styles/main.css" />
-    <title>Tool Index</title>
+    <title>Tools Index</title>
 </head>
 <body>
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-            <div class="postit-image">
-                <h2>Tools Index page</h2>
-            </div>
+            <%- include('../partials/postit-image.ejs', {title: 'Tools Index'}) %>
             <ul>
                 <% allTools.forEach(tool => { %> 
-                    <li title='<%= tool.description %>'>
-                        <a href="/tools/<%=tool._id%>">
-                            <%= tool.name %>                 
-                        </a>
-                        <div class='pencil edit-tool'>
-                            <a href="/tools/<%=tool._id%>/edit"><i class="fas fa-edit"></i></a>
-                        </div>
-                        <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
-                            <input type="submit" value="Delete Tool">
-                        </form>
-                    </li>
+                    <div class="li-container">
+                        <li title='<%= tool.description %>' class='list-item'>
+                            <a href="/tools/<%=tool._id%>" class='list-item-content tool-name'>
+                                <%= tool.name %>:                 
+                            </a>
+                            <span class="tool-description">
+                                <%= tool.description %>
+                            </span>
+                            <div class='pencil edit-tool' title="Edit this tool.">
+                                <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
+                            </div>
+                            <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
+                                <label for="delete-button">
+                                    <i class="fas fa-trash-alt" title="Delete this tool."></i>
+                                </label>
+                                <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                            </form>
+                        </li>
+                    </div>
                 <% }) %> 
             </ul>
         </section>

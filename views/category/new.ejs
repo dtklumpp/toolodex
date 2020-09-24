@@ -12,9 +12,7 @@
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-            <div class="postit-image">
-                <h2>Add a New Category</h2>
-            </div>
+            <%- include('../partials/postit-image.ejs', {title: 'Add a New Category'}) %>
             <div class="form-container">
                 <form action='/categories' method='POST' class='form'>
                     <p>
