@@ -127,7 +127,7 @@ h2 {
     margin: calc( var(--scale-size) * 10px);
     width: calc( var(--scale-size) * 150px);
     height: calc( var(--scale-size) * 150px);
-    box-shadow: 2px 2px black;
+    box-shadow: 3px 3px 3px black;
     display: flex;
     text-align: center;
     align-items: center;

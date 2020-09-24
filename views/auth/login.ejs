@@ -12,29 +12,35 @@
     <div class="display-area">
         <section class="header">
             <h2>Welcome to Toolodex!</h2>
-            <p class='tagline'>The best way to find the right tool for the job.</p>
+            <p class='tagline' style="text-align: left">Find the right tool for the job.</p>
         </section>
         <section class='corkboard'>
             <div class='register form'>
                 <h3>New to Toolodex? Register here:</h3>
                 <form action="/register" method="POST">
-                    Username: <input type="text" name="username" required /><br>
-                    Location: <select name="location">
+                    <input type="text" name="username" placeholder='Username' required /><br>
+                    <select name="location">
                         <% for(eachState of statesArray) { %> 
-                            <option value="<%=eachState%>"><%=eachState%></option>
+                            <option value="<%=eachState%>"
+                            <% if(eachState === "NY"){ %>selected<% } %> 
+                            ><%=eachState%></option>
                             <% } %> 
                         </select> <br>
-                    Email: <input type="text" name="email"  required /><br>
-                    Password: <input type="password" name="password" required />
-                    <input type="submit" value="Create User">
+                    <input type="text" name="email" placeholder='Email'  required /><br>
+                    <input type="password" name="password" placeholder='password' required /><br>
+                    <input type="submit" value="Register Account">
                 </form>
             </div>
+
+            <br>
+            <br>
+            <br>
                 
             <div class="login form">
                 <h3>Returning? Login here:</h3>
                 <form action="/login" method="POST">
-                    Username: <input type="text" name="username" required /><br>
-                    Password: <input type="password" name="password" required />
+                    <input type="text" name="username" placeholder='Username' required /><br>
+                    <input type="password" name="password" placeholder='password' required /><br>
                     <input type="submit" value="Login">
                 </form>
             </div>

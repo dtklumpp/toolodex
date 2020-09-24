@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles/main.css" />
     <script src="/scripts/app.js" defer></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src="/scripts/tool-reorder.js" defer></script>
     <title>Toolodex</title>
 </head>
 <body>
@@ -15,14 +16,14 @@
         <section class='corkboard'>
                 <h2><%= user.username %>'s Categories</h2>
                 <div class='post-its'>
-                    <% user.categories.forEach(category => { %>
-                        <a href="/categories/<%= category._id %>" class='category-name tile-link'>
+                    <% user.categories.forEach((category, index) => { %>
+                        <a href="/categories/<%= category._id %>" class='category-name tile-link dragit tile<%=index%> arrange<%=index%>' style="order: <%=index%>">
                             <div class="category tile" title='<%= category.description %>'>
                                 <%= category.name %>
                             </div>
                         </a>
                     <% }); %>
-                    <a href="/categories/new" class="tile-link">
+                    <a href="/categories/new" class="tile-link" style="order: 1000">
                         <div class="add-category tile">
                             <i class="fas fa-plus"></i>
                         </div>
