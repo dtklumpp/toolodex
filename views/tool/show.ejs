@@ -12,7 +12,9 @@
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-            <h2><%= oneTool.name %></h2>
+            <div class="postit-image">                
+                <h2><%= oneTool.name %></h2>
+            </div>
             <div class='pencil edit-tool'>
                 <a href="/tools/<%=oneTool._id%>/edit"><i class="fas fa-edit"></i></a>
             </div>

@@ -12,7 +12,9 @@
     <div class="display-area">
         <%- include('../partials/header-navbar.ejs') %>
         <section class="corkboard">
-            <h2>Tools Index page</h2>
+            <div class="postit-image">
+                <h2>Tools Index page</h2>
+            </div>
             <ul>
                 <% allTools.forEach(tool => { %> 
                     <li title='<%= tool.description %>'>

@@ -13,7 +13,9 @@
     <div class='display-area'>
         <%- include('../partials/header-navbar.ejs') %>
         <section class='corkboard'>
+            <div class="postit-image">
                 <h2><%= user.username %>'s Categories</h2>
+            </div>
                 <div class='post-its'>
                     <% user.categories.forEach(category => { %>
                         <a href="/categories/<%= category._id %>" class='category-name tile-link'>
