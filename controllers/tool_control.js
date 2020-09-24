@@ -189,3 +189,23 @@ router.post('/:toolId/:catId', async (req, res) => {
         console.log('remove tool from category route error: '+error);
     }
 })
+
+//steal tool route
+router.get('/steal/:toolId/:userId', async (req, res) => {
+    try{
+        if(req.session.currentUser.id != req.params.userId){
+            const thief = await db.User.findById(req.session.currentUser.id)
+                .populate('categories');
+            const booty = await db.Tool.findById(req.params.toolId);
+            const stash = thief.categories[0];
+            stash.tools.push(booty);
+            booty.categories.push(stash);
+            stash.save();
+            booty.save();
+            res.redirect('/users/'+req.params.userId);
+        }
+    }
+    catch(error){
+        console.log('steal tool route error: '+error);
+    }
+})

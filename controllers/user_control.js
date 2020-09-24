@@ -43,8 +43,17 @@ router.get('/', async (req, res) => {
 //show route
 router.get('/:userId', async (req, res) => {
     try{
-        const foundUser = await db.User.findById(req.params.userId).populate('categories').exec();
-        const context = {oneUser: foundUser};
+        const foundUser = await db.User.findById(req.params.userId)
+        .populate({
+            path: 'categories',
+            populate: {
+                path: 'tools',
+            }
+        }).exec();
+        const context = {
+            oneUser: foundUser,
+            userCats: foundUser.categories,
+        };
         res.render('user/show.ejs', context);
     }
     catch(error){
