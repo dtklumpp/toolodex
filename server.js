@@ -78,8 +78,28 @@ app.post('/search', async (req, res) => {
         // find user's categories, populate their tools
         const categoryMatches = await db.Category.find(query).populate('tools').exec();
 
+        //look for matching tools as well
+        //checks name, description, keywords
+        const toolMatches = [];
+        const allCats = await db.Category.find({}).populate('tools').exec();
+        //console.log('categoryMatches avast:', categoryMatches);
+        allCats.forEach(category => {
+            category.tools.forEach(tool => {
+                //console.log('tool.name:', tool.name);
+                //console.log('tool.keywords:', tool.keywords);
+                let toolContents = "" + tool.name + tool.description + tool.keywords;
+                //console.log('toolContents:', toolContents);
+                if(toolContents.includes(searchInput)){
+                    toolMatches.push(tool);
+                }
+            })
+        })
+        console.log('toolMatches:', toolMatches);
+
+
         const context = {
             categoryMatches: categoryMatches,
+            toolMatchesZOMG: toolMatches,
         };
 
         res.render('search.ejs', context);
