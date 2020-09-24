@@ -25,6 +25,8 @@ router.post('/register', async (req, res) => {
         const hash = await bcrypt.hash(req.body.password, salt);
         req.body.password = hash;
 
+        const allUsers = await db.User.find({});
+
         //adding this stuff to auto-login when make user
         //db.User.create(req.body);
         const newUser = await db.User.create(req.body);
@@ -38,7 +40,6 @@ router.post('/register', async (req, res) => {
         newUser.categories.push(favoritesCategory);
 
 
-        const allUsers = await db.User.find({});
         allUsers.forEach(user => {
             newUser.friends.push(user);
             user.friends.push(newUser);
@@ -113,6 +114,8 @@ router.post('/demo', async (req, res) => {
         newPW = hash;
         console.log("Your demo pw is admin");
 
+        const allUsers = await db.User.find({});
+
         //adding this stuff to auto-login when make user
         //db.User.create(req.body);
         newUsername = "Demo"+Math.floor(10000*Math.random());
@@ -134,7 +137,6 @@ router.post('/demo', async (req, res) => {
         newUser.categories.push(favoritesCategory);
 
 
-        const allUsers = await db.User.find({});
         allUsers.forEach(user => {
             newUser.friends.push(user);
             user.friends.push(newUser);

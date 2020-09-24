@@ -52,6 +52,7 @@ router.get('/:userId', async (req, res) => {
         })
         .populate('friends')
         .exec();
+        //console.log('foundUser.friends:', foundUser.friends)
         const context = {
             oneUser: foundUser,
             userCats: foundUser.categories,
