@@ -133,6 +133,15 @@ h2 {
     align-items: center;
     justify-content: center;
     word-wrap: break-word;
+    transition: transform .2s linear;
+}
+
+.tile:hover {
+    transform: scale(1.1);
+}
+
+.tile-link:hover {
+    text-decoration: none;
 }
 
 i {

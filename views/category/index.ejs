@@ -16,13 +16,13 @@
                 <h2><%= user.username %>'s Categories</h2>
                 <div class='post-its'>
                     <% user.categories.forEach(category => { %>
-                        <a href="/categories/<%= category._id %>" class='category-name'>
+                        <a href="/categories/<%= category._id %>" class='category-name tile-link'>
                             <div class="category tile" title='<%= category.description %>'>
                                 <%= category.name %>
                             </div>
                         </a>
                     <% }); %>
-                    <a href="/categories/new">
+                    <a href="/categories/new" class="tile-link">
                         <div class="add-category tile">
                             <i class="fas fa-plus"></i>
                         </div>
