@@ -26,22 +26,22 @@ $('.dragit').draggable({
     revert: "invalid",
     //revertDuration: 0,
     start: function () {
-        console.log('starteddragging');
-        $(this).removeClass('tool-link');
+        //console.log('starteddragging');
+        //$(this).removeClass('tool-link');
 
     },
     stop: function () {
-        $(this).addClass('tool-link');
+        //$(this).addClass('tool-link');
     }
 });
 
 $('.dragit').droppable({
     drop: function (event, ui) {
-        console.log('dropped');
+        //console.log('dropped');
         //$(this).css("background-color", "red");
-        console.log("this:", $(this));
-        console.log('drop order: '+$(this).css('order'));
-        console.log('drag order: '+ui.draggable.css('order'));
+        //console.log("this:", $(this));
+        //console.log('drop order: '+$(this).css('order'));
+        //console.log('drag order: '+ui.draggable.css('order'));
 
         const x = $(this).css('order');
         const y = Number(ui.draggable.css('order'));
@@ -49,8 +49,8 @@ $('.dragit').droppable({
         //$(this).css('order', y);
         //ui.draggable.css('order', x);
 
-        console.log('y:', y);
-        console.log('x:', x);
+        //console.log('y:', y);
+        //console.log('x:', x);
 
         ui.draggable.removeClass('arrange'+y);
         if( y > x ) {
@@ -63,8 +63,8 @@ $('.dragit').droppable({
             ui.draggable.addClass('arrange'+x);
         } else {
             for(let i = (y+1); i <= x; i++){
-                console.log("i is "+i);
-                console.log($('.arrange'+i).text());
+                //console.log("i is "+i);
+                //console.log($('.arrange'+i).text());
                 $('.arrange'+i).css('order', i-1);    
                 $('.arrange'+i).addClass('arrange'+(i-1));
                 $('.arrange'+i).removeClass('arrange'+i);
