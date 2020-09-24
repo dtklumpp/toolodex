@@ -33,7 +33,8 @@ router.post('/register', async (req, res) => {
             id: newUser._id,
         };
 
-        const favoritesCategory = await db.Category.create({name: 'Favorites', user: newUser, description: 'Your favorite, go-to tools.'});
+        const catName = "Favorites"+Math.floor(Math.random()*10000);
+        const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
         await newUser.save();
 
@@ -119,8 +120,16 @@ router.post('/demo', async (req, res) => {
             id: newUser._id,
         };
 
-        const favoritesCategory = await db.Category.create({name: 'Favorites', user: newUser, description: 'Your favorite, go-to tools.'});
+        const catName = "Favorites"+Math.floor(Math.random()*10000);
+        const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
+
+
+        const allUsers = await db.User.find({});
+        allUsers.forEach(user => {
+            newUser.friends.push(user);
+        })
+
         await newUser.save();
 
         res.redirect('/');

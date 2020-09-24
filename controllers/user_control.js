@@ -49,10 +49,13 @@ router.get('/:userId', async (req, res) => {
             populate: {
                 path: 'tools',
             }
-        }).exec();
+        })
+        .populate('friends')
+        .exec();
         const context = {
             oneUser: foundUser,
             userCats: foundUser.categories,
+            allFriends: foundUser.friends,
         };
         res.render('user/show.ejs', context);
     }

@@ -34,6 +34,15 @@
             <br>
         <% } %> 
     <br>
+    Friends: <ul>
+        <% for(eachFriend of allFriends){ %> 
+            <li>
+                <a href="/users/<%=eachFriend._id%>"><%=eachFriend.name%></a>
+            </li>
+        <% } %> 
+    </ul>
+
+    <br>
     <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
         <input type="submit" value="DESTROY">
     </form>
