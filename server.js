@@ -32,7 +32,7 @@ app.use(session({
     saveUninitialized: false,
     secret: process.env.SECRET,
     store: new MongoStore({
-        url: process.env.MONGODB_LOCAL
+        url: process.env.MONGODB_URI
     }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 // one day
