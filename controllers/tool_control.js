@@ -7,7 +7,7 @@ const db = require('../models');
 //index route
 router.get('/', (req, res) => {
     //res.send('tools index page');
-    db.Tool.find({}, (error, toolsArray) => {
+    db.Tool.find({}).sort('name').exec((error, toolsArray) => {
         if(error) return res.send("index route error: "+error);
         context = {allTools: toolsArray};
         res.render('tool/index.ejs', context);
