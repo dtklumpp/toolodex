@@ -9,35 +9,48 @@
     <title>Edit Tool</title>
 </head>
 <body>
-    <%- include('../partials/header-navbar.ejs') %>
-    <%- include('../partials/postit-image.ejs', {title: 'Edit a Tool'}) %>
-    <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post">
-        <p>
-            Name: <input type="text" name="name" value=<%=oneTool.name%> />
-        </p>
-<!--         <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <br> -->
-        Link: <input type="text" name="link" value=<%=oneTool.link%>><br>
-        Description: <input type="text" name="description" value=<%=oneTool.description%>><br>
-        Notes: <input type="text" name="notes" value=<%=oneTool.notes%>><br>
-        Keywords: <input type="text" name="keywords" value=<%=oneTool.keywords%>><br>
-        Categories: <ul>
-            <% for(eachCat of allCats){ %> 
-                <li>
-                    <input type="checkbox" name="category_<%= eachCat._id %>"
-                        <% if(oneTool.categories.includes(String(eachCat._id))){ %>
-                            checked
-                        <% } %> 
-                    /><%= eachCat.name %> 
-                </li>
-            <% } %> 
-        </ul>
-        <input type="submit" value="Apply Changes">
-    </form>
+    <div class="display-area">
+        <%- include('../partials/header-navbar.ejs') %>
+        <section class="corkboard">
+
+            <%- include('../partials/postit-image.ejs', {title: 'Edit a Tool'}) %>
+            <div class="form-container">
+                <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post" class='form'>
+                    <p>
+                        Name: <input type="text" name="name" value="<%=oneTool.name%>" />
+                    </p>
+                    <p>
+                        Link: <input type="text" name="link" value="<%=oneTool.link%>" />
+                    </p>
+                    <p>
+                        Description: <input type="text" name="description" value="<%=oneTool.description%>" />
+                    </p>
+                    <p>
+                        Notes: <input type="text" name="notes" value="<%=oneTool.notes%>" />
+                    </p>
+                    <p>
+                        Keywords: <input type="text" name="keywords" value="<%=oneTool.keywords%>" />
+                    </p>
+                    <p>
+                        Categories:
+                        <ul>
+                            <% for(eachCat of allCats){ %> 
+                                <li class='form-li'>
+                                    <input type="checkbox" name="category_<%= eachCat._id %>"
+                                        <% if(oneTool.categories.includes(String(eachCat._id))){ %>
+                                            checked
+                                        <% } %> 
+                                    /><%= eachCat.name %> 
+                                </li>
+                            <% } %> 
+                        </ul>
+                    </p>
+                    <p>
+                        <input type="submit" value="Apply Changes" class='submit-button' />
+                    </p>
+                </form>
+            </div>
+        </section>
+    </div>
 </body>
 </html>
