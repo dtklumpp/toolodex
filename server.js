@@ -13,7 +13,9 @@ const controllers = require('./controllers');
 const app = express();
 
 /* Configuration */
-const PORT = 4000;
+require('dotenv').config();
+const PORT = process.env.PORT;
+//console.log('process.env.PORT:', process.env.PORT);
 app.set('view engine', 'ejs');
 
 /* Middleware */
@@ -28,9 +30,9 @@ app.use(express.urlencoded({extended: false}));
 app.use(session({
     resave: false,
     saveUninitialized: false,
-    secret: 'Open sesame',
+    secret: process.env.SECRET,
     store: new MongoStore({
-        url: 'mongodb://localhost:27017/toolodex-sessions'
+        url: process.env.MONGODB_LOCAL
     }),
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 // one day
