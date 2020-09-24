@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Edit Tool</title>
+</head>
+<body>
+    <%- include('../partials/header-navbar.ejs') %>
+    <%- include('../partials/postit-image.ejs', {title: 'Edit a Tool'}) %>
+    <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post">
+        Name: <input type="text" name="name" value=<%=oneTool.name%>><br>
+        Link: <input type="text" name="link" value=<%=oneTool.link%>><br>
+        Description: <input type="text" name="description" value=<%=oneTool.description%>><br>
+        Notes: <input type="text" name="notes" value=<%=oneTool.notes%>><br>
+        Keywords: <input type="text" name="keywords" value=<%=oneTool.keywords%>><br>
+        Categories: <ul>
+            <% for(eachCat of allCats){ %> 
+                <li>
+                    <input type="checkbox" name="category_<%= eachCat._id %>"
+                        <% if(oneTool.categories.includes(String(eachCat._id))){ %>
+                            checked
+                        <% } %> 
+                    /><%= eachCat.name %> 
+                </li>
+            <% } %> 
+        </ul>
+        <input type="submit" value="Apply Changes">
+    </form>
+    <%- include('../partials/testfooter.ejs'); %>
+</body>
+</html>

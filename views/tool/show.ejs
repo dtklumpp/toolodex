@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Show Tool</title>
+</head>
+<body>
+    <div class="display-area">
+        <%- include('../partials/header-navbar.ejs') %>
+        <section class="corkboard">
+            <div class="postit-container">
+                <img src="/images/row-postits.png" class='postit-image' />
+                <h2><%= oneTool.name %></h2>
+            </div>
+            <div class='pencil edit-tool'>
+                <a href="/tools/<%=oneTool._id%>/edit"><i class="fas fa-edit"></i></a>
+            </div>
+            <p>
+                Link: <%= oneTool.link %>
+            </p>
+            <p>
+                Description: <%= oneTool.description %>
+            </p>
+            <p>
+                Notes: <%= oneTool.notes %>
+            </p>
+            <p>
+                Keywords: <%= oneTool.keywords %>
+            </p>
+            <p>
+                Categories: <ul>
+                    <% for(eachCat of oneTool.categories){ %> 
+                        <li>
+                            <%= eachCat.name %> 
+                        </li>
+                    <% } %> 
+                </ul>
+            </p>
+            <form action="/tools/<%=oneTool._id%>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete Tool">
+            </form>
+        </section>
+    </div>
+</body>
+</html>

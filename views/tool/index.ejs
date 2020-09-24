@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Tools Index</title>
+</head>
+<body>
+    <div class="display-area">
+        <%- include('../partials/header-navbar.ejs') %>
+        <section class="corkboard">
+            <%- include('../partials/postit-image.ejs', {title: 'Tools Index'}) %>
+            <ul>
+                <% allTools.forEach(tool => { %> 
+                    <div class="li-container">
+                        <li title='<%= tool.description %>' class='list-item'>
+                            <a href="/tools/<%=tool._id%>" class='list-item-content tool-name'>
+                                <%= tool.name %>:                 
+                            </a>
+                            <span class="tool-description">
+                                <%= tool.description %>
+                            </span>
+                            <div class='pencil edit-tool' title="Edit this tool.">
+                                <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
+                            </div>
+                            <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
+                                <label for="delete-button">
+                                    <i class="fas fa-trash-alt" title="Delete this tool."></i>
+                                </label>
+                                <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                            </form>
+                        </li>
+                    </div>
+                <% }) %> 
+            </ul>
+        </section>
+    </div>
+</body>
+</html>

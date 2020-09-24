@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <!-- <script src="jquery-ui.min.js"></script> -->
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script> -->
+    <script src="/scripts/tool-reorder.js" defer></script>
+    <title>Explore Your Category</title>
+</head>
+<body>
+    <div class="display-area">
+        <section class='header'>
+            <%- include('../partials/header-navbar.ejs') %>
+        </section>
+        <section class='corkboard'>
+            <div class="postit-container">
+                <img src="/images/row-postits.png" class='postit-image' />
+                <h2>"<%= category.name %>" Tools:</h2>
+            </div>
+            <a href="/categories/<%= category._id %>/edit" title='Edit "<%= category.name %>"'><i class="fas fa-edit"></i></a>
+            <div class='post-its'>
+                <% category.tools.forEach((tool, index) => { %>
+                    <a href='<%= tool.link %>' target='_blank' class="tool-link tile-link dragit tile<%=index%> arrange<%=index%>" style="order: <%=index%>">
+                        <div class='tool tile' title='<%= tool.description %>'>
+                            <%= tool.name %>
+                        </div>
+                    </a>
+                <% }); %>
+                <% if(category.tools.length === 0) { %>
+                    <p>There are no tools available yet!</p>
+                <% } %>
+                <a href="/tools/newTool/<%=category._id%>" class="tile-link" style="order: 1000">
+                    <div class="add-tool tile" title='Add a tool!'>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
+
+

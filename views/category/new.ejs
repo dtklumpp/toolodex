@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Add a Category</title>
+</head>
+<body>
+    <div class="display-area">
+        <%- include('../partials/header-navbar.ejs') %>
+        <section class="corkboard">
+            <%- include('../partials/postit-image.ejs', {title: 'Add a New Category'}) %>
+            <div class="form-container">
+                <form action='/categories' method='POST' class='form'>
+                    <p>
+                        Name: <input type='text' name='name' placeholder='Category Name' required />
+                    </p>
+                    <p>
+                        Description: <textarea type= 'text' name='description' placeholder='Add a description...'></textarea>
+                    </p>
+                    <p>
+                        <input type='submit' value='Add Category' class='submit-button' />
+                    </p>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>User Index</title>
+</head>
+<body>
+    <nav>
+        <%- include('../partials/header-navbar.ejs') %>
+        <form action="/logout?_method=DELETE" method="post" value=''>
+            <input type="submit" value="Logout" id='logout'>
+        </form>
+    </nav>
+    <h2>Users Index page</h2>
+    <ul>
+        <% allUsers.forEach(user => { %> 
+            <li>
+                <a href="/users/<%=user._id%>">
+                    <%= user.username %>                 
+                </a>
+            </li>
+        <% }) %> 
+    </ul>
+    <%- include('../partials/testfooter.ejs'); %>
+</body>
+</html>

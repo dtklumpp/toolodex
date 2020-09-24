@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>Toolodex</title>
+</head>
+<body>
+    <div class="display-area">
+        <section class="header">
+            <h2>Welcome to Toolodex!</h2>
+            <p class='tagline' style="text-align: left">Find the right tool for the job.</p>
+        </section>
+        <section class='corkboard'>
+            <div class='register form'>
+                <h3>New to Toolodex? Register here:</h3>
+                <form action="/register" method="POST">
+                    <input type="text" name="username" placeholder='Username' required /><br>
+                    <select name="location">
+                        <% for(eachState of statesArray) { %> 
+                            <option value="<%=eachState%>"
+                            <% if(eachState === "NY"){ %>selected<% } %> 
+                            ><%=eachState%></option>
+                            <% } %> 
+                        </select> <br>
+                    <input type="text" name="email" placeholder='Email'  required /><br>
+                    <input type="password" name="password" placeholder='password' required /><br>
+                    <input type="submit" value="Register Account">
+                </form>
+            </div>
+
+            <br>
+            <br>
+            <br>
+                
+            <div class="login form">
+                <h3>Returning? Login here:</h3>
+                <form action="/login" method="POST">
+                    <input type="text" name="username" placeholder='Username' required /><br>
+                    <input type="password" name="password" placeholder='password' required /><br>
+                    <input type="submit" value="Login">
+                </form>
+                <br>
+                <form action="/demo" method="POST">
+                    <input type="submit" value="or Demo the site as a guest">
+                </form>
+            </div>
+
+        </section>
+    </div>
+</body>
+</html>

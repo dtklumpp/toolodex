@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/app.js" defer></script>
+    <%- include('../partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <title>New Tool Page</title>
+</head>
+<body>
+    <%- include('../partials/header-navbar.ejs') %>
+    <h2>Make New User</h2>
+    <form action="/users/" method="post">
+        Name: <input type="text" name="name"><br>
+        Location: <input type="text" name="location"><br>
+        Political Affiliation: <input type="text" name="politicalAffiliation"><br>
+        <!-- Email: <input type="text" name="email"> -->
+        <input type="submit" value="Create">
+    </form>
+    <%- include('../partials/testfooter.ejs') %>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<section class='header'>
+    <div class="header-container">
+        <h1>Toolodex</h1>
+        <p class='tagline'>Find the right tool for the job.</p>
+        <nav>
+            <a href='/'>Home</a> |
+            <a href='/categories/new'>Add a Category</a> |
+            <a href='/tools/newTool'>Add a Tool</a> |
+            <a href='/tools'>Tools Index</a> | 
+            <form action="/logout?_method=DELETE" method="post" value='' class='logout'>
+                <input type="submit" value="Logout" id='logout' class='btn-link'>
+            </form>
+
+            <form action="/search" method="POST" class="form-inline d-flex justify-content-center md-form form-sm" id='search'>
+                <input class="form-control form-control-sm mr-3 w-75" type="text" name='search' placeholder="Search..."
+                  aria-label="Search">
+                <i class="fas fa-search" aria-hidden="true" id='search-icon'></i>
+              </form>
+        </nav>
+    </div>
+</section>
+
