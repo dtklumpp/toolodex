@@ -108,11 +108,21 @@ router.delete('/:userId', async (req, res) => {
                 path: 'tools',
             }
         })
+        .populate('friends')
+        .exec();
+
         const childCats = doomedUser.categories;
         for(eachCat of childCats){
             eachCat.user = null;
             eachCat.save();
         }
+
+        const lostFriends = doomedUser.friends;
+        for(eachFriend of lostFriends){
+            eachFriend.friends.remove(doomedUser);
+            eachFriend.save();
+        }
+
         doomedUser.deleteOne();
         res.redirect('/users');
     }
