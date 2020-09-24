@@ -140,6 +140,17 @@ h2 {
     position: relative;
 }
 
+h3 {
+    font-family: 'Courier Prime', monospace;
+    font-size: 25px;
+    color: black;
+    display: inline-flex;
+}
+
+.plus-container {
+    margin-left: 5px;
+}
+
 .post-its {
     font-family: 'Indie Flower', cursive;
     font-size: 25px;
@@ -276,6 +287,37 @@ ul {
     word-wrap: break-word;
 }
 
+.avail-tools-container {
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+.available-tools {
+    width: 327px;
+    height: 62px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: var(--post-it);
+    margin: 8px 0;
+    padding: 15px;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+}
+
+.avail-tools-list {
+    margin-left: 0;
+}
+
+#available-tools-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 25px;
+    margin: 0 auto;
+    padding: 0;
+}
+
 .submit-button {
     font-family: 'Courier Prime', monospace;
     border: 4px solid red;
@@ -295,11 +337,11 @@ ul {
     margin-bottom: 0;
 }
 
-label, .pencil {
+label, .pencil, .plus-tool {
     color: #0088cc;
 }
 
-label:hover, .pencil:hover {
+label:hover, .pencil:hover, .plus-tool:hover {
     color: #005580;
 }
 

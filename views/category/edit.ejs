@@ -16,43 +16,65 @@
                 <img src="/images/row-postits.png" class='postit-image' />
                 <h2>Edit "<%= category.name %>"</h2>
             </div>
-            <form action='/categories/<%= category._id %>?_method=PUT' method='POST'>
-                <p>Name: <input type='text' name='name' value='<%= category.name %>' /></p>
-                <p>Description: <textarea type= 'text' name='description' ><%= category.description %></textarea></p>
-                <input type='submit' value='Save Changes' />
-            </form>
-            <form action="/categories/<%= category._id %>?_method=DELETE" method="POST">
-                <input type="submit" value="Delete Category" />
-            </form>
-            <div class="postit-image">                
-                <h2>Available Tools:</h2>
+            <div class="form-container">
+                <form action='/categories/<%= category._id %>?_method=PUT' method='POST' class='form'>
+                    <p>
+                        Name: <input type='text' name='name' value='<%= category.name %>' />
+                    </p>
+                    <p>
+                        Description: <textarea type= 'text' name='description' ><%= category.description %></textarea>
+                    </p>
+                    <p>
+                        <input type='submit' value='Save Changes' class='submit-button' />
+                    </p>
+                    <p>
+                        <form action="/categories/<%= category._id %>?_method=DELETE" method="POST">
+                            <input type="submit" value="Delete Category" class='submit-button' />
+                        </form>
+                    </p>
+                </form>
+            
+                <div class="avail-tools-container">
+                    <div class='available-tools'>                
+                        <h3 id='available-tools-label'>Available Tools:
+                            <div class="plus-container">
+                                <span class='plus-tool' title="Add a tool.">
+                                    <a href="/tools/newTool/<%=category._id%>" class='list-item-content'>
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </h3>
+                    </div>
+                    <ul class="edit-tools">
+                        <% category.tools.forEach(tool => { %>
+                            <div class="li-container avail-tools-list">
+                                <li class='tool list-item'>
+                                    <a href='<%= tool.link %>' target='_blank' class='list-item-content tool-name'><%= tool.name %>:
+                                    </a>
+                                    <span class="tool-description">
+                                        <%= tool.description %>
+                                    </span>
+                                    <div class='pencil edit-tool' title="Edit this tool.">
+                                        <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
+                                    </div>
+                                    <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
+                                        <label for="delete-button">
+                                            <i class="fas fa-trash-alt" title="Delete this tool."></i>
+                                        </label>
+                                        <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                                    </form>
+                                </li>
+                            <% }); %>
+                            <% if(category.tools.length === 0) { %>
+                                <li class="tool list-item">
+                                    There are no tools available yet!
+                                </li>
+                            <% } %>
+                            </div>
+                    </ul>
+                </div>
             </div>
-            <ul class="edit-tools">
-                <% category.tools.forEach(tool => { %>
-                    <li class='tool'>
-                        <a href='<%= tool.link %>' target='_blank'><%= tool.name %></a>
-                        <div class='pencil edit-tool'>
-                            <a href="/tools/<%=tool._id%>/edit"><i class="fas fa-edit"></i></a>
-                        </div>
-                        <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
-                            <input type="submit" value="Delete Tool">
-                        </form>
-                        <form action="/tools/<%=tool._id%>/<%=category._id%>" method="POST">
-                            <input type="submit" value="Remove Tool">
-                        </form>
-                    </li>
-                <% }); %>
-                <% if(category.tools.length === 0) { %>
-                    <p>There are no tools available yet!</p>
-                <% } %>
-                <li class="add-tool tile">
-                    <a href="/tools/newTool/<%=category._id%>">
-                        <div>
-                            <i class="fas fa-plus"></i>
-                        </div>
-                    </a>
-                </li>
-            </ul>
         </section>
     </div>
 </body>
