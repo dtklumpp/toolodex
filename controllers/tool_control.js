@@ -170,3 +170,20 @@ router.delete('/:toolId', async (req, res) => {
     }
     res.redirect('/tools');
 });
+
+
+//remove-from-category route
+router.post('/:toolId/:catId', async (req, res) => {
+    try{
+        const errantTool = await db.Tool.findById(req.params.toolId);
+        const scornedCategory = await db.Category.findById(req.params.catId);
+        scornedCategory.tools.remove(errantTool);
+        errantTool.categories.remove(scornedCategory);
+        errantTool.save();
+        scornedCategory.save();
+        res.redirect('/categories/'+req.params.catId+"/edit");
+    }
+    catch(error){
+        console.log('remove tool from category route error: '+error);
+    }
+})

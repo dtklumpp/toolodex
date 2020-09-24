@@ -33,6 +33,9 @@
                         <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
                             <input type="submit" value="Delete Tool">
                         </form>
+                        <form action="/tools/<%=tool._id%>/<%=category._id%>" method="POST">
+                            <input type="submit" value="Remove Tool">
+                        </form>
                     </li>
                 <% }); %>
                 <% if(category.tools.length === 0) { %>
