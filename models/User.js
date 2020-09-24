@@ -6,12 +6,16 @@ const userSchema = new Schema(
         username: {type: String, required: true, unique: true},
         location: {type: String, required: true},
         politicalAffiliation: {type: String},
-        email: {type: String, required: true, unique: true},
+        email: {type: String},
         password: {type: String, required: true},
         categories: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Category",
         }],
+        friends: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }]
     },
     {timestamps: true},
 );

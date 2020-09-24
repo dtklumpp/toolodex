@@ -43,8 +43,21 @@ router.get('/', async (req, res) => {
 //show route
 router.get('/:userId', async (req, res) => {
     try{
-        const foundUser = await db.User.findById(req.params.userId).populate('categories').exec();
-        const context = {oneUser: foundUser};
+        const foundUser = await db.User.findById(req.params.userId)
+        .populate({
+            path: 'categories',
+            populate: {
+                path: 'tools',
+            }
+        })
+        .populate('friends')
+        .exec();
+        //console.log('foundUser.friends:', foundUser.friends)
+        const context = {
+            oneUser: foundUser,
+            userCats: foundUser.categories,
+            allFriends: foundUser.friends,
+        };
         res.render('user/show.ejs', context);
     }
     catch(error){
@@ -96,11 +109,21 @@ router.delete('/:userId', async (req, res) => {
                 path: 'tools',
             }
         })
+        .populate('friends')
+        .exec();
+
         const childCats = doomedUser.categories;
         for(eachCat of childCats){
             eachCat.user = null;
             eachCat.save();
         }
+
+        const lostFriends = doomedUser.friends;
+        for(eachFriend of lostFriends){
+            eachFriend.friends.remove(doomedUser);
+            eachFriend.save();
+        }
+
         doomedUser.deleteOne();
         res.redirect('/users');
     }

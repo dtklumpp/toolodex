@@ -25,6 +25,8 @@ router.post('/register', async (req, res) => {
         const hash = await bcrypt.hash(req.body.password, salt);
         req.body.password = hash;
 
+        const allUsers = await db.User.find({});
+
         //adding this stuff to auto-login when make user
         //db.User.create(req.body);
         const newUser = await db.User.create(req.body);
@@ -33,8 +35,17 @@ router.post('/register', async (req, res) => {
             id: newUser._id,
         };
 
-        const favoritesCategory = await db.Category.create({name: 'Favorites', user: newUser, description: 'Your favorite, go-to tools.'});
+        const catName = "Favorites"+Math.floor(Math.random()*10000);
+        const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
+
+
+        allUsers.forEach(user => {
+            newUser.friends.push(user);
+            user.friends.push(newUser);
+            user.save();
+        })
+
         await newUser.save();
 
         res.redirect('/');
@@ -76,4 +87,68 @@ router.delete('/logout', async (req, res) => {
 // Redirects to categories index if user is signed in
 router.get('/', (req,res) => {
     res.redirect('/categories');
+});
+
+
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//demo site
+//note: COPIED FROM REGISTER ROUTE -- VERY WET!!
+//DO THIS PROPERLY LATER
+router.post('/demo', async (req, res) => {
+    try {
+        
+        const defaultPass = "admin"
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(defaultPass, salt);
+        newPW = hash;
+        console.log("Your demo pw is admin");
+
+        const allUsers = await db.User.find({});
+
+        //adding this stuff to auto-login when make user
+        //db.User.create(req.body);
+        newUsername = "Demo"+Math.floor(10000*Math.random());
+        newEmail = "Demo@"+Math.floor(10000*Math.random())+"EvergreenTerrace.com";
+        newLocation = "PA";
+        const newUser = await db.User.create({
+            username: newUsername,
+            password: newPW,
+            location: newLocation,
+            email: newEmail,
+        });
+        req.session.currentUser = {
+            username: newUser.username,
+            id: newUser._id,
+        };
+
+        const catName = "Favorites"+Math.floor(Math.random()*10000);
+        const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
+        newUser.categories.push(favoritesCategory);
+
+
+        allUsers.forEach(user => {
+            newUser.friends.push(user);
+            user.friends.push(newUser);
+            user.save();
+        })
+
+        await newUser.save();
+
+        res.redirect('/');
+
+    } catch (error) {
+        console.log(error);
+        res.send({message: 'Internal server error.'});
+    }
 });

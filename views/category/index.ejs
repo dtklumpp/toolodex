@@ -15,7 +15,9 @@
         <%- include('../partials/header-navbar.ejs') %>
         <section class='corkboard'>
             <div class="postit-image">
-                <h2><%= user.username %>'s Categories</h2>
+                <a href="/users/<%=user._id%>">
+                    <h2><%= user.username %>'s Categories</h2>                
+                </a>
             </div>
                 <div class='post-its'>
                     <% user.categories.forEach((category, index) => { %>
