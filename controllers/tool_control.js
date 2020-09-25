@@ -111,13 +111,16 @@ router.get('/:toolId', (req, res) => {
 
 // edit route
 router.get('/:toolId/edit', (req, res) => {
-    db.Category.find({}, (error, catsArray) => {
+
+    db.User.findById(req.session.currentUser.id)
+    .populate('categories')
+    .exec( (error, foundUser) => {
         if(error) return res.send("edit route categories error: "+error)
         db.Tool.findById(req.params.toolId, (error, foundTool) => {
             if(error) return res.send("edit route error: "+error);
             context = {
                 oneTool: foundTool,
-                allCats: catsArray,
+                allCats: foundUser.categories,
             };
             res.render('tool/edit.ejs', context);
         });
