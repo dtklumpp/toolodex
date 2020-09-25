@@ -152,3 +152,54 @@ router.post('/demo', async (req, res) => {
         res.send({message: 'Internal server error.'});
     }
 });
+
+
+
+
+
+
+
+
+
+
+//map route
+
+router.get('/map', async (req, res) => {
+    try{
+        const foundUser = await db.User.findById(req.session.currentUser.id)
+        .populate('friends')
+        .exec();
+
+        const friendList = foundUser.friends;
+
+        function stateIndex(state) {
+            return state === "NY";
+        } 
+
+        const x = statesUSA.findIndex(stateIndex);
+        console.log('x:', x);
+
+
+
+
+        
+        const context = {
+            allFriends: foundUser.friends,
+        }
+        res.render('testing/map.ejs', context);
+    }
+
+    catch(error){
+        console.log('map route error: '+error);
+    }
+})
+
+
+
+
+
+
+// var result = jsObjects.filter(obj => {
+//     return obj.b === 6
+//   })
+  

@@ -380,3 +380,28 @@ label:hover, .pencil:hover, .plus-tool:hover {
 .tool-link {
     transition: 0.3s linear;
 } */
+
+
+.map-holder {
+    position: relative;
+}
+
+.map {
+    background-image: url('../maps/usamap.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-position: center;
+    border: 5px solid rgba(121, 60, 47, 0.8);
+    min-height: calc( var(--scale-size) * 600px);
+    max-width: calc( var(--scale-size) * 960px);
+    font-family: 'Courier Prime', monospace;
+}
+
+.friend {
+    position: absolute;
+    /* top: -300px; */
+    z-index: 1;
+    left: 100px;
+    top: 100px;
+}
