@@ -157,7 +157,7 @@ router.put('/:toolId', async (req, res) => {
         
         const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
 
-        res.redirect('/tools/'+req.params.toolId);
+        res.redirect('/tools/');
     }
     catch(error){
         res.send("update route error: "+error);
