@@ -78,11 +78,39 @@ For our MVP version, we plan to include a two-model application, with a one-to-m
 - jQuery UI
 - EJS
 - bcrypt
+- dotenv
 - deployed on Heroku / Atlas
 
 ## Existing features:
+- full REST / CRUD for Tools model
+- full REST / CRUD for Categories model
+- full REST / CRUD FOR Users model
+- 90s Office Theme
+- User Authentication / Login
+- working Search Bar for Tools / Categories
+- basic Authorization (e.g. cannot delete another User)
+- basic Validation for data
+- category pre-population & custom routes
+- full USA State support + UAE
+- auto-login after register an account
+- alphabetical sort of Tools Index
+- advanced shadowing
+- Guest Sign-In feature
+- many-to-many relation twixt Tools / Categories
+- draggable Post-It notes
+- reflexive Friends relation between Users
+- sharing /stealing tools between Users
+- bonus Map display for finding Friends
+
 
 ## Planned features (for future versions):
+- save dragging re-ordering to the database in real-time
+- custom model creation to track Events, Bugs, etc in same space
+- custom checkboxes -- click the category itself to check/uncheck
+- dynamic post-it sizes
+- design: push-pins added to corkboard
+- advanced security feature
+- advanced Friend CRUD
 
 
 ### Concrete ideas for achieving certain features:
