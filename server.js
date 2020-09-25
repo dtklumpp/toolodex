@@ -143,3 +143,6 @@ app.use('/users', authRequired, controllers.user);
 app.listen(PORT, () => {
     console.log(`Server is live and listening on http://localhost:${PORT}`);
 });
+
+
+

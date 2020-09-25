@@ -119,23 +119,28 @@ router.put('/:id', async (req, res) => {
 
 // delete route
 router.delete('/:id', async (req, res) => {
+    console.log('got cat delete')
     try {
         const doomedCategory= await db.Category.findById(req.params.id).populate('tools').populate('user').exec();
         
         //removes the reference to the category from each associated tool
         const childTools = doomedCategory.tools;
         for(eachTool of childTools){
+            console.log('eachTool:', eachTool);
             eachTool.categories.remove(doomedCategory);
             await eachTool.save();
         }
 
+        console.log('got to middle');
+
         //removes the reference to the category from its associated User
         const parentUser = doomedCategory.user;
+        console.log('parentUser:', parentUser);
         parentUser.categories.remove(doomedCategory);
         parentUser.save();
 
-        doomedCategory.deleteOne();
         console.log('Deleted category: ', doomedCategory);
+        doomedCategory.deleteOne();
 
         //DK-note: just commented out this now that MTM is running
         //const deletedTools = await db.Tool.deleteMany({ category: deletedCategory._id });

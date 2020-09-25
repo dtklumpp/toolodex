@@ -372,6 +372,44 @@ label:hover, .pencil:hover, .plus-tool:hover {
     flex-direction: column;
 }
 
+.map-holder {
+    position: relative;
+}
+
+.map {
+    background-image: url('../maps/usamap.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-position: center;
+    border: 5px solid rgba(121, 60, 47, 0.8);
+    min-height: calc( var(--scale-size) * 600px);
+    max-width: calc( var(--scale-size) * 960px);
+    font-family: 'Courier Prime', monospace;
+    position: relative;
+}
+
+.friend {
+    position: absolute;
+    /* top: -300px; */
+    z-index: 1;
+    left: 100px;
+    top: 100px;
+}
+
+.fa-map-marker-alt {
+    overflow: hidden;
+}
+
+a {
+    overflow: hidden;
+}
+
+/* 
+.tool-link {
+    transition: 0.3s linear;
+} */
+
 .user-card {
     left: 50%;
     transform: translate(-50%);
@@ -409,4 +447,16 @@ label:hover, .pencil:hover, .plus-tool:hover {
 
 .edit-cat-form {
     flex-direction: column;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.black-color {
+    color: black;
+}
+
+.red-color {
+    color: red;
 }
