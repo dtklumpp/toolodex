@@ -448,3 +448,15 @@ a {
 .edit-cat-form {
     flex-direction: column;
 }
+
+.right-align {
+    text-align: right;
+}
+
+.black-color {
+    color: black;
+}
+
+.red-color {
+    color: red;
+}

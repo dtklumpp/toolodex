@@ -120,7 +120,7 @@ router.post('/demo', async (req, res) => {
         //db.User.create(req.body);
         newUsername = "Demo"+Math.floor(10000*Math.random());
         newEmail = "Demo@"+Math.floor(10000*Math.random())+"EvergreenTerrace.com";
-        newLocation = "PA";
+        newLocation = "DC";
         const newUser = await db.User.create({
             username: newUsername,
             password: newPW,
@@ -177,7 +177,7 @@ const objStates = [
     ['CO',260,290],
     ['CT',165,840],
     ['DE',215,820],
-    ['DC',235,800],
+    ['DC',10000,400],
     ['FL',530,790],
     ['GA',370,680],
     ['HI',540,320],
@@ -221,12 +221,12 @@ const objStates = [
     ['WV',260,720],
     ['WI',135,600],
     ['WY',150,260],
-    ['XX', 10000, 400],
+    ['XX',10000,400],
 ]
 
 //for reference, these are not used
 const omitted = ["AS, FM, GU, MH, MP, PW, PR, VI"];
-const againStates = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'United Arab Emirates', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+const againStates = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'United Arab Emirates', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'XX' ];
 
 
 
