@@ -114,8 +114,6 @@ app.post('/search', async (req, res) => {
                 }
             })
         })
-        console.log('toolMatches:', toolMatches);
-
 
         const context = {
             categoryMatches: categoryMatches,

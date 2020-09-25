@@ -32,7 +32,7 @@
                                 <a href="/categories/<%=category._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
                             </div>
                             <form action="/categories/<%= category._id %>?_method=DELETE" method="POST" class='delete-item'>
-                                <button type="submit" class='button list-item-content'><i class="fas fa-trash-alt" title="Delete this category."></i></button>
+                                <button type="submit" class='button list-item-content search-delete'><i class="fas fa-trash-alt" title="Delete this category."></i></button>
                             </form>
                         </li>
                     </div>
@@ -54,7 +54,7 @@
                                 <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
                             </div>
                             <form action="/tools/<%= tool._id %>?_method=DELETE" method="POST" class='delete-item'>
-                                <button type="submit" class='button list-item-content'><i class="fas fa-trash-alt" title="Delete this tool."></i></button>
+                                <button type="submit" class='button list-item-content search-delete'><i class="fas fa-trash-alt" title="Delete this tool."></i></button>
                             </form>
                         </li>
                     </div>

@@ -292,21 +292,12 @@ ul {
     word-wrap: break-word;
 }
 
-.avail-tools-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
 .available-tools {
     width: 317px;
     height: 35px;
     text-align: center;
     position: relative;
     display: inline-flex;
-    left: 50%;
-    transform: translate(-50%);
     background-color: var(--post-it);
     margin: 8px 0;
     padding: 15px;
@@ -426,6 +417,7 @@ a {
 
 .delete-item {
     display: inline-flex;
+    margin-top: 0;
 }
 
 .button {
@@ -453,4 +445,22 @@ a {
 
 .red-color {
     color: red;
+}
+
+#button-container{
+    margin-top: -30px;
+}
+
+#friends-list {
+    margin-bottom: 0;
+}
+
+#edit-category-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-delete {
+    margin: 0 5px;
 }

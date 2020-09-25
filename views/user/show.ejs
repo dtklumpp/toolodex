@@ -31,7 +31,7 @@
                             <a href="/categories/<%= eachCat._id %>" title="<%= eachCat.description %>" class="black-color">
                                 <%= eachCat.name %></a>
                             <% for(eachTool of eachCat.tools){ %> 
-                                <li class='simple-li right-align'>
+                                <li class='simple-li'>
                                     <a href="<%= eachTool.link %>" title='<%= eachTool.description %>' target='_blank'>
                                         <%=eachTool.name%></a> 
                                     <% if(activeUser.id != oneUser._id){ %> 
@@ -44,7 +44,7 @@
                         </ul>
                     <% } %> 
                 </p>
-                <p class='category-list'>
+                <p class='category-list' id='friends-list'>
                     Friends: 
                     <ul class="profile-ul">
                         <% for(eachFriend of allFriends){ %> 
@@ -54,16 +54,18 @@
                         <% } %> 
                     </ul>
                 </p>
-                <p>
-                    <form action="/map" method="get">
-                        <input type="submit" value="Steal My Friends' Tools!">
-                    </form>
-                </p>
-                <p>
-                    <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
-                        <input type="submit" value="Delete My Account" class='submit-button' />
-                    </form>
-                </p>
+                <div id='button-container'>
+                    <p>
+                        <form action="/map" method="get">
+                            <input type="submit" value="Steal My Friends' Tools!" class='submit-button' />
+                        </form>
+                    </p>
+                    <p>
+                        <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
+                            <input type="submit" value="Delete My Account" class='submit-button' />
+                        </form>
+                    </p>
+                </div>
             </div>
         </section>
     </div>
