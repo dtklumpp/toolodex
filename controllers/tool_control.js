@@ -62,7 +62,7 @@ router.post('/', async (req, res) => {
             }
         }
         createdTool.save();
-        res.redirect('/tools');
+        res.redirect('/');
     }
     catch (error) {
         return res.send("update route error: "+error);
