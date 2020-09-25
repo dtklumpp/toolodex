@@ -14,12 +14,12 @@
         <section class='corkboard'>
             <div class="postit-container">
                 <img src="/images/row-postits.png" class='postit-image' />
-                <h2><%= oneUser.username %>'s Profile</h2>
+                <h2 class='variable-heading'><%= oneUser.username %>'s Profile</h2>
             </div>
             <a href="/users/<%=oneUser._id%>/edit" title="Edit <%= oneUser.username %>'s profile"><i class="fas fa-edit"></i></a>
             <div class='user-card form'>
                 <p>
-                    Username: <%= oneUser.username %>
+                    Username: <%=oneUser.username%>
                 </p>
                 <p>
                     Location: <%= oneUser.location %>
