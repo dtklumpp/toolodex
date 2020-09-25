@@ -19,20 +19,20 @@
             <form action="/categories/<%= category._id %>?_method=DELETE" method="POST" class='delete-item'>
                 <button type="submit" class='button'><i class="fas fa-trash-alt" title="Delete this category."></i></button>
             </form>
-            <div class="form-container edit-cat-form">
-                <form action='/categories/<%= category._id %>?_method=PUT' method='POST' class='form'>
-                    <p>
-                        Name: <input type='text' name='name' value='<%= category.name %>' required />
-                    </p>
-                    <p>
-                        Description: <textarea type= 'text' name='description' ><%= category.description %></textarea>
-                    </p>
-                    <p>
-                        <input type='submit' value='Save Changes' class='submit-button' />
-                    </p>
-                </form>
+            <section id='edit-category-container'>
+                <div class="form-container edit-cat-form">
+                    <form action='/categories/<%= category._id %>?_method=PUT' method='POST' class='form'>
+                        <p>
+                            Name: <input type='text' name='name' value='<%= category.name %>' required />
+                        </p>
+                        <p>
+                            Description: <textarea type= 'text' name='description' ><%= category.description %></textarea>
+                        </p>
+                        <p>
+                            <input type='submit' value='Save Changes' class='submit-button' />
+                        </p>
+                    </form>
             
-                <div class="avail-tools-container">
                     <div class='available-tools'>                
                         <h3 id='available-tools-label'>Available Tools:
                             <div class="plus-container">
@@ -71,7 +71,7 @@
                             </div>
                     </ul>
                 </div>
-            </div>
+            </section>
         </section>
     </div>
 </body>

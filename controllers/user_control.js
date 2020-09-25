@@ -119,7 +119,7 @@ router.delete('/:userId', async (req, res) => {
 });
 
 //IMPORTANT:
-// THIS ISNT TESTED SO MAYBE LEAVE OFF TIL AFTER DEMO DAY?
+// THIS ISN'T TESTED SO MAYBE LEAVE OFF TIL AFTER DEMO DAY?
 // [RESTORE THIS AT PRODUCTION TIME]
 // into the 'for(eachCat of childCats)' loop in delete user
 // deletes each Category and Tool owned by the doomed user
