@@ -111,7 +111,3 @@ For our MVP version, we plan to include a two-model application, with a one-to-m
 - design: push-pins added to corkboard
 - advanced security feature
 - advanced Friend CRUD
-
-
-### Concrete ideas for achieving certain features:
-    - ** Idea for stealing other people's resources: Include an add button on a resources that redirects a user an "Edit" form, pre-populated with that resource's information, therefore allowing the user to edit/adjust the record before saving it into their own tool set.
