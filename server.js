@@ -72,7 +72,24 @@ app.post('/search', async (req, res) => {
                     { user: userId },
                     {
                         $or: [
-                            { name: { $regex: searchInput, $options: 'i' } }, { description: { $regex: searchInput, $options: 'i' } }
+                            { name: 
+                                { $regex: searchInput, $options: 'i' } 
+                            }, 
+                            { description: 
+                                { $regex: searchInput, $options: 'i' } 
+                            },
+                            { notes: 
+                                { $regex: searchInput, $options: 'i' } 
+                            },
+                            { link: 
+                                { $regex: searchInput, $options: 'i' } 
+                            },
+                            { notes: 
+                                { $regex: searchInput, $options: 'i' } 
+                            },
+                            { keywords: 
+                                { $regex: searchInput, $options: 'i' } 
+                            },
                         ]
                     }
                 ]
@@ -102,7 +119,7 @@ app.post('/search', async (req, res) => {
 
         const context = {
             categoryMatches: categoryMatches,
-            toolMatchesZOMG: toolMatches,
+            toolMatches: toolMatches,
         };
 
         res.render('search.ejs', context);

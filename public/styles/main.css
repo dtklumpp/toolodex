@@ -274,13 +274,13 @@ ul {
     list-style-type: none;
 }
 
-.tool-name {
+.tool-name, .category-name {
     color: black;
     font-size: 25px;
     margin-right: 10px;
 }
 
-.tool-description {
+.tool-description, .category-description {
     color: slategrey;
     line-height: 1.5;
     font-size: 20px;
