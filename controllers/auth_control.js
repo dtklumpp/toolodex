@@ -15,6 +15,7 @@ router.get('/login', (req, res) => {
 });
 
 // Register post => creates user
+// DUPED with REGISTER DEMO
 router.post('/register', async (req, res) => {
     try {
         const foundUser = await db.User.findOne({ email: req.body.email });

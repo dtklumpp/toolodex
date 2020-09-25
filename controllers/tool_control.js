@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 
 
 // new route
+//DUPED with NEW PRE-POPULATED
 router.get('/newTool', (req, res) => {
 
     db.User.findById(req.session.currentUser.id)
@@ -48,6 +49,7 @@ router.get('/newTool/:catId', (req, res) => {
 
 
 // create route
+//DUPED with CREATE PRE-POPULATED
 router.post('/', async (req, res) => {
     try {
         const createdTool = await db.Tool.create(req.body);
@@ -61,7 +63,7 @@ router.post('/', async (req, res) => {
             }
         }
         createdTool.save();
-        res.redirect('/tools');
+        res.redirect('/');
     }
     catch (error) {
         console.log('update route error: '+error);
