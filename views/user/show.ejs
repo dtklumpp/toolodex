@@ -29,16 +29,13 @@
                     <% for(eachCat of userCats){ %> 
                         <ul class="profile-ul">
                             <a href="/categories/<%= eachCat._id %>" title="<%= eachCat.description %>">
-                                <%= eachCat.name %> 
-                            </a>
+                                <%= eachCat.name %></a>
                             <% for(eachTool of eachCat.tools){ %> 
                                 <li class='simple-li'>
-                                    <a href="/tools/<% eachTool._id %>" title='<%= eachTool.description %>'>
-                                        <%=eachTool.name%>
-                                    </a> - 
+                                    <a href="<%= eachTool.link %>" title='<%= eachTool.description %>' target='_blank'>
+                                        <%=eachTool.name%></a> - 
                                     <a href="/tools/steal/<%=eachTool._id%>/<%=oneUser._id%>" class='steal-button' title="Add this tool to your own Toolodex!">
-                                        Steal it!
-                                    </a>
+                                        Steal it!</a>
                                 </li>
                             <% } %> 
                         </ul>
