@@ -71,6 +71,14 @@ For our MVP version, we plan to include a two-model application, with a one-to-m
 
 
 ## Technologies used:
+- Node.js
+- Express
+- MongoDB
+- Bootstrap
+- jQuery UI
+- EJS
+- bcrypt
+- deployed on Heroku / Atlas
 
 ## Existing features:
 
