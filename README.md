@@ -90,6 +90,7 @@ For our MVP version, we plan to include a two-model application, with a one-to-m
 - working Search Bar for Tools / Categories
 - basic Authorization (e.g. cannot delete another User)
 - basic Validation for data
+- remove Tool from Category feature
 - category pre-population & custom routes
 - full USA State support + UAE
 - auto-login after register an account
