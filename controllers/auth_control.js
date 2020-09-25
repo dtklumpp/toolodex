@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
         };
 
         // Adds new Favorites category upon registration
-        const catName = 'Favorites'+Math.floor(Math.random()*10000);
+        const catName = 'Favorites';//+Math.floor(Math.random()*10000);
         const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
 
@@ -117,7 +117,7 @@ router.post('/demo', async (req, res) => {
             id: newUser._id,
         };
 
-        const catName = 'Favorites'+Math.floor(Math.random()*10000);
+        const catName = 'Favorites';//+Math.floor(Math.random()*10000);
         const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
 
