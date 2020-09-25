@@ -17,8 +17,8 @@
                 <% allTools.forEach(tool => { %> 
                     <div class="li-container">
                         <li title='<%= tool.description %>' class='list-item'>
-                            <a href="/tools/<%=tool._id%>" class='list-item-content tool-name'>
-                                <%= tool.name %>:                 
+                            <a href="<%=tool.link%>" target='_blank' class='list-item-content tool-name'>
+                                <%= tool.name %>                 
                             </a>
                             <span class="tool-description">
                                 <%= tool.description %>
