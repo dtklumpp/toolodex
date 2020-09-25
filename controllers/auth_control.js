@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 module.exports = router;
 
-const statesUSA = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'United Arab Emirates', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
+const statesUSA = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'United Arab Emirates', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'XX' ];
 
 // base path: /
 
@@ -15,6 +15,7 @@ router.get('/login', (req, res) => {
 });
 
 // Register post => creates user
+// DUPED with REGISTER DEMO
 router.post('/register', async (req, res) => {
     try {
         const foundUser = await db.User.findOne({ email: req.body.email });
@@ -27,15 +28,15 @@ router.post('/register', async (req, res) => {
 
         const allUsers = await db.User.find({});
 
-        //adding this stuff to auto-login when make user
-        //db.User.create(req.body);
+        //adding this stuff to auto-login when a user registers
         const newUser = await db.User.create(req.body);
         req.session.currentUser = {
             username: newUser.username,
             id: newUser._id,
         };
 
-        const catName = "Favorites"+Math.floor(Math.random()*10000);
+        // Adds new Favorites category upon registration
+        const catName = 'Favorites'+Math.floor(Math.random()*10000);
         const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
 
@@ -44,12 +45,11 @@ router.post('/register', async (req, res) => {
             newUser.friends.push(user);
             user.friends.push(newUser);
             user.save();
-        })
+        });
 
         await newUser.save();
 
         res.redirect('/');
-
     } catch (error) {
         console.log(error);
         res.send({message: 'Internal server error.'});
@@ -90,37 +90,22 @@ router.get('/', (req,res) => {
 });
 
 
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//demo site
-//note: COPIED FROM REGISTER ROUTE -- VERY WET!!
-//DO THIS PROPERLY LATER
+/* SECTION Demo Version (Guest) */
 router.post('/demo', async (req, res) => {
     try {
         
-        const defaultPass = "admin"
+        const defaultPass = 'admin'
         const salt = await bcrypt.genSalt(10);
         const hash = await bcrypt.hash(defaultPass, salt);
         newPW = hash;
-        console.log("Your demo pw is admin");
+        console.log('Your Demo password is admin');
 
         const allUsers = await db.User.find({});
 
-        //adding this stuff to auto-login when make user
-        //db.User.create(req.body);
-        newUsername = "Demo"+Math.floor(10000*Math.random());
-        newEmail = "Demo@"+Math.floor(10000*Math.random())+"EvergreenTerrace.com";
-        newLocation = "PA";
+        //adds demo user profile to auto-login upon Guest 'registration'
+        newUsername = 'Demo'+Math.floor(10000*Math.random());
+        newEmail = 'Demo@'+Math.floor(10000*Math.random())+'EvergreenTerrace.com';
+        newLocation = 'DC';
         const newUser = await db.User.create({
             username: newUsername,
             password: newPW,
@@ -132,7 +117,7 @@ router.post('/demo', async (req, res) => {
             id: newUser._id,
         };
 
-        const catName = "Favorites"+Math.floor(Math.random()*10000);
+        const catName = 'Favorites'+Math.floor(Math.random()*10000);
         const favoritesCategory = await db.Category.create({name: catName, user: newUser, description: 'Your favorite, go-to tools.'});
         newUser.categories.push(favoritesCategory);
 
@@ -146,9 +131,131 @@ router.post('/demo', async (req, res) => {
         await newUser.save();
 
         res.redirect('/');
-
     } catch (error) {
         console.log(error);
         res.send({message: 'Internal server error.'});
+    }
+});
+
+/* SECTION User Map Feature */
+//array of states and their latitude, longitude in pixels
+const objStates = [
+    ['AL',390,640],
+    ['AK',520,120],
+    ['AZ',320,200],
+    ['AR',360,520],
+    ['CA',250,40],
+    ['CO',260,290],
+    ['CT',165,840],
+    ['DE',215,820],
+    ['DC',10000,400],
+    ['FL',530,790],
+    ['GA',370,680],
+    ['HI',540,320],
+    ['ID',130,180],
+    ['IL',195,610],
+    ['IN',220,640],
+    ['IA',200,510],
+    ['KS',280,420],
+    ['KY',275,690],
+    ['LA',470,560],
+    ['ME',60,890],
+    ['MD',230,805],
+    ['MA',140,880],
+    ['MI',140,650],
+    ['MN',90,510],
+    ['MS',400,570],
+    ['MO',310,590],
+    ['MT',90,220],
+    ['NE',210,400],
+    ['NV',290,140],
+    ['NH',100,860],
+    ['NJ',215,835],
+    ['NM',340,300],
+    ['NY',175,840],
+    ['NC',315,790],
+    ['ND',80,450],
+    ['OH',200,680],
+    ['OK',340,480],
+    ['OR',75,80],
+    ['PA',205,820],
+    ['RI',155,875],
+    ['SC',385,765],
+    ['SD',140,380],
+    ['TN',320,660],
+    ['TX',480,480],
+    ['United Arab Emirates',440,840],
+    ['UT',240,200],
+    ['VT',110,840],
+    ['VA',275,790],
+    ['WA',25,100],
+    ['WV',260,720],
+    ['WI',135,600],
+    ['WY',150,260],
+    ['XX',10000,400],
+];
+
+//for reference, these are not used
+const omitted = ['AS, FM, GU, MH, MP, PW, PR, VI'];
+const againStates = [ 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'United Arab Emirates', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY', 'XX' ];
+
+
+//map route
+router.get('/map', async (req, res) => {
+    try{
+        const foundUser = await db.User.findById(req.session.currentUser.id)
+        .populate('friends')
+        .exec();
+
+        
+        const friendList = foundUser.friends;
+        const geoFriends = [];
+        for(eachFriend of friendList){
+            const newRow = [];
+            newRow.push(eachFriend._id);
+            newRow.push(eachFriend.username);
+            for(eachState of objStates){
+                if(eachState[0] === eachFriend.location){
+                    newRow.push(eachState[1]);
+                    newRow.push(eachState[2]);
+                    break;
+                }
+            }
+            geoFriends.push(newRow);
+        }
+
+        const context = {
+            allFriends: geoFriends,
+        }
+        res.render('testing/map.ejs', context);
+    }
+    catch(error){
+        console.log('map route error: '+error);
+    }
+});
+
+
+router.get('/math', async (req, res) => {
+    try{
+        const nums = [1, 2, 3, 4]
+        const checkThree = function(num){
+            return num === 3;
+        }
+        const foundIt = nums.findIndex(checkThree);
+        console.log('foundIt:', foundIt);
+
+        var jsObjects = [
+            {a: 1, b: 2}, 
+            {a: 3, b: 4}, 
+            {a: 5, b: 6}, 
+            {a: 7, b: 8}
+        ];
+        
+        var result = jsObjects.filter(obj => {
+            return obj.b === 6
+        });
+    }
+    catch(error){
+        console.log('math error: '+error);
     }
 });

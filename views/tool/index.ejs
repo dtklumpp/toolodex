@@ -17,8 +17,8 @@
                 <% allTools.forEach(tool => { %> 
                     <div class="li-container">
                         <li title='<%= tool.description %>' class='list-item'>
-                            <a href="/tools/<%=tool._id%>" class='list-item-content tool-name'>
-                                <%= tool.name %>:                 
+                            <a href="<%=tool.link%>" target='_blank' class='list-item-content tool-name'>
+                                <%= tool.name %>                 
                             </a>
                             <span class="tool-description">
                                 <%= tool.description %>
@@ -26,11 +26,8 @@
                             <div class='pencil edit-tool' title="Edit this tool.">
                                 <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
                             </div>
-                            <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
-                                <label for="delete-button">
-                                    <i class="fas fa-trash-alt" title="Delete this tool."></i>
-                                </label>
-                                <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                            <form action="/tools/<%= tool._id %>?_method=DELETE" method="POST" class='delete-item'>
+                                <button type="submit" class='button list-item-content'><i class="fas fa-trash-alt" title="Delete this tool."></i></button>
                             </form>
                         </li>
                     </div>

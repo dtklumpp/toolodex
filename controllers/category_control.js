@@ -3,7 +3,6 @@ const router = express.Router();
 const db = require('../models');
 module.exports = router;
 
-
 /* Base route is /categories */
 
 // new route
@@ -45,8 +44,8 @@ router.get('/', (req, res) => {
     // populate the current user's categories
     db.User.findById(userId).populate('categories').exec(function (error, foundUser) {
         if(error) {
-            console.log("Error", error);
-            return res.send(error);
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
         } 
         
         const context = {
@@ -62,7 +61,10 @@ router.get('/:id', (req, res) => {
     db.Category.findById(req.params.id)
     .populate('tools')
     .exec( (error, foundCategory) => {
-        if(error) return res.send(error);
+        if(error) {
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
+        }
         const context = {
             category: foundCategory,
         };
@@ -77,23 +79,25 @@ router.get('/:id/edit', async (req, res) => {
         db.Category.findById(req.params.id)
         .populate('tools')
         .exec( (error, foundCategory) => {
-            if(error) return res.send(error);
+            if(error) {
+                console.log('Error: ', error);
+                return res.send('Internal server error.');
+            }
             const context = {
                 category: foundCategory,
                 allUsers: userArray,
             };
             res.render('category/edit', context);
         });
-
     }
-    catch(error){
-        res.send("category edit route error: "+error);
+    catch(error) {
+        console.log('Error: ', error);
+        return res.send('Internal server error.');
     }
 });
 
 // update route
 router.put('/:id', async (req, res) => {
-
     try {
         const oldCategory = await db.Category.findById(req.params.id);
         const isUserChange = (oldCategory.user != req.params.user);
@@ -109,41 +113,41 @@ router.put('/:id', async (req, res) => {
             newUser.save();
         }
         res.redirect('/categories/'+req.params.id);
-
     }
-
-    catch(err){
-        res.send("update route error: "+err);
+    catch(error) {
+        console.log('Error: ', error);
+        return res.send('Internal server error.');
     }
 });
 
 // delete route
 router.delete('/:id', async (req, res) => {
+    console.log('got cat delete')
     try {
         const doomedCategory= await db.Category.findById(req.params.id).populate('tools').populate('user').exec();
         
         //removes the reference to the category from each associated tool
         const childTools = doomedCategory.tools;
         for(eachTool of childTools){
+            console.log('eachTool:', eachTool);
             eachTool.categories.remove(doomedCategory);
             await eachTool.save();
         }
 
         //removes the reference to the category from its associated User
         const parentUser = doomedCategory.user;
+        console.log('parentUser:', parentUser);
         parentUser.categories.remove(doomedCategory);
         parentUser.save();
 
-        doomedCategory.deleteOne();
         console.log('Deleted category: ', doomedCategory);
-
-        //DK-note: just commented out this now that MTM is running
-        //const deletedTools = await db.Tool.deleteMany({ category: deletedCategory._id });
+        doomedCategory.deleteOne();
 
         // redirect to the homepage (aka categories index)
         res.redirect('/');
     } catch (error) {
-        return res.send("category deletion route error: "+error);
+        console.log('Error: ', error);
+        return res.send('Internal server error.');
     }
 });
 

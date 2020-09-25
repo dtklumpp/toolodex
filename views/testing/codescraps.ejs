@@ -50,3 +50,10 @@ Category: <select name="category">
          </a>
      <% }); %>
  </ul>
+
+
+ <!-- add ability to prevents Users deleting others' accounts -->
+ <!-- just wrap the Delete My Account button in this -->
+ <% if(activeUser.id === oneUser._id){ %> 
+ <% } %> 
+ 
