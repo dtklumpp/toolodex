@@ -7,7 +7,10 @@ const db = require('../models');
 // index route
 router.get('/', (req, res) => {
     db.Tool.find({}).sort('name').exec((error, toolsArray) => {
-        if(error) return res.send('index route error: '+error);
+        if(error) {
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
+        }
         context = {allTools: toolsArray};
         res.render('tool/index.ejs', context);
     });
@@ -17,11 +20,13 @@ router.get('/', (req, res) => {
 // new route
 //DUPED with NEW PRE-POPULATED
 router.get('/newTool', (req, res) => {
-
     db.User.findById(req.session.currentUser.id)
     .populate('categories')
     .exec( (error, foundUser) => {
-        if(error) return res.send('create route categories error: '+error);
+        if(error) {
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
+        }
         context = {
             allCats: foundUser.categories,
             catId: null,
@@ -34,11 +39,13 @@ router.get('/newTool', (req, res) => {
 // new route (Category pre-populated)
 // note: COPIED FROM NEW ROUTE -- VERY WET.  COMBINE THESE LATER.
 router.get('/newTool/:catId', (req, res) => {
-
     db.User.findById(req.session.currentUser.id)
     .populate('categories')
     .exec( (error, foundUser) => {
-        if(error) return res.send('Create route (category pre-populated) error: '+error);
+        if(error) {
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
+        }
         context = {
             allCats: foundUser.categories,
             catId: req.params.catId,
@@ -66,7 +73,7 @@ router.post('/', async (req, res) => {
         res.redirect('/');
     }
     catch (error) {
-        console.log('update route error: '+error);
+        console.log('Error: ', error);
         return res.send('Internal server error.');
     }
 });
@@ -90,7 +97,7 @@ router.post('/:catId', async (req, res) => {
         res.redirect('/categories/'+req.params.catId);
     }
     catch (error) {
-        console.log('Create route error: '+ error);
+        console.log('Error: ', error);
         return res.send('Internal server error.');
     }
 });
@@ -101,7 +108,10 @@ router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
     .populate('categories')
     .exec( (error, foundTool) => {
-        if(error) return res.send('Show route error: '+error);
+        if(error) {
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
+        }
         context = {oneTool: foundTool};
         res.render('tool/show.ejs', context);
     });
@@ -111,12 +121,21 @@ router.get('/:toolId', (req, res) => {
 // edit route
 router.get('/:toolId/edit', (req, res) => {
 
+    // find current user and populate their categories
     db.User.findById(req.session.currentUser.id)
     .populate('categories')
     .exec( (error, foundUser) => {
-        if(error) return res.send('edit route categories error: '+error)
+        if(error) {
+            console.log('Error: ', error);
+            return res.send('Internal server error.');
+        }
+
+        // isolate the tool to be edited
         db.Tool.findById(req.params.toolId, (error, foundTool) => {
-            if(error) return res.send('Edit route error: '+error);
+            if(error) {
+                console.log('Error: ', error);
+                return res.send('Internal server error.');
+            }
             context = {
                 oneTool: foundTool,
                 allCats: foundUser.categories,
@@ -133,6 +152,7 @@ router.put('/:toolId', async (req, res) => {
         const allCats = await db.Category.find({});
         const oldTool = await db.Tool.findById(req.params.toolId);
         
+        // if user adds a tool to another new category, push tool into that category
         for(eachCat of allCats){
             catId = eachCat._id;
             const checkedCategory = req.body['category_'+catId] === 'on';
@@ -159,7 +179,7 @@ router.put('/:toolId', async (req, res) => {
         res.redirect('/tools/');
     }
     catch(error){
-        console.log('update route error: '+error);
+        console.log('Error: ', error);
         return res.send('Internal server error.');
     }
 });
@@ -168,6 +188,7 @@ router.put('/:toolId', async (req, res) => {
 // delete route
 router.delete('/:toolId', async (req, res) => {
     try {
+        // find all categories in which this tool is stored, delete tool from all of them
         const doomedTool = await db.Tool.findById(req.params.toolId).populate('categories').exec();
         const parentCats = doomedTool.categories;
         for(eachCat of parentCats){
@@ -187,6 +208,7 @@ router.delete('/:toolId', async (req, res) => {
 //remove-from-category route
 router.post('/:toolId/:catId', async (req, res) => {
     try{
+        // find specific tool in current category and remove only from this category (don't delete elsewhere)
         const errantTool = await db.Tool.findById(req.params.toolId);
         const scornedCategory = await db.Category.findById(req.params.catId);
         scornedCategory.tools.remove(errantTool);
@@ -196,14 +218,15 @@ router.post('/:toolId/:catId', async (req, res) => {
         res.redirect('/categories/'+req.params.catId+'/edit');
     }
     catch(error){
-        console.log('Remove tool from category route error: '+error);
+        console.log('Error: ', error);
         return res.send('Internal server error.');
     }
-})
+});
 
 //steal tool route
 router.get('/steal/:toolId/:userId', async (req, res) => {
     try{
+        // allows current user to 'steal' another user's tools and add them to their own Toolodex
         if(req.session.currentUser.id != req.params.userId){
             const thief = await db.User.findById(req.session.currentUser.id)
                 .populate('categories');
@@ -217,7 +240,7 @@ router.get('/steal/:toolId/:userId', async (req, res) => {
         }
     }
     catch(error){
-        console.log('Steal tool route error: '+error);
+        console.log('Error: ', error);
         return res.send('Internal server error.');
     }
-})
+});
