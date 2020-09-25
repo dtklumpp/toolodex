@@ -6,49 +6,58 @@
     <script src="/scripts/app.js" defer></script>
     <%- include('../partials/external-imports.ejs') %>
     <link rel="stylesheet" href="/styles/main.css" />
-    <title>Show User</title>
+    <title>User Profile</title>
 </head>
 <body>
-    <nav>
+    <div class='display-area'>
         <%- include('../partials/header-navbar.ejs') %>
-        <form action="/logout?_method=DELETE" method="post" value=''>
-            <input type="submit" value="Logout" id='logout'>
-        </form>
-    </nav>
-    <h2>Show User</h2>
-    Userame: <%= oneUser.username %> <br>
-    Location: <%= oneUser.location %> <br>
-    Political Affiliation: <%= oneUser.politicalAffiliation %> <br>
-    Categories:
-        <br>
-        <% for(eachCat of userCats){ %> 
-            <ul>
-                <%= eachCat.name %> 
-                <% for(eachTool of eachCat.tools){ %> 
-                    <li>
-                        <%= eachTool.name %> 
-                        <a href="/tools/steal/<%=eachTool._id%>/<%=oneUser._id%>"  >--steal it!</a>
-                    </li>
-                <% } %> 
-            </ul>
-            <br>
-        <% } %> 
-    <br>
-    Friends: <ul>
-        <% for(eachFriend of allFriends){ %> 
-            <li>
-                <a href="/users/<%=eachFriend._id%>"><%=eachFriend.username%></a>
-            </li>
-        <% } %> 
-    </ul>
-
-    <br>
-    <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
-        <input type="submit" value="DESTROY">
-    </form>
-    <br>
-    <a href="/users/<%=oneUser._id%>/edit">Edit</a>
-    <br>
-    <%- include('../partials/testfooter.ejs'); %>
+        <section class='corkboard'>
+            <div class="postit-container">
+                <img src="/images/row-postits.png" class='postit-image' />
+                <h2><%= oneUser.username %>'s Profile</h2>
+            </div>
+            <a href="/users/<%=oneUser._id%>/edit" title="Edit <%= oneUser.username %>'s profile"><i class="fas fa-edit"></i></a>
+            <div class='user-card form'>
+                <p>
+                    Username: <%= oneUser.username %>
+                </p>
+                <p>
+                    Location: <%= oneUser.location %>
+                </p>
+                <p class='category-list'>
+                    Categories:
+                    <% for(eachCat of userCats){ %> 
+                        <ul class="profile-ul">
+                            <a href="/categories/<%= eachCat._id %>" title="<%= eachCat.description %>">
+                                <%= eachCat.name %></a>
+                            <% for(eachTool of eachCat.tools){ %> 
+                                <li class='simple-li'>
+                                    <a href="<%= eachTool.link %>" title='<%= eachTool.description %>' target='_blank'>
+                                        <%=eachTool.name%></a> - 
+                                    <a href="/tools/steal/<%=eachTool._id%>/<%=oneUser._id%>" class='steal-button' title="Add this tool to your own Toolodex!">
+                                        Steal it!</a>
+                                </li>
+                            <% } %> 
+                        </ul>
+                    <% } %> 
+                </p>
+                <p class='category-list'>
+                    Friends: 
+                    <ul class="profile-ul">
+                        <% for(eachFriend of allFriends){ %> 
+                            <li class='simple-li'>
+                                <a href="/users/<%=eachFriend._id%>"><%=eachFriend.username%></a>
+                            </li>
+                        <% } %> 
+                    </ul>
+                </p>
+                <p>
+                    <form action="/users/<%=oneUser._id%>?_method=DELETE" method="POST">
+                        <input type="submit" value="Delete My Account" class='submit-button' />
+                    </form>
+                </p>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

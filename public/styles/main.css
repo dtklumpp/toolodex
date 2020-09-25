@@ -376,12 +376,6 @@ label:hover, .pencil:hover, .plus-tool:hover {
     flex-direction: column;
 }
 
-/* 
-.tool-link {
-    transition: 0.3s linear;
-} */
-
-
 .map-holder {
     position: relative;
 }
@@ -404,4 +398,29 @@ label:hover, .pencil:hover, .plus-tool:hover {
     z-index: 1;
     left: 100px;
     top: 100px;
+}
+
+/* 
+.tool-link {
+    transition: 0.3s linear;
+} */
+
+.user-card {
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 24px;
+    position: absolute;
+    width: fit-content;
+    background-color: var(--post-it);
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+}
+
+#category-list, .profile-ul {
+    margin-bottom: 15px;
+}
+
+.simple-li {
+    font-family: 'Courier Prime', monospace;
+    box-shadow: none;
+    line-height: 1.5;
 }
