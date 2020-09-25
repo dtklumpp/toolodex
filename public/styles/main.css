@@ -1,12 +1,7 @@
-* {
-    box-sizing: border-box;
-    /* this is useful so borders & padding don't change the size of elements */
-}
-
 :root {
     /* colors */
     --post-it: lightyellow;
-    --background: whitesmoke;
+    --background: rgba(186, 192, 156, 0.8);
     --navbar: burlywood;
     /* sizes */
     --scale-size: 1;
@@ -16,6 +11,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--background);
+    height: 100vh;
 }
 
 .display-area {
@@ -32,6 +28,7 @@ body {
     text-align: center;
     font-family: 'Courier Prime', monospace;
     margin-bottom: 12px;
+    border: 5px solid rgba(231, 223, 212, 1);
 }
 
 .header-container {
@@ -85,17 +82,18 @@ input, textarea, .uneditable-input {
     width: 150px;
 }
 
-select, textarea, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], .uneditable-input {
+select, textarea, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], textarea, .uneditable-input {
     display: inline-block;
     height: 26px;
     font-size: 16px;
     padding: 4px 6px;
+    width: 150px;
     margin-bottom: 0px;
     font-family: 'Courier Prime', monospace;
 }
 
 input[type="checkbox"] {
-    margin: -1px 0 0;
+    margin: -1px 8px 0 0;
 }
 
 .btn-link {
@@ -106,7 +104,7 @@ input[type="checkbox"] {
     background-image: url('../images/corkboard.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    color: blue;
+    border: 5px solid rgba(121, 60, 47, 0.8);
     min-height: calc( var(--scale-size) * 960px);
     font-family: 'Courier Prime', monospace;
 }
@@ -132,12 +130,27 @@ input[type="checkbox"] {
 h2 {
     font-family: 'Indie Flower', cursive;
     display: inline-block;
-    padding-top: 22px;
+    padding-top: 40px;
     font-size: 33px;
     text-align: center;
     height: 90px;
     color: black;
     position: relative;
+}
+
+h3 {
+    font-family: 'Courier Prime', monospace;
+    font-size: 25px;
+    color: black;
+    display: inline-flex;
+}
+
+.username-heading:hover {
+    color: #005580;
+}
+
+.plus-container {
+    margin-left: 5px;
 }
 
 .post-its {
@@ -261,19 +274,55 @@ ul {
     list-style-type: none;
 }
 
-.tool-name {
+.categories-ul {
+    text-align: initial;
+}
+
+.tool-name, .category-name {
     color: black;
     font-size: 25px;
     margin-right: 10px;
 }
 
-.tool-description {
+.tool-description, .category-description {
     color: slategrey;
     line-height: 1.5;
     font-size: 20px;
     max-width: 500px;
     margin-right: 10px;
     word-wrap: break-word;
+}
+
+.avail-tools-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.available-tools {
+    width: 317px;
+    height: 35px;
+    text-align: center;
+    position: relative;
+    display: inline-flex;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: var(--post-it);
+    margin: 8px 0;
+    padding: 15px;
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+}
+
+.avail-tools-list {
+    margin-left: 0;
+}
+
+#available-tools-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 25px;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .submit-button {
@@ -290,20 +339,124 @@ ul {
     transform: scale(1.1);
 }
 
-.delete-button {
-    display: none;
-    margin-bottom: 0;
-}
-
-label, .pencil {
+label, .pencil, .plus-tool {
     color: #0088cc;
 }
 
-label:hover, .pencil:hover {
+label:hover, .pencil:hover, .plus-tool:hover {
     color: #005580;
+}
+
+.login-reg-forms {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    align-items: baseline;
+}
+
+.search-results-section {
+    font-family: 'Indie Flower', cursive;
+    background-color: var(--post-it);
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+    margin: 30px 0 0 20px;
+    font-size: 30px;
+    padding: 8px;
+}
+
+#search-results-header {
+    display: flex;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.map-holder {
+    position: relative;
+}
+
+.map {
+    background-image: url('../maps/usamap.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-attachment: fixed; */
+    background-position: center;
+    border: 5px solid rgba(121, 60, 47, 0.8);
+    min-height: calc( var(--scale-size) * 600px);
+    max-width: calc( var(--scale-size) * 960px);
+    font-family: 'Courier Prime', monospace;
+    position: relative;
+}
+
+.friend {
+    position: absolute;
+    /* top: -300px; */
+    z-index: 1;
+    left: 100px;
+    top: 100px;
+}
+
+.fa-map-marker-alt {
+    overflow: hidden;
+}
+
+a {
+    overflow: hidden;
 }
 
 /* 
 .tool-link {
     transition: 0.3s linear;
 } */
+
+.user-card {
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 24px;
+    position: absolute;
+    width: fit-content;
+    background-color: var(--post-it);
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+}
+
+#category-list, .profile-ul {
+    margin-bottom: 15px;
+}
+
+.simple-li {
+    font-family: 'Courier Prime', monospace;
+    box-shadow: none;
+    line-height: 1.5;
+}
+
+.delete-item {
+    display: inline-flex;
+}
+
+.button {
+    border: none;
+    background-color: rgba(255,255,255,0);
+    color: #0088cc;
+    font-size: 50px;
+}
+
+.button:hover {
+    color: #005580;
+}
+
+.edit-cat-form {
+    flex-direction: column;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.black-color {
+    color: black;
+}
+
+.red-color {
+    color: red;
+}
