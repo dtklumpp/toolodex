@@ -17,7 +17,6 @@ body {
 .display-area {
     margin: 0 auto;
     width: calc( var(--scale-size) * 960px);
-    /* width: 960px; */
 }
 
 .header {
@@ -82,7 +81,7 @@ input, textarea, .uneditable-input {
     width: 150px;
 }
 
-select, textarea, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], textarea, .uneditable-input {
+select, textarea, input[type='text'], input[type='password'], input[type='email'], input[type='url'], input[type='search'], textarea, .uneditable-input {
     display: inline-block;
     height: 26px;
     font-size: 16px;
@@ -92,7 +91,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="email"
     font-family: 'Courier Prime', monospace;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
     margin: -1px 8px 0 0;
 }
 
@@ -404,11 +403,6 @@ label:hover, .pencil:hover, .plus-tool:hover {
 a {
     overflow: hidden;
 }
-
-/* 
-.tool-link {
-    transition: 0.3s linear;
-} */
 
 .user-card {
     left: 50%;
