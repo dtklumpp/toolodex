@@ -33,9 +33,12 @@
                             <% for(eachTool of eachCat.tools){ %> 
                                 <li class='simple-li right-align'>
                                     <a href="<%= eachTool.link %>" title='<%= eachTool.description %>' target='_blank'>
-                                        <%=eachTool.name%></a> - 
+                                        <%=eachTool.name%></a> 
+                                    <% if(activeUser.id != oneUser._id){ %> 
+                                        - 
                                     <a href="/tools/steal/<%=eachTool._id%>/<%=oneUser._id%>" class='steal-button red-color' title="Add this tool to your own Toolodex!">
                                         Steal it!</a>
+                                    <% } %> 
                                 </li>
                             <% } %> 
                         </ul>

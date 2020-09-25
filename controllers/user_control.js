@@ -57,6 +57,7 @@ router.get('/:userId', async (req, res) => {
             oneUser: foundUser,
             userCats: foundUser.categories,
             allFriends: foundUser.friends,
+            activeUser: req.session.currentUser,
         };
         res.render('user/show.ejs', context);
     }
