@@ -4,27 +4,31 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script src="/scripts/app.js" defer></script>
-    <link rel="stylesheet" href="/styles/main.css" />
     <%- include('partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
     <title>Toolodex</title>
 </head>
 <body>
     <div class='display-area'>
         <%- include('partials/header-navbar.ejs') %>
         <section class='corkboard'>
-            <%- include('partials/postit-image.ejs', {title: 'Search Results'}) %>
+            <div class="postit-container" id='search-results-header'>
+                <img src="/images/row-postits.png" class='postit-image' />
+                <h2>Search Results</h2>
+            </div>
+
+            <h3 class='search-results-section'>Matching Categories:</h3>
             <ul>
-                <h3>Categories:</h3>
-                <% categoryMatches.forEach(category => { %>
+                <% categoryMatches.forEach(category => { %> 
                     <div class="li-container">
                         <li title='<%= category.description %>' class='list-item'>
-                            <a href="/categories/<%= category._id %>" class='list-item-content category-name'>
-                                <%= category.name %>
+                            <a href="/categories/<%=category._id%>" class='list-item-content category-name'>
+                                <%= category.name %>:                 
                             </a>
                             <span class="category-description">
                                 <%= category.description %>
                             </span>
-                            <div class='pencil edit-tool' title="Edit this category.">
+                            <div class='pencil edit-category' title="Edit this category.">
                                 <a href="/categories/<%=category._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
                             </div>
                             <form action="/categories/<%=category._id%>?_method=DELETE" method="POST">
@@ -35,16 +39,16 @@
                             </form>
                         </li>
                     </div>
-                <% }); %>
+                <% }) %> 
             </ul>
 
+            <h3 class='search-results-section'>Matching Tools:</h3>
             <ul>
-                <h3>Tools:</h3>
-                <% toolMatches.forEach(tool => { %>
+                <% toolMatches.forEach(tool => { %> 
                     <div class="li-container">
                         <li title='<%= tool.description %>' class='list-item'>
-                            <a href="/tools/<%= tool._id %>" class='list-item-content tool-name'>
-                                <%= tool.name %>
+                            <a href="/tools/<%=tool._id%>" class='list-item-content tool-name'>
+                                <%= tool.name %>:                 
                             </a>
                             <span class="tool-description">
                                 <%= tool.description %>
@@ -60,7 +64,7 @@
                             </form>
                         </li>
                     </div>
-                <% }); %>
+                <% }) %> 
             </ul>
         </section>
     </div>

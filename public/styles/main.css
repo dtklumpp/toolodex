@@ -134,7 +134,7 @@ input[type="checkbox"] {
 h2 {
     font-family: 'Indie Flower', cursive;
     display: inline-block;
-    padding-top: 22px;
+    padding-top: 40px;
     font-size: 33px;
     text-align: center;
     height: 90px;
@@ -147,6 +147,10 @@ h3 {
     font-size: 25px;
     color: black;
     display: inline-flex;
+}
+
+.username-heading:hover {
+    color: #005580;
 }
 
 .plus-container {
@@ -352,6 +356,24 @@ label:hover, .pencil:hover, .plus-tool:hover {
     justify-content: center;
     padding-top: 25px;
     align-items: baseline;
+}
+
+.search-results-section {
+    font-family: 'Indie Flower', cursive;
+    background-color: var(--post-it);
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+    margin: 30px 0 0 20px;
+    font-size: 30px;
+    padding: 8px;
+}
+
+#search-results-header {
+    display: flex;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
 }
 
 /* 
