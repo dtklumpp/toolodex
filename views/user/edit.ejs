@@ -23,10 +23,10 @@
             <div class="form-container">
                 <form action="/users/<%=oneUser._id%>?_method=PUT"  method="post" class='form'>
                     <p>
-                        Username: <input type="text" name="username" value="<%=oneUser.username%>" />
+                        Username: <input type="text" name="username" value="<%=oneUser.username%>" required />
                     </p>
                     <p>
-                        Email: <input type="email" name="email" value="<%=oneUser.email%>" />
+                        Email: <input type="email" name="email" value="<%=oneUser.email%>" required />
                     </p>
                     <p>
                         Location: <select name="location">

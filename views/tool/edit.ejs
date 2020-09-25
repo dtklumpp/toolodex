@@ -16,10 +16,10 @@
             <div class="form-container">
                 <form action="/tools/<%=oneTool._id%>?_method=PUT"  method="post" class='form'>
                     <p>
-                        Name: <input type="text" name="name" value="<%=oneTool.name%>" />
+                        Name: <input type="text" name="name" value="<%=oneTool.name%>" required />
                     </p>
                     <p>
-                        Link: <input type="url" name="link" value="<%=oneTool.link%>" />
+                        Link: <input type="url" name="link" value="<%=oneTool.link%>" required />
                     </p>
                     <p>
                         Description: <input type="text" name="description" value="<%=oneTool.description%>" />
