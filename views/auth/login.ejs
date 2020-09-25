@@ -10,52 +10,62 @@
 </head>
 <body>
     <div class="display-area">
-        <section class="header">
-            <h2>Welcome to Toolodex!</h2>
-            <p class='tagline' style="text-align: left">Find the right tool for the job.</p>
+        <section class='header'>
+            <div class="header-container">
+                <h1>Toolodex</h1>
+                <p class='tagline'>Find the right tool for the job.</p>
+                <form action="/demo" method="POST">
+                    <input type="submit" value="GUEST DEMO" class='submit-button' />
+                </form>
+            </div>
         </section>
         <section class='corkboard'>
-            <div class="form-container">
-                    <h3>New to Toolodex? Register here:</h3>
-                    <form action="/register" method="POST" class='form'>
+            <div class='login-reg-forms'>
+                <div class="form-container">
+                        <form action="/register" method="POST" class='form'>
+                            <h3>New to Toolodex?</h3> 
+                            <p>Register here:</p>
+                            <p>
+                                Username: <input type="text" name="username" required />
+                            </p>
+                            <p>
+                                Email: <input type="email" name="email" required />
+                            </p>
+                            <p>
+                                Location: <select name="location">
+                                    <% for(eachState of statesArray) { %> 
+                                        <option value="<%=eachState%>"
+                                        <% if(eachState === "NY"){ %>selected<% } %>>
+                                            <%=eachState%>
+                                        </option>
+                                        <% } %> 
+                                </select>
+                            </p>
+                            <p>
+                                Password: <input type="password" name="password" required />
+                            </p>
+                            <p>
+                                <input type="submit" value="REGISTER" class='submit-button' />
+                            </p>
+                        </form>
+                </div>
+    
+                <div class="form-container">
+                    <form action="/login" method="POST" class='form'>
+                        <h3>Returning?</h3> 
+                        <p>Login here:</p>
                         <p>
-                            <input type="text" name="username" placeholder='Username' required />
+                            Username: <input type="text" name="username" required />
                         </p>
                         <p>
-                            
+                            Password: <input type="password" name="password"  required />
                         </p>
-                        <p></p>
-                        <p></p>
-                        <p></p>
-                        <br>
-                        <select name="location">
-                            <% for(eachState of statesArray) { %> 
-                                <option value="<%=eachState%>"
-                                <% if(eachState === "NY"){ %>selected<% } %> 
-                                ><%=eachState%></option>
-                                <% } %> 
-                            </select> <br>
-                        <input type="text" name="email" placeholder='Email'  required /><br>
-                        <input type="password" name="password" placeholder='password' required /><br>
-                        <input type="submit" value="Register Account">
-                    </form>
-            </div>
-
-            <div class="form-container">
-                <div class="login form">
-                    <h3>Returning? Login here:</h3>
-                    <form action="/login" method="POST">
-                        <input type="text" name="username" placeholder='Username' required /><br>
-                        <input type="password" name="password" placeholder='password' required /><br>
-                        <input type="submit" value="Login">
-                    </form>
-                    <br>
-                    <form action="/demo" method="POST">
-                        <input type="submit" value="or Demo the site as a guest">
+                        <p>
+                            <input type="submit" value="LOGIN" class='submit-button' />
+                        </p>
                     </form>
                 </div>
             </div>
-
         </section>
     </div>
 </body>

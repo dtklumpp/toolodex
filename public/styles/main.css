@@ -1,12 +1,12 @@
 * {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     /* this is useful so borders & padding don't change the size of elements */
 }
 
 :root {
     /* colors */
     --post-it: lightyellow;
-    --background: whitesmoke;
+    --background: rgba(186, 192, 156, 0.8);
     --navbar: burlywood;
     /* sizes */
     --scale-size: 1;
@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--background);
+    height: 100vh;
 }
 
 .display-area {
@@ -32,6 +33,7 @@ body {
     text-align: center;
     font-family: 'Courier Prime', monospace;
     margin-bottom: 12px;
+    border: 5px solid rgba(231, 223, 212, 1);
 }
 
 .header-container {
@@ -106,7 +108,7 @@ input[type="checkbox"] {
     background-image: url('../images/corkboard.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    color: blue;
+    border: 5px solid rgba(121, 60, 47, 0.8);
     min-height: calc( var(--scale-size) * 960px);
     font-family: 'Courier Prime', monospace;
 }
@@ -343,6 +345,13 @@ label, .pencil, .plus-tool {
 
 label:hover, .pencil:hover, .plus-tool:hover {
     color: #005580;
+}
+
+.login-reg-forms {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    align-items: baseline;
 }
 
 /* 
