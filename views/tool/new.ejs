@@ -35,7 +35,7 @@
                         <span class='user-prompt'>
                             (select at least one)
                         </span>
-                        <ul>
+                        <ul class='categories-ul'>
                             <% const len = allCats.length %> 
                             <% allCats.forEach((eachCat, index) => { %> 
                                 <li class='form-li'>
@@ -43,7 +43,7 @@
                                         <% if( (String(eachCat._id) === catId) || (index===0 && len===1 )){ %>
                                             checked
                                         <% } %> 
-                                    /> <%= eachCat.name %>
+                                    /><%=eachCat.name%>
                                 </li>
                             <% }) %> 
                         </ul>

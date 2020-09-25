@@ -82,17 +82,18 @@ input, textarea, .uneditable-input {
     width: 150px;
 }
 
-select, textarea, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], .uneditable-input {
+select, textarea, input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="search"], textarea, .uneditable-input {
     display: inline-block;
     height: 26px;
     font-size: 16px;
     padding: 4px 6px;
+    width: 150px;
     margin-bottom: 0px;
     font-family: 'Courier Prime', monospace;
 }
 
 input[type="checkbox"] {
-    margin: -1px 0 0;
+    margin: -1px 8px 0 0;
 }
 
 .btn-link {
@@ -271,6 +272,10 @@ textarea {
 ul {
     margin: 0 auto;
     list-style-type: none;
+}
+
+.categories-ul {
+    text-align: initial;
 }
 
 .tool-name, .category-name {

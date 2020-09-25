@@ -56,7 +56,6 @@ router.post('/', async (req, res) => {
         for(eachCat of allCats){
             catId = eachCat._id;
             if(req.body["category_"+catId] === 'on'){
-                console.log('got here');
                 await createdTool.categories.push(eachCat);
                 eachCat.tools.push(createdTool);
                 eachCat.save();
@@ -80,7 +79,6 @@ router.post('/:catId', async (req, res) => {
         for(eachCat of allCats){
             catId = eachCat._id;
             if(req.body["category_"+catId] === 'on'){
-                console.log('got here too');
                 await createdTool.categories.push(eachCat);
                 eachCat.tools.push(createdTool);
                 eachCat.save();
@@ -90,7 +88,8 @@ router.post('/:catId', async (req, res) => {
         res.redirect('/categories/'+req.params.catId);
     }
     catch (error) {
-        return res.send("Create route error: "+ error);
+        console.log("Create route error: "+ error);
+        return res.send('Internal server error.');
     }
 });
 
@@ -101,8 +100,6 @@ router.get('/:toolId', (req, res) => {
     .populate('categories')
     .exec( (error, foundTool) => {
         if(error) return res.send("show route error: "+error);
-        //console.log('req.params.toolId:', req.params.toolId);
-        //console.log('foundTool:', foundTool);
         context = {oneTool: foundTool};
         res.render('tool/show.ejs', context);
     });
@@ -160,7 +157,8 @@ router.put('/:toolId', async (req, res) => {
         res.redirect('/tools/');
     }
     catch(error){
-        res.send("update route error: "+error);
+        console.log("update route error: "+error);
+        return res.send("Internal server error.");
     }
 });
 
@@ -170,7 +168,6 @@ router.delete('/:toolId', async (req, res) => {
     try {
         const doomedTool = await db.Tool.findById(req.params.toolId).populate('categories').exec();
         const parentCats = doomedTool.categories;
-        //console.log('parentCats:', parentCats);
         for(eachCat of parentCats){
             eachCat.tools.remove(doomedTool);
             eachCat.save();
@@ -178,7 +175,8 @@ router.delete('/:toolId', async (req, res) => {
         doomedTool.deleteOne();
     }
     catch (error) {
-        res.send('tool deletion route error: '+error);
+        console.log('Tool deletion route error: '+error)
+        return res.send('Internal server error.');
     }
     res.redirect('/tools');
 });
@@ -196,7 +194,8 @@ router.post('/:toolId/:catId', async (req, res) => {
         res.redirect('/categories/'+req.params.catId+"/edit");
     }
     catch(error){
-        console.log('remove tool from category route error: '+error);
+        console.log('Remove tool from category route error: '+error);
+        return res.send('Internal server error.');
     }
 })
 
@@ -216,6 +215,7 @@ router.get('/steal/:toolId/:userId', async (req, res) => {
         }
     }
     catch(error){
-        console.log('steal tool route error: '+error);
+        console.log('Steal tool route error: '+error);
+        return res.send('Internal server error.');
     }
 })
