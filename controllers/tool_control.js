@@ -176,7 +176,7 @@ router.put('/:toolId', async (req, res) => {
         
         const updatedTool = await db.Tool.findByIdAndUpdate(req.params.toolId, req.body, {new: true});
 
-        res.redirect('/tools/');
+        res.redirect('/tools');
     }
     catch(error){
         console.log('Error: ', error);

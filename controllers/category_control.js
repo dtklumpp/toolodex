@@ -52,7 +52,7 @@ router.get('/', (req, res) => {
             user: foundUser,
         };
 
-        res.render('category/index.ejs', context);
+        res.render('category/index', context);
     });
 });
 
