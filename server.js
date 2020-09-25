@@ -22,8 +22,7 @@ app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 
 app.use(express.static(path.join('public')));
-//const path = require('path');
-//app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(express.urlencoded({extended: false}));
 
 // user auth
@@ -38,6 +37,12 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 // one day
     },
 }));
+
+// middleware to add user to all ejs views
+app.use(function (req, res, next) {
+    res.locals.user = req.session.currentUser; // adds the user to all ejs views
+    next();
+});
 
 // Gatekeeper Authorization
 const authRequired = function (req, res, next) {
@@ -114,8 +119,6 @@ app.post('/search', async (req, res) => {
                 }
             })
         })
-        console.log('toolMatches:', toolMatches);
-
 
         const context = {
             categoryMatches: categoryMatches,
