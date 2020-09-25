@@ -16,7 +16,10 @@
                 <img src="/images/row-postits.png" class='postit-image' />
                 <h2>Edit "<%= category.name %>"</h2>
             </div>
-            <div class="form-container">
+            <form action="/categories/<%= category._id %>?_method=DELETE" method="POST" class='delete-item'>
+                <button type="submit" class='button'><i class="fas fa-trash-alt" title="Delete this category."></i></button>
+            </form>
+            <div class="form-container edit-cat-form">
                 <form action='/categories/<%= category._id %>?_method=PUT' method='POST' class='form'>
                     <p>
                         Name: <input type='text' name='name' value='<%= category.name %>' required />
@@ -26,11 +29,6 @@
                     </p>
                     <p>
                         <input type='submit' value='Save Changes' class='submit-button' />
-                    </p>
-                    <p>
-                        <form action="/categories/<%= category._id %>?_method=DELETE" method="POST">
-                            <input type="submit" value="Delete Category" class='submit-button' />
-                        </form>
                     </p>
                 </form>
             
@@ -50,7 +48,7 @@
                         <% category.tools.forEach(tool => { %>
                             <div class="li-container avail-tools-list">
                                 <li class='tool list-item'>
-                                    <a href='<%= tool.link %>' target='_blank' class='list-item-content tool-name'><%= tool.name %>:
+                                    <a href='<%= tool.link %>' target='_blank' class='list-item-content tool-name'><%= tool.name %>
                                     </a>
                                     <span class="tool-description">
                                         <%= tool.description %>
@@ -58,11 +56,10 @@
                                     <div class='pencil edit-tool' title="Edit this tool.">
                                         <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
                                     </div>
-                                    <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
-                                        <label for="delete-button">
-                                            <i class="fas fa-trash-alt" title="Delete this tool."></i>
-                                        </label>
-                                        <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                                    <form action="/tools/<%=tool._id%>/<%=category._id%>" method="POST">
+                                        <button type="submit" class='button list-item-content'>
+                                            <i class="fas fa-trash-alt" title="Removes this tool from this category."></i>
+                                        </button>
                                     </form>
                                 </li>
                             <% }); %>
