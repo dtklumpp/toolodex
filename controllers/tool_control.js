@@ -4,15 +4,15 @@ module.exports = router;
 
 const db = require('../models');
 
-//index route
+// index route
 router.get('/', (req, res) => {
-    //res.send('tools index page');
     db.Tool.find({}).sort('name').exec((error, toolsArray) => {
-        if(error) return res.send("index route error: "+error);
+        if(error) return res.send('index route error: '+error);
         context = {allTools: toolsArray};
         res.render('tool/index.ejs', context);
     });
 });
+
 
 // new route
 router.get('/newTool', (req, res) => {
@@ -20,7 +20,7 @@ router.get('/newTool', (req, res) => {
     db.User.findById(req.session.currentUser.id)
     .populate('categories')
     .exec( (error, foundUser) => {
-        if(error) return res.send("create route categories error: "+error);
+        if(error) return res.send('create route categories error: '+error);
         context = {
             allCats: foundUser.categories,
             catId: null,
@@ -37,14 +37,13 @@ router.get('/newTool/:catId', (req, res) => {
     db.User.findById(req.session.currentUser.id)
     .populate('categories')
     .exec( (error, foundUser) => {
-        if(error) return res.send("create route categories error: "+error);
+        if(error) return res.send('Create route (category pre-populated) error: '+error);
         context = {
             allCats: foundUser.categories,
             catId: req.params.catId,
         };
         res.render('tool/new.ejs', context);
     });
-
 });
 
 
@@ -55,7 +54,7 @@ router.post('/', async (req, res) => {
         const allCats = await db.Category.find({});
         for(eachCat of allCats){
             catId = eachCat._id;
-            if(req.body["category_"+catId] === 'on'){
+            if(req.body['category_'+catId] === 'on'){
                 await createdTool.categories.push(eachCat);
                 eachCat.tools.push(createdTool);
                 eachCat.save();
@@ -65,7 +64,8 @@ router.post('/', async (req, res) => {
         res.redirect('/tools');
     }
     catch (error) {
-        return res.send("update route error: "+error);
+        console.log('update route error: '+error);
+        return res.send('Internal server error.');
     }
 });
 
@@ -78,7 +78,7 @@ router.post('/:catId', async (req, res) => {
         const allCats = await db.Category.find({});
         for(eachCat of allCats){
             catId = eachCat._id;
-            if(req.body["category_"+catId] === 'on'){
+            if(req.body['category_'+catId] === 'on'){
                 await createdTool.categories.push(eachCat);
                 eachCat.tools.push(createdTool);
                 eachCat.save();
@@ -88,7 +88,7 @@ router.post('/:catId', async (req, res) => {
         res.redirect('/categories/'+req.params.catId);
     }
     catch (error) {
-        console.log("Create route error: "+ error);
+        console.log('Create route error: '+ error);
         return res.send('Internal server error.');
     }
 });
@@ -99,7 +99,7 @@ router.get('/:toolId', (req, res) => {
     db.Tool.findById(req.params.toolId)
     .populate('categories')
     .exec( (error, foundTool) => {
-        if(error) return res.send("show route error: "+error);
+        if(error) return res.send('Show route error: '+error);
         context = {oneTool: foundTool};
         res.render('tool/show.ejs', context);
     });
@@ -112,9 +112,9 @@ router.get('/:toolId/edit', (req, res) => {
     db.User.findById(req.session.currentUser.id)
     .populate('categories')
     .exec( (error, foundUser) => {
-        if(error) return res.send("edit route categories error: "+error)
+        if(error) return res.send('edit route categories error: '+error)
         db.Tool.findById(req.params.toolId, (error, foundTool) => {
-            if(error) return res.send("edit route error: "+error);
+            if(error) return res.send('Edit route error: '+error);
             context = {
                 oneTool: foundTool,
                 allCats: foundUser.categories,
@@ -133,7 +133,7 @@ router.put('/:toolId', async (req, res) => {
         
         for(eachCat of allCats){
             catId = eachCat._id;
-            const checkedCategory = req.body["category_"+catId] === 'on';
+            const checkedCategory = req.body['category_'+catId] === 'on';
             const alreadyInCategory = oldTool.categories.includes(String(catId));
 
             const isCategoryAdded = checkedCategory && !(alreadyInCategory);
@@ -157,8 +157,8 @@ router.put('/:toolId', async (req, res) => {
         res.redirect('/tools/');
     }
     catch(error){
-        console.log("update route error: "+error);
-        return res.send("Internal server error.");
+        console.log('update route error: '+error);
+        return res.send('Internal server error.');
     }
 });
 
@@ -191,7 +191,7 @@ router.post('/:toolId/:catId', async (req, res) => {
         errantTool.categories.remove(scornedCategory);
         errantTool.save();
         scornedCategory.save();
-        res.redirect('/categories/'+req.params.catId+"/edit");
+        res.redirect('/categories/'+req.params.catId+'/edit');
     }
     catch(error){
         console.log('Remove tool from category route error: '+error);
