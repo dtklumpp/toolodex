@@ -4,39 +4,68 @@
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <script src="/scripts/app.js" defer></script>
-    <link rel="stylesheet" href="/styles/main.css" />
     <%- include('partials/external-imports.ejs') %>
+    <link rel="stylesheet" href="/styles/main.css" />
     <title>Toolodex</title>
 </head>
 <body>
     <div class='display-area'>
         <%- include('partials/header-navbar.ejs') %>
         <section class='corkboard'>
-            <div class="postit-image">
+            <div class="postit-container" id='search-results-header'>
+                <img src="/images/row-postits.png" class='postit-image' />
                 <h2>Search Results</h2>
             </div>
-            <h3>Categories:</h3>
-            <ul class='list'>
-                <% categoryMatches.forEach(category => { %>
-                    <a href="/categories/<%= category._id %>" class='category-name'>
-                        <li title='<%= category.description %>'>
-                            <%= category.name %>
+
+            <h3 class='search-results-section'>Matching Categories:</h3>
+            <ul>
+                <% categoryMatches.forEach(category => { %> 
+                    <div class="li-container">
+                        <li title='<%= category.description %>' class='list-item'>
+                            <a href="/categories/<%=category._id%>" class='list-item-content category-name'>
+                                <%= category.name %>:                 
+                            </a>
+                            <span class="category-description">
+                                <%= category.description %>
+                            </span>
+                            <div class='pencil edit-category' title="Edit this category.">
+                                <a href="/categories/<%=category._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
+                            </div>
+                            <form action="/categories/<%=category._id%>?_method=DELETE" method="POST">
+                                <label for="delete-button">
+                                    <i class="fas fa-trash-alt" title="Delete this category."></i>
+                                </label>
+                                <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                            </form>
                         </li>
-                    </a>
-                <% }); %>
+                    </div>
+                <% }) %> 
             </ul>
-            <br>
-            <h3>Tools:</h3>
-            <ul class='list'>
-                <% toolMatchesZOMG.forEach(tool => { %>
-                    <a href="/tools/<%= tool._id %>" class='tool-name'>
-                        <li title='<%= tool.description %>'>
-                            <%= tool.name %>
+
+            <h3 class='search-results-section'>Matching Tools:</h3>
+            <ul>
+                <% toolMatches.forEach(tool => { %> 
+                    <div class="li-container">
+                        <li title='<%= tool.description %>' class='list-item'>
+                            <a href="/tools/<%=tool._id%>" class='list-item-content tool-name'>
+                                <%= tool.name %>:                 
+                            </a>
+                            <span class="tool-description">
+                                <%= tool.description %>
+                            </span>
+                            <div class='pencil edit-tool' title="Edit this tool.">
+                                <a href="/tools/<%=tool._id%>/edit" class='list-item-content'><i class="fas fa-edit"></i></a>
+                            </div>
+                            <form action="/tools/<%=tool._id%>?_method=DELETE" method="POST">
+                                <label for="delete-button">
+                                    <i class="fas fa-trash-alt" title="Delete this tool."></i>
+                                </label>
+                                <input type="submit" class='list-item-content delete-button' id='delete-button' />
+                            </form>
                         </li>
-                    </a>
-                <% }); %>
+                    </div>
+                <% }) %> 
             </ul>
-            <p>Brought to you by <span id='dalton'>Dalton Hart</span>.</p>
         </section>
     </div>
 </body>

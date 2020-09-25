@@ -1,12 +1,12 @@
 * {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     /* this is useful so borders & padding don't change the size of elements */
 }
 
 :root {
     /* colors */
     --post-it: lightyellow;
-    --background: whitesmoke;
+    --background: rgba(186, 192, 156, 0.8);
     --navbar: burlywood;
     /* sizes */
     --scale-size: 1;
@@ -16,6 +16,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: var(--background);
+    height: 100vh;
 }
 
 .display-area {
@@ -32,6 +33,7 @@ body {
     text-align: center;
     font-family: 'Courier Prime', monospace;
     margin-bottom: 12px;
+    border: 5px solid rgba(231, 223, 212, 1);
 }
 
 .header-container {
@@ -106,7 +108,7 @@ input[type="checkbox"] {
     background-image: url('../images/corkboard.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    color: blue;
+    border: 5px solid rgba(121, 60, 47, 0.8);
     min-height: calc( var(--scale-size) * 960px);
     font-family: 'Courier Prime', monospace;
 }
@@ -132,7 +134,7 @@ input[type="checkbox"] {
 h2 {
     font-family: 'Indie Flower', cursive;
     display: inline-block;
-    padding-top: 22px;
+    padding-top: 40px;
     font-size: 33px;
     text-align: center;
     height: 90px;
@@ -145,6 +147,10 @@ h3 {
     font-size: 25px;
     color: black;
     display: inline-flex;
+}
+
+.username-heading:hover {
+    color: #005580;
 }
 
 .plus-container {
@@ -272,13 +278,13 @@ ul {
     list-style-type: none;
 }
 
-.tool-name {
+.tool-name, .category-name {
     color: black;
     font-size: 25px;
     margin-right: 10px;
 }
 
-.tool-description {
+.tool-description, .category-description {
     color: slategrey;
     line-height: 1.5;
     font-size: 20px;
@@ -343,6 +349,31 @@ label, .pencil, .plus-tool {
 
 label:hover, .pencil:hover, .plus-tool:hover {
     color: #005580;
+}
+
+.login-reg-forms {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    align-items: baseline;
+}
+
+.search-results-section {
+    font-family: 'Indie Flower', cursive;
+    background-color: var(--post-it);
+    box-shadow: 0 6px 6px rgba(0,0,0,0.4);
+    margin: 30px 0 0 20px;
+    font-size: 30px;
+    padding: 8px;
+}
+
+#search-results-header {
+    display: flex;
+}
+
+.results-container {
+    display: flex;
+    flex-direction: column;
 }
 
 /* 
