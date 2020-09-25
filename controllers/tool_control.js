@@ -16,10 +16,13 @@ router.get('/', (req, res) => {
 
 // new route
 router.get('/newTool', (req, res) => {
-    db.Category.find({}, (error, catsArray) => {
+
+    db.User.findById(req.session.currentUser.id)
+    .populate('categories')
+    .exec( (error, foundUser) => {
         if(error) return res.send("create route categories error: "+error);
         context = {
-            allCats: catsArray,
+            allCats: foundUser.categories,
             catId: null,
         };
         res.render('tool/new.ejs', context);
@@ -30,14 +33,18 @@ router.get('/newTool', (req, res) => {
 // new route (Category pre-populated)
 // note: COPIED FROM NEW ROUTE -- VERY WET.  COMBINE THESE LATER.
 router.get('/newTool/:catId', (req, res) => {
-    db.Category.find({}, (error, catsArray) => {
+
+    db.User.findById(req.session.currentUser.id)
+    .populate('categories')
+    .exec( (error, foundUser) => {
         if(error) return res.send("create route categories error: "+error);
         context = {
-            allCats: catsArray,
+            allCats: foundUser.categories,
             catId: req.params.catId,
         };
         res.render('tool/new.ejs', context);
     });
+
 });
 
 

@@ -38,15 +38,16 @@
                             (select at least one)
                         </span>
                         <ul>
-                            <% for(eachCat of allCats){ %> 
+                            <% const len = allCats.length %> 
+                            <% allCats.forEach((eachCat, index) => { %> 
                                 <li class='form-li'>
                                     <input type="checkbox" name="category_<%= eachCat._id %>"
-                                        <% if(String(eachCat._id) === catId){ %>
+                                        <% if( (String(eachCat._id) === catId) || (index===0 && len===1 )){ %>
                                             checked
                                         <% } %> 
                                     /> <%= eachCat.name %>
                                 </li>
-                            <% } %> 
+                            <% }) %> 
                         </ul>
                     </p>
                     <p>
