@@ -53,7 +53,7 @@ h1 {
 
 nav {
     color: black;
-    font-size: 20px;
+    font-size: 17.5px;
 }
 
 .logout {
@@ -61,7 +61,7 @@ nav {
 }
 
 label, input, button, select, textarea {
-    font-size: 20px;
+    font-size: 17.5px;
     font-weight: normal;
     line-height: 20px;
 }
@@ -97,6 +97,7 @@ input[type='checkbox'] {
 
 .btn-link {
     font-family: 'Courier Prime', monospace;
+    padding: 0;
 }
 
 .corkboard {
