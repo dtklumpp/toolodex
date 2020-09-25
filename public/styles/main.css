@@ -390,6 +390,7 @@ label:hover, .pencil:hover, .plus-tool:hover {
     min-height: calc( var(--scale-size) * 600px);
     max-width: calc( var(--scale-size) * 960px);
     font-family: 'Courier Prime', monospace;
+    position: relative;
 }
 
 .friend {
@@ -398,6 +399,14 @@ label:hover, .pencil:hover, .plus-tool:hover {
     z-index: 1;
     left: 100px;
     top: 100px;
+}
+
+.fa-map-marker-alt {
+    overflow: hidden;
+}
+
+a {
+    overflow: hidden;
 }
 
 /* 
