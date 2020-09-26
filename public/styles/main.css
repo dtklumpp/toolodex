@@ -110,16 +110,17 @@ input[type='checkbox'] {
 }
 
 .postit-container {
+    background-clip: border-box;
     height: 100px;
     display: inline-flex;
-    width: 30%;
-    height: 100px;
+    width: 34%;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
 .postit-image {
+    background-clip: border-box;
     position: absolute;
     top: 0;
     left: 0;
@@ -128,6 +129,7 @@ input[type='checkbox'] {
 }
 
 h2 {
+    width: 90%;
     font-family: 'Indie Flower', cursive;
     display: inline-block;
     padding-top: 40px;
