@@ -29,9 +29,6 @@
                                 Username: <input type="text" name="username" required />
                             </p>
                             <p>
-                                Email: <input type="email" name="email" required />
-                            </p>
-                            <p>
                                 Location: <select name="location">
                                     <% for(eachState of statesArray) { %> 
                                         <option value="<%=eachState%>"
@@ -40,6 +37,9 @@
                                         </option>
                                         <% } %> 
                                 </select>
+                            </p>
+                            <p>
+                                Political Affiliation: <input type="text" name="politicalAffiliation" required />
                             </p>
                             <p>
                                 Password: <input type="password" name="password" required />
