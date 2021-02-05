@@ -7,7 +7,7 @@ This app allows a developer to save and categorize links to handy tools and reso
   1. [Requirements](#Requirements)
   1. [Usage](#Usage)
   1. [Features](#Features)
-  1. [Examples of Use](#Examples-of-Use)
+  1. [Examples of Use](#Example-of-Use)
   1. [Roadmap](#Roadmap)
   1. [Development](#Development)
   1. [License](#License)
@@ -80,10 +80,9 @@ The database is automatically seeded with a "Favorites" category for each user
 - sharing /stealing tools between Users
 - bonus Map display for finding Friends
     
-## Examples-of-Use
+## Example-of-Use
 
-- [screenshots]
-
+![Screen Shot 2021-02-05 at 12 12 55 AM](https://user-images.githubusercontent.com/65556316/107082573-602fe500-67c2-11eb-867f-bb36a9b21728.png)
 
 ## Roadmap -- pending features
 
