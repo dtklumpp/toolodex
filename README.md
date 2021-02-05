@@ -25,6 +25,7 @@ This app allows a developer to save and categorize links to handy tools and reso
 - express-session 1.17.1
 - method-override 3.0.0
 - jQuery-UI 1.12.1
+- MongoDB 4.2.8
 
 ## Usage
 
