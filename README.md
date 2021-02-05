@@ -40,7 +40,11 @@ To clone and run this app, you'll need [Git](https://git-scm.com) installed on y
 
 Note: if mongdb isn't running already, you will need to run:
 
--start the database: `$ mongod`
+- start the database: `$ mongod`
+
+if this command fails, use:
+
+- start the database v2: `$ brew services start mongodb/brew/mongodb-community@4.2`
 
 In addition, you will need to create certain environmental variables in a .env file in the project root folder.  Defaults are as follows:
 
