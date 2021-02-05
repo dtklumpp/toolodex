@@ -50,6 +50,8 @@ SECRET=opensesame
 MONGODB_URI=mongodb://localhost:27017/toolodex
 ```
 
+The database is automatically seeded with a "Favorites" category for each user
+
 
 
 ## Features
