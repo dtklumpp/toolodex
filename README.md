@@ -1,7 +1,5 @@
 # Toolodex
 
-## About  
-
 This app allows a developer to save and categorize links to handy tools and resources across the internet, for later reference and easy access.  Users can create and re-order "toolboxes" at will, as well as share and "steal" tools from their friends.
 
 ## Contents
