@@ -2,7 +2,7 @@
 
 This app allows a developer to save and categorize links to handy tools and resources across the internet, for later reference and easy access.  Users can create and re-order "toolboxes" at will, as well as share and "steal" tools from their friends.
 
-This app is basically a response to the poor UX of bookmarking and folders in google chrome.  If you want to save anything beyond a couple dozen bookmarks in chrome, it becomes impossible to find anything, let alone know which folder something goes into.  And folder creation / selection is slow as well.  This project aims to mitigate those issues and create a smoother, search-able experience.
+Toolodex is basically a response to the poor UX of bookmarking and folders in google chrome.  If you want to save anything beyond a couple dozen bookmarks in chrome, it becomes impossible to find anything, let alone know which folder something goes into.  And folder creation / selection is slow as well.  This project aims to mitigate those issues and create a smoother, search-able experience.
 
 ## example-of-use
 
