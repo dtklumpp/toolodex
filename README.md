@@ -4,7 +4,7 @@ This app allows a developer to save and categorize links to handy tools and reso
 
 This app is basically a response to the poor UX of bookmarking and folders in google chrome.  If you want to save anything beyond a couple dozen bookmarks in chrome, it becomes impossible to find anything, let alone know which folder something goes into.  And folder creation / selection is slow as well.  This project aims to mitigate those issues and create a smoother, search-able experience.
 
-## example-of-Use
+## example-of-use
 
 ![Screen Shot 2021-02-05 at 12 12 55 AM](https://user-images.githubusercontent.com/65556316/107082573-602fe500-67c2-11eb-867f-bb36a9b21728.png)
 
